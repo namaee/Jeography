@@ -1,10 +1,18 @@
 .map ::ng-deep svg {
-  fill: rgb(255, 142, 142);
-  transform: scale(1); // 75% of original size
+  fill: rgb(66, 158, 255);
+  // transform: scale(1); // 75% of original size
 }
 
+.map ::ng-deep svg path:hover {
+  fill: rgb(115, 183, 255);
+  cursor: pointer;
+}
+
+
 .map-container {
-  margin: auto;
+  margin: 0 auto;
+  position:relative;
   width: 800px;
+  right:100px;
 }
 
