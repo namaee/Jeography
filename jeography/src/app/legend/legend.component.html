@@ -1,7 +1,17 @@
 <div class="legend-container">
-  <mat-list-item class="legend-prefecture" [ngStyle]="{'color': prefecture.hover ? prefecture.hoverColor : prefecture.defaultColor}" *ngFor="let prefecture of prefectures">
-    <span class="{{'legend-' + prefecture.name}}"  >
-      {{prefecture.name}}
+  <mat-list-item
+    class="legend-prefecture"
+    [ngStyle]="{
+      color: prefecture.hover ? prefecture.hoverColor : prefecture.defaultColor
+    }"
+    *ngFor="let prefecture of prefectures"
+  >
+    <span
+      class="{{ 'legend-' + prefecture.name }}"
+      (mouseover)="this.mapService.prefectureHover(prefecture.name)"
+      (mouseout)="this.mapService.prefectureLeave()"
+    >
+      {{ prefecture.name }}
     </span>
     <mat-divider></mat-divider>
   </mat-list-item>

@@ -1,10 +1,13 @@
+$default-fill: rgb(66, 158, 255);
+$active-fill: rgb(135, 193, 255);
+
 .map {
-  fill: rgb(66, 158, 255);
+  fill: $default-fill;
   // transform: scale(1); // 75% of original size
 }
 
 .map path:hover {
-  fill: rgb(135, 193, 255);
+  fill: $active-fill;
   cursor: pointer;
 }
 

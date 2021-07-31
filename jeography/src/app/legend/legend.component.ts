@@ -33,10 +33,7 @@ export class LegendComponent implements OnInit {
 
   public setHoverColor(name: string) {
     if (this.prefectures && name) {
-      console.log(name);
-      console.log(this.prefectures.find((prefecture) => prefecture.name == name).hover);
       this.prefectures.find((prefecture) => prefecture.name == name).hover = true;
-      console.log(this.prefectures.find((prefecture) => prefecture.name == name).hover);
     }
   }
 

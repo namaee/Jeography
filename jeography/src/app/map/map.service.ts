@@ -10,6 +10,7 @@ export class MapService {
 
   }
   prefectureHover(prefecture: string) {
+    this.prefectureLeave();
     this.hover.next(prefecture)
   }
   prefectureLeave() {
