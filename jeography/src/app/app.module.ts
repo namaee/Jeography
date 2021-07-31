@@ -7,12 +7,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { LegendComponent } from './legend/legend.component';
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MenuComponent } from './menu/menu.component';
+import { MapService } from './map/map.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
-    LegendComponent
+    LegendComponent,
+    MenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -21,7 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MaterialModule,
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [MapService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

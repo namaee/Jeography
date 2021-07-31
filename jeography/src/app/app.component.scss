@@ -1,5 +1,8 @@
 .app-container {
   display: flex;
+  justify-content: flex-end;
+  border: 3px solid rgb(48, 141, 20);
+
 }
 .app-container > * {
   margin: auto;

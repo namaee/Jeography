@@ -1,9 +1,8 @@
 <div class="legend-container">
-  <mat-list>
-    <mat-list-item>Item 1</mat-list-item>
+  <mat-list-item class="legend-prefecture" [ngStyle]="{'color': prefecture.hover ? prefecture.hoverColor : prefecture.defaultColor}" *ngFor="let prefecture of prefectures">
+    <span class="{{'legend-' + prefecture.name}}"  >
+      {{prefecture.name}}
+    </span>
     <mat-divider></mat-divider>
-    <mat-list-item>Item 2</mat-list-item>
-    <mat-divider></mat-divider>
-    <mat-list-item>Item 3</mat-list-item>
-  </mat-list>
+  </mat-list-item>
 </div>
