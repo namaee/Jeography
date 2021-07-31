@@ -1,9 +1,9 @@
-.map ::ng-deep svg {
+.map {
   fill: rgb(66, 158, 255);
   // transform: scale(1); // 75% of original size
 }
 
-.map ::ng-deep svg path:hover {
+.map path:hover {
   fill: rgb(135, 193, 255);
   cursor: pointer;
 }

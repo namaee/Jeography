@@ -8,7 +8,6 @@ import { MapService } from './map.service';
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit, AfterViewInit {
-  public map = '../../assets/japan.svg';
   public prefectures = prefectures;
   constructor(private elementRef: ElementRef, public mapService: MapService) { }
 
