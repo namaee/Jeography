@@ -4,12 +4,13 @@
 }
 
 .map ::ng-deep svg path:hover {
-  fill: rgb(115, 183, 255);
+  fill: rgb(135, 193, 255);
   cursor: pointer;
 }
 
 
 .map-container {
+  background-color: rgb(190, 190, 190);
   margin: 0 auto;
   position:relative;
   width: 800px;
