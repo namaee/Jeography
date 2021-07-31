@@ -8,6 +8,6 @@ export class LegendEntry {
     this.name = name;
     this.hover = false;
     this.defaultColor = 'white';
-    this.hoverColor = 'red'
+    this.hoverColor = 'rgb(255, 198, 99)'
   }
 }

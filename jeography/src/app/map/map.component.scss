@@ -1,8 +1,10 @@
-$default-fill: rgb(66, 158, 255);
-$active-fill: rgb(135, 193, 255);
+$default-fill: rgb(92, 171, 255);
+$active-fill: rgb(255, 198, 99);
 
 .map {
   fill: $default-fill;
+  stroke: rgb(242, 242, 242); 
+  stroke-width: 0.65px;
   // transform: scale(1); // 75% of original size
 }
 
@@ -19,5 +21,22 @@ $active-fill: rgb(135, 193, 255);
   border: 3px solid rgb(93, 255, 78);
   width: 800px;
   right: 100px;
+}
+
+.map-prefectures {
+  stroke: rgb(139, 43, 43); 
+  stroke-width: 0.65px;
+}
+
+.map-button {
+  stroke-width: 0px;
+  fill: rgb(109, 109, 109); 
+  margin: 0.5em;
+}
+.map-button-container {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  flex-direction: column;
 }
 
