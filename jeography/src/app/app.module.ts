@@ -13,6 +13,7 @@ import { MapDragDirective } from './map/mapDrag.directive';
 import { QuizComponent } from './quiz/quiz.component';
 import { QuestionComponent } from './quiz/question/question.component';
 import { ScoreComponent } from './quiz/score/score.component';
+import { QuizService } from './quiz/quiz.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { ScoreComponent } from './quiz/score/score.component';
     MaterialModule,
     BrowserAnimationsModule,
   ],
-  providers: [MapService],
+  providers: [MapService, QuizService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

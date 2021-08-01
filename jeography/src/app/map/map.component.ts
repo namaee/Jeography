@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, QueryList, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, QueryList, ViewChild } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { State } from '../app.component';
 import { prefectures } from '../data';
+import { QuizService } from '../quiz/quiz.service';
 import { MapService } from './map.service';
 import { MapDragDirective } from './mapDrag.directive';
 
@@ -11,7 +12,7 @@ import { MapDragDirective } from './mapDrag.directive';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
 })
-export class MapComponent implements OnInit, AfterViewInit {
+export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MapDragDirective)
   public mapDrag: MapDragDirective;
 
@@ -29,7 +30,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.mouseWheel.next(event);
   }
   
-  constructor(private elementRef: ElementRef, public mapService: MapService) {
+  constructor(private elementRef: ElementRef, public mapService: MapService, public qs: QuizService) {
     this.subscriptions.add(
       this.mapService.hover.subscribe((prefecture: string) => {
         if (prefecture) {
@@ -48,10 +49,8 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   public onwheell(event: WheelEvent) {
     this.mapDrag.checkMousePosition(event);
-    if (this.mapDrag.mouseOnCanvas) {
-      console.log('in canvas');
+    if (this.mapDrag.mouseOnCanvas) { //FIX MOUSEONCANVAS
       event.preventDefault();
-
       if (event.deltaY < 0) {
         this.onZoomIn();
       } else {
@@ -86,6 +85,12 @@ export class MapComponent implements OnInit, AfterViewInit {
     let path = event.target as SVGPathElement;
     if (path.hasAttribute('title')) {
       // console.log(path.getAttribute('title'));
+      if (this.qs.state && !this.mapDrag.dirty) {
+        this.qs.nextQuestion()
+        console.log('quiz log');
+        
+      }
+      //check using service if state is quiz, then ->
     } else {
       // console.log('NO PREFECTURE');
     }
@@ -124,21 +129,27 @@ export class MapComponent implements OnInit, AfterViewInit {
   public get mapStyle(): { [key: string]: string } {
     const style: { [key: string]: string } = {};
     style['transform'] = 'scale(' + this.zoomLevel + ')';
-    // style['transform-origin'] = "50% 50%";
     if (this.mapDrag != undefined) {
         style['transform-origin'] = (50 - (this.mapDrag.currentX / 8)) + "% " + (50 - (this.mapDrag.currentY / 9)) + "%";
-
     }
     style['stroke'] = 'rgb(242, 242, 242)';
     style['stroke-width'] =  0.65 / this.zoomLevel + 'px';
     return style;
   }
 
-  public get mapDragZoom(): { [key: string]: string } {
+  public mapPathStyle(title: string): { [key: string]: string } {
     const style: { [key: string]: string } = {};
-    style['transform'] = 'scale(' + this.zoomLevel + ')';
-    // style['transform-origin'] = 'center';
+    style['fill'] = this.activePrefecture == title ? 'rgb(255, 198, 99)' : 'rgb(92, 171, 255)'
+    if (this.qs.state) {
+      style['cursor'] = 'pointer';
+    } else {
+      style['cursor'] = 'default';
+    }
     return style;
+  }
+
+  public ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }
 

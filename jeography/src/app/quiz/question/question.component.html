@@ -1,3 +1,4 @@
 <div class="question-display">
-  <span class="question-display-name">{{question.name}}</span>
+  <span *ngIf="!qs.state" (click)="startQuiz()" class="start-button">Start</span>
+  <span *ngIf="qs.state" class="question-display-name">{{qs.questions[qs.questionIndex].name}}</span>
 </div>

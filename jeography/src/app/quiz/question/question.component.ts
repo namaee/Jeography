@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { QuizService } from '../quiz.service';
+import { Subscription } from 'rxjs';
 
-class Question {
+export class Question {
   name: string;
   id: number;
 
@@ -14,12 +16,22 @@ class Question {
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.scss']
 })
-export class QuestionComponent implements OnInit {
-  public question: Question;
-  constructor() { }
+export class QuestionComponent implements OnInit, OnDestroy {
+  private subscriptions: Subscription = new Subscription();
+  constructor(public qs: QuizService) { }
 
   ngOnInit(): void {
-    this.question = new Question("prefecture", 0)
+    this.subscriptions.add(
+      this.qs.quizControl.subscribe((msg: string) => {
+      })
+    )  
   }
 
+  public startQuiz() {
+    this.qs.startQuiz();
+  }
+
+  public ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
 }
