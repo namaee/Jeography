@@ -1,1 +1,6 @@
-<p>score works!</p>
+<div class="score-container">
+  <mat-list-item *ngFor="let score of scores">
+    <span>{{ score.areaName }}</span>
+      <mat-divider></mat-divider>
+  </mat-list-item>
+</div>
