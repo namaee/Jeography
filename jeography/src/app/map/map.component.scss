@@ -6,8 +6,6 @@ $active-fill: rgb(255, 198, 99);
   stroke: rgb(242, 242, 242); 
   stroke-width: 0.65px;
   border: 3px solid rgb(255, 212, 22);
-
-  // transform: scale(1); // 75% of original size
 }
 
 .map path:hover {
@@ -32,10 +30,16 @@ $active-fill: rgb(255, 198, 99);
 }
 
 .map-button {
-  stroke-width: 0px;
   fill: rgb(109, 109, 109); 
   margin: 0.5em;
 }
+
+.map-button-disabled {
+  background-color: rgb(29, 15, 46) !important; 
+  margin: 0.5em;
+}
+
+
 .map-button-container {
   position: absolute;
   display: inline-flex;

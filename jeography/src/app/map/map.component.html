@@ -9,10 +9,10 @@
     <button class="map-button" (click)="onReset()" [class.mat-elevation-z0]="true" mat-fab color="primary" disableRipple>
       <mat-icon>refresh</mat-icon>
     </button>
-    <button class="map-button" (click)="onZoomIn()" [class.mat-elevation-z0]="true" mat-fab color="primary" disableRipple>
+    <button class="map-button" (click)="onZoomIn()" [disabled]="zoomLevel > 17" [ngClass]="{'map-button-disabled': zoomLevel > 17}" [class.mat-elevation-z0]="true" mat-fab color="primary" disableRipple>
       <mat-icon>add</mat-icon>
     </button>
-    <button class="map-button" (click)="onZoomOut()" [class.mat-elevation-z0]="true" mat-fab color="primary" disableRipple>
+    <button class="map-button" (click)="onZoomOut()" [disabled]="zoomLevel == 1" [ngClass]="{'map-button-disabled': zoomLevel == 1}" [class.mat-elevation-z0]="true" mat-fab color="primary" disableRipple>
       <mat-icon>remove</mat-icon>
     </button>
   </div>

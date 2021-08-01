@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { prefectures } from '../data';
 import { MapService } from './map.service';
+import { MapDragDirective } from './mapDrag.directive';
 
 @Component({
   selector: 'app-map',
@@ -10,6 +11,9 @@ import { MapService } from './map.service';
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit, AfterViewInit {
+  @ViewChild(MapDragDirective)
+  public mapDrag: MapDragDirective;
+
   public prefectures = prefectures;
   private subscriptions: Subscription = new Subscription();
   public activePrefecture: string = '';
@@ -76,6 +80,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   public onReset() {
     this.zoomLevel = 1;
+    this.mapDrag.resetView();
   }
 
   public onZoomIn() {

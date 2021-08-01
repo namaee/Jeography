@@ -15,6 +15,9 @@ export class MapDragDirective implements OnInit {
   public mouseOnButton = false;
   public mouseEventCount = 0;
 
+  public currentX = 0;
+  public currentY = 0;
+
   private pointerDown: Subject<PointerEvent> = new Subject<PointerEvent>();
   private pointerMove: Subject<PointerEvent> = new Subject<PointerEvent>();
   private pointerUp: Subject<PointerEvent> = new Subject<PointerEvent>();
@@ -39,8 +42,7 @@ export class MapDragDirective implements OnInit {
 
   ngOnInit(): void {
     this.element = this.elementRef.nativeElement as HTMLElement;
-    let currentX = 0;
-    let currentY = 0;
+
     /* Pointer Down Event */
     this.pointerDown.asObservable().subscribe((event) => {
       this.touched = true;
@@ -57,9 +59,9 @@ export class MapDragDirective implements OnInit {
       .subscribe((event: PointerEvent) => {
         if (this.mouseOnCanvas) {
           this.mouseEventCount += Math.abs(event.movementX) + Math.abs(event.movementY);
-          currentX = currentX + event.movementX;
-          currentY = currentY + event.movementY;
-          this.element.style.transform = "translate3d(" + currentX + "px, " + currentY + "px, 0)";
+          this.currentX = this.currentX + event.movementX;
+          this.currentY = this.currentY + event.movementY;
+          this.element.style.transform = "translate3d(" + this.currentX + "px, " + this.currentY + "px, 0)";
           this.dirty = true;
           
         }
@@ -102,6 +104,13 @@ export class MapDragDirective implements OnInit {
       default:
         return element.parentElement ? this.checkOnControl(element.parentElement) : false;
     }
+  }
+
+  public resetView(): void {
+    console.log('reset');
+    this.currentX = 0;
+    this.currentY = 0;
+    this.element.style.transform = "translate3d(0px, 0px, 0)";
   }
 }
 
