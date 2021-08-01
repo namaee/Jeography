@@ -103,7 +103,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   public onZoomIn() {
     this.zoomLevel = this.zoomLevel * 1.5;
-
+    console.log((this.mapDrag.currentX + 400 )/ 400 + 'em ' + (this.mapDrag.currentY+450) / 600+ 'em');
   }
 
   public onZoomOut() {
@@ -116,9 +116,20 @@ export class MapComponent implements OnInit, AfterViewInit {
   public get mapStyle(): { [key: string]: string } {
     const style: { [key: string]: string } = {};
     style['transform'] = 'scale(' + this.zoomLevel + ')';
-    // style['transform-origin'] = 'center';
+    // style['transform-origin'] = "50% 50%";
+    if (this.mapDrag != undefined) {
+        style['transform-origin'] = (50 - (this.mapDrag.currentX / 8)) + "% " + (50 - (this.mapDrag.currentY / 9)) + "%";
+
+    }
     style['stroke'] = 'rgb(242, 242, 242)';
     style['stroke-width'] =  0.65 / this.zoomLevel + 'px';
+    return style;
+  }
+
+  public get mapDragZoom(): { [key: string]: string } {
+    const style: { [key: string]: string } = {};
+    style['transform'] = 'scale(' + this.zoomLevel + ')';
+    // style['transform-origin'] = 'center';
     return style;
   }
 }

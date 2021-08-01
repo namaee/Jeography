@@ -1,6 +1,7 @@
 import { Directive, ElementRef, HostListener, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { repeat, switchMap, take, takeUntil} from 'rxjs/operators';
+import { MapComponent } from './map.component';
 
 @Directive({
   selector: '[mapDrag]',
@@ -39,6 +40,7 @@ export class MapDragDirective implements OnInit {
 
   constructor(
     private elementRef: ElementRef,
+    private host: MapComponent
   ) {}
 
   ngOnInit(): void {
@@ -60,9 +62,9 @@ export class MapDragDirective implements OnInit {
       .subscribe((event: PointerEvent) => {
         if (this.mouseOnCanvas) {
           this.mouseEventCount += Math.abs(event.movementX) + Math.abs(event.movementY);
-          this.currentX = this.currentX + event.movementX;
-          this.currentY = this.currentY + event.movementY;
-          this.element.style.transform = "translate3d(" + this.currentX + "px, " + this.currentY + "px, 0)";
+          this.currentX = this.currentX + event.movementX / this.host.zoomLevel
+          this.currentY = this.currentY + event.movementY / this.host.zoomLevel
+          this.element.style.transform = "translate3d(" + this.currentX  + "px, " + this.currentY+ "px, 0)";
           this.dirty = true;
           
         }
