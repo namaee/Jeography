@@ -41,22 +41,22 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    /* Mouse Wheel Event */
-    this.mouseWheel.asObservable().subscribe((event) => {
-      this.mapDrag.checkMousePosition(event);
-
-      if (this.mapDrag.mouseOnCanvas) {
-        if (event.deltaY < 0) {
-          event.preventDefault();
-          this.onZoomIn();
-        } else {
-          event.preventDefault();
-          this.onZoomOut();
-        }
-      }
-    });
   }
 
+  public onwheell(event: WheelEvent) {
+    this.mapDrag.checkMousePosition(event);
+    if (this.mapDrag.mouseOnCanvas) {
+      console.log('in canvas');
+      event.preventDefault();
+
+      if (event.deltaY < 0) {
+        this.onZoomIn();
+      } else {
+        this.onZoomOut();
+      }
+    }
+    
+  }
   ngAfterViewInit() {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor =
       '#2b2b2b';

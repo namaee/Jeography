@@ -10,7 +10,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuComponent } from './menu/menu.component';
 import { MapService } from './map/map.service';
 import { MapDragDirective } from './map/mapDrag.directive';
-import { MapDragHandle } from './map/mapDragHandle.directive';
 
 @NgModule({
   declarations: [
@@ -19,7 +18,6 @@ import { MapDragHandle } from './map/mapDragHandle.directive';
     LegendComponent,
     MenuComponent,
     MapDragDirective,
-    MapDragHandle,
   ],
   imports: [
     BrowserModule,

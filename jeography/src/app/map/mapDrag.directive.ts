@@ -45,7 +45,7 @@ export class MapDragDirective implements OnInit {
 
   ngOnInit(): void {
     this.element = this.elementRef.nativeElement as HTMLElement;
-
+    
     /* Pointer Down Event */
     this.pointerDown.asObservable().subscribe((event) => {
       this.touched = true;
