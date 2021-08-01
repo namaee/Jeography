@@ -57,13 +57,11 @@ export class MapDragDirective implements OnInit {
       .subscribe((event: PointerEvent) => {
         if (this.mouseOnCanvas) {
           this.mouseEventCount += Math.abs(event.movementX) + Math.abs(event.movementY);
-          if (this.mouseEventCount > 1) {
-            console.log(event.clientX, event.clientY);
-            currentX = currentX + event.movementX;
-            currentY = currentY + event.movementY;
-            this.element.style.transform = "translate3d(" + currentX + "px, " + currentY + "px, 0)";
-            this.dirty = true;
-          }
+          currentX = currentX + event.movementX;
+          currentY = currentY + event.movementY;
+          this.element.style.transform = "translate3d(" + currentX + "px, " + currentY + "px, 0)";
+          this.dirty = true;
+          
         }
     });
 
@@ -88,12 +86,10 @@ export class MapDragDirective implements OnInit {
     const element: HTMLElement = event.target as HTMLElement;
     this.mouseOnButton = this.checkOnControl(element);
     this.mouseOnCanvas = this.checkOnMap(element) && !this.checkOnControl(element);
-    console.log(this.mouseOnCanvas);
-    
   }
   
   private checkOnMap(element: HTMLElement): boolean {
-    return element.className == "map-drag" ? true : element.parentElement ? this.checkOnMap(element.parentElement) : false
+    return element.className == "map-container" ? true : element.parentElement ? this.checkOnMap(element.parentElement) : false
   }
 
   private checkOnControl(element: HTMLElement): boolean {
