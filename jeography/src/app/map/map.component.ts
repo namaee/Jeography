@@ -102,10 +102,16 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   public onZoomIn() {
+    if (this.zoomLevel >= 17) {
+      return;
+    }
     this.zoomLevel = this.zoomLevel * 1.5;
   }
 
   public onZoomOut() {
+    if (this.zoomLevel <= 1) {
+      return;
+    }
     this.zoomLevel = this.zoomLevel / 1.5;
   }
   public onLeave() {
