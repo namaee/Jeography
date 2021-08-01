@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, ElementRef, HostListener, OnInit, QueryList, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, QueryList, ViewChild } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { State } from '../app.component';
 import { prefectures } from '../data';
 import { MapService } from './map.service';
 import { MapDragDirective } from './mapDrag.directive';
@@ -13,6 +14,8 @@ import { MapDragDirective } from './mapDrag.directive';
 export class MapComponent implements OnInit, AfterViewInit {
   @ViewChild(MapDragDirective)
   public mapDrag: MapDragDirective;
+
+  @Input() state: State = null
 
   public prefectures = prefectures;
   private subscriptions: Subscription = new Subscription();

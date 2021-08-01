@@ -1,9 +1,11 @@
 .app-container {
   display: flex;
-  justify-content: flex-end;
+  position: relative;
+  justify-content: flex-start;
+
 }
 .app-container > * {
-  margin: auto;
+  margin: 0em 5em 0em 5em;
 }
 .toolbar {
   background-color:transparent;

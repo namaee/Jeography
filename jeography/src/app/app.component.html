@@ -3,10 +3,10 @@
     <mat-icon>menu</mat-icon>
   </button>
   <span>My App</span>
-  <button mat-icon-button class="example-icon favorite-icon">
+  <button (click)="stateSwitch(stateEnum.VIEW)" mat-icon-button class="example-icon favorite-icon">
     <mat-icon>favorite</mat-icon>
   </button>
-  <button mat-icon-button class="example-icon">
+  <button (click)="stateSwitch(stateEnum.STATE)" mat-icon-button class="example-icon">
     <mat-icon>share</mat-icon>
   </button>
 </mat-toolbar>
@@ -14,6 +14,8 @@
 
 <div class="app-container">
   <app-menu></app-menu>
-  <app-map></app-map>
-  <app-legend></app-legend>
+  <app-map [state]="state"></app-map>
+  <app-legend *ngIf="state == 1"></app-legend>
+  <app-quiz *ngIf="state == 2"></app-quiz>
+
 </div>

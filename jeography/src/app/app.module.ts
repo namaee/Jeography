@@ -10,6 +10,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuComponent } from './menu/menu.component';
 import { MapService } from './map/map.service';
 import { MapDragDirective } from './map/mapDrag.directive';
+import { QuizComponent } from './quiz/quiz.component';
+import { QuestionComponent } from './quiz/question/question.component';
+import { ScoreComponent } from './quiz/score/score.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import { MapDragDirective } from './map/mapDrag.directive';
     LegendComponent,
     MenuComponent,
     MapDragDirective,
+    QuizComponent,
+    QuestionComponent,
+    ScoreComponent,
   ],
   imports: [
     BrowserModule,
