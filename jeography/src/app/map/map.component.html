@@ -6,19 +6,19 @@
   <circle class="map-buttons" cx="-40" cy="40" r="15">
   </circle> -->
   <div class="map-button-container">
-    <button class="map-button" [class.mat-elevation-z0]="true" mat-fab color="primary">
+    <button class="map-button" (click)="onReset()" [class.mat-elevation-z0]="true" mat-fab color="primary" disableRipple>
       <mat-icon>refresh</mat-icon>
     </button>
-    <button class="map-button" [class.mat-elevation-z0]="true" mat-fab color="primary">
-      <mat-icon>remove</mat-icon>
-    </button>
-    <button class="map-button" [class.mat-elevation-z0]="true" mat-fab color="primary">
+    <button class="map-button" (click)="onZoomIn()" [class.mat-elevation-z0]="true" mat-fab color="primary" disableRipple>
       <mat-icon>add</mat-icon>
+    </button>
+    <button class="map-button" (click)="onZoomOut()" [class.mat-elevation-z0]="true" mat-fab color="primary" disableRipple>
+      <mat-icon>remove</mat-icon>
     </button>
   </div>
 
     <!-- </svg:g> -->
-
+<div class="map-drag">
   <svg
   xmlns:mapsvg="http://mapsvg.com"
   xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -31,9 +31,11 @@
   height="900"
   preserveAspectRatio="xMidYMid meet"
   class="map"
+  [ngStyle]="{'transform': 'scale(' + zoomLevel + ')'}"
   (mouseover)="onHover($event)"
   (mouseout)="onLeave()"
   (click)="onClick($event)"
+  mapDrag
   >
 
   <path
@@ -272,6 +274,6 @@
     id="JP-06" 
     [ngStyle]="{fill: activePrefecture == 'Yamagata' ? 'rgb(255, 198, 99)' : 'rgb(92, 171, 255)'}"/>
 </svg>
-    
+</div>
 <!-- <object class="map" type="image/svg+xml" data="../../assets/japan.svg"></object> -->
 </div>
