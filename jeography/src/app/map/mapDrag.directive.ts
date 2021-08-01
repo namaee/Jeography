@@ -45,11 +45,15 @@ export class MapDragDirective implements OnInit {
 
   ngOnInit(): void {
     this.element = this.elementRef.nativeElement as HTMLElement;
-    
+
     /* Pointer Down Event */
     this.pointerDown.asObservable().subscribe((event) => {
       this.touched = true;
       this.checkMousePosition(event);
+      if (event.button === 1 && this.mouseOnCanvas) {
+        event.preventDefault();
+        return false;
+      }
     });
 
     /* Pointer Move Event */

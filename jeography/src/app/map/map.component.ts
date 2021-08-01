@@ -103,7 +103,6 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   public onZoomIn() {
     this.zoomLevel = this.zoomLevel * 1.5;
-    console.log((this.mapDrag.currentX + 400 )/ 400 + 'em ' + (this.mapDrag.currentY+450) / 600+ 'em');
   }
 
   public onZoomOut() {
