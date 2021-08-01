@@ -6,7 +6,7 @@ import { repeat, switchMap, take, takeUntil} from 'rxjs/operators';
   selector: '[mapDrag]',
 })
 export class MapDragDirective implements OnInit {
-  private element: HTMLElement;
+  public element: HTMLElement;
 
   public dirty = false;
   public touched = false;
@@ -26,6 +26,7 @@ export class MapDragDirective implements OnInit {
   public onPointerDown(event: PointerEvent): void {
     this.pointerDown.next(event);
   }
+
   @HostListener('document:pointermove', ['$event'])
   public onPointerMove(event: PointerEvent): void {
     this.pointerMove.next(event);
@@ -84,17 +85,17 @@ export class MapDragDirective implements OnInit {
     });
   }
 
-  private checkMousePosition(event: MouseEvent): void {
+  public checkMousePosition(event: MouseEvent): void {
     const element: HTMLElement = event.target as HTMLElement;
     this.mouseOnButton = this.checkOnControl(element);
     this.mouseOnCanvas = this.checkOnMap(element) && !this.checkOnControl(element);
   }
   
-  private checkOnMap(element: HTMLElement): boolean {
+  public checkOnMap(element: HTMLElement): boolean {
     return element.className == "map-container" ? true : element.parentElement ? this.checkOnMap(element.parentElement) : false
   }
 
-  private checkOnControl(element: HTMLElement): boolean {
+  public checkOnControl(element: HTMLElement): boolean {
     // console.log('test here');
     switch ((element.nodeName || '').toUpperCase()) {
       case 'BUTTON':

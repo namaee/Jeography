@@ -31,7 +31,7 @@
   height="900"
   preserveAspectRatio="xMidYMid meet"
   class="map"
-  [ngStyle]="{'transform': 'scale(' + zoomLevel + ')'}"
+  [ngStyle]="mapStyle"
   (mouseover)="onHover($event)"
   (mouseout)="onLeave()"
   (click)="onClick($event)"

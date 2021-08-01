@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, OnInit, QueryList, ViewChild } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { prefectures } from '../data';
@@ -19,6 +19,13 @@ export class MapComponent implements OnInit, AfterViewInit {
   public activePrefecture: string = '';
   public zoomLevel: number = 1;
 
+  private mouseWheel: Subject<WheelEvent> = new Subject<WheelEvent>();
+
+  @HostListener('document:wheel', ['$event'])
+  public onMouseWheel(event: WheelEvent): void {
+    this.mouseWheel.next(event);
+  }
+  
   constructor(private elementRef: ElementRef, public mapService: MapService) {
     this.subscriptions.add(
       this.mapService.hover.subscribe((prefecture: string) => {
@@ -34,10 +41,21 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    
-  }
+    /* Mouse Wheel Event */
+    this.mouseWheel.asObservable().subscribe((event) => {
+      this.mapDrag.checkMousePosition(event);
 
-  
+      if (this.mapDrag.mouseOnCanvas) {
+        if (event.deltaY < 0) {
+          event.preventDefault();
+          this.onZoomIn();
+        } else {
+          event.preventDefault();
+          this.onZoomOut();
+        }
+      }
+    });
+  }
 
   ngAfterViewInit() {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor =
@@ -85,6 +103,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   public onZoomIn() {
     this.zoomLevel = this.zoomLevel * 1.5;
+
   }
 
   public onZoomOut() {
@@ -92,6 +111,15 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
   public onLeave() {
     this.mapService.prefectureLeave();
+  }
+
+  public get mapStyle(): { [key: string]: string } {
+    const style: { [key: string]: string } = {};
+    style['transform'] = 'scale(' + this.zoomLevel + ')';
+    // style['transform-origin'] = 'center';
+    style['stroke'] = 'rgb(242, 242, 242)';
+    style['stroke-width'] =  0.65 / this.zoomLevel + 'px';
+    return style;
   }
 }
 

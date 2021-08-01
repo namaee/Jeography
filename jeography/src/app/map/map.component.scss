@@ -3,8 +3,6 @@ $active-fill: rgb(255, 198, 99);
 
 .map {
   fill: $default-fill;
-  stroke: rgb(242, 242, 242); 
-  stroke-width: 0.65px;
   border: 3px solid rgb(255, 212, 22);
 }
 
@@ -24,10 +22,6 @@ $active-fill: rgb(255, 198, 99);
   overflow: hidden;
 }
 
-.map-prefectures {
-  stroke: rgb(139, 43, 43); 
-  stroke-width: 0.65px;
-}
 
 .map-button {
   fill: rgb(109, 109, 109); 
