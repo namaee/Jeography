@@ -36,6 +36,10 @@ export class QuizService implements OnInit {
     this.quizControl.next('next')
   }
 
+  public resetQuiz() {
+    this.state = false;
+    this.quizControl.next('reset');
+  }
   public shuffle(ar) {
     var ci = ar.length, ri;
     while (0 !== ci) {

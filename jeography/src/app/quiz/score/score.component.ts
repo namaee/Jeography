@@ -28,9 +28,10 @@ export class ScoreComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscriptions.add(
       this.qs.quizControl.subscribe((msg: string) => {
-        if (msg == 'next') {
-          this.updateScore();
-        } else {
+        switch (msg) {
+          case "next": this.updateScore(); break;
+          case "reset": this.resetScore(); break;
+          default: ;
         }
       })
     )  
@@ -43,6 +44,12 @@ export class ScoreComponent implements OnInit, OnDestroy {
     this.scores.unshift(new Score(this.qs.questions[this.qs.questionIndex - 1].name, this.qs.answers[this.qs.questionIndex - 1].tf, this.scoreID++))
   }
 
+  public resetScore() {
+    // this.scores.forEach(() => {
+    //   this.scores.pop();
+    // })
+    this.scores = [];
+  }
   public ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }

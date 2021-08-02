@@ -1,19 +1,35 @@
+$primary-color: rgb(48, 25, 77);
+$primary-color-dark: rgb(29, 15, 46);
+$secondary-color: rgb(255, 198, 99);
+$secondary-color-dark: rgb(255, 188, 71);
+$font-color: rgb(249, 231, 231);
+$error-color: rgb(215, 71, 83);
+$correct-color: rgb(136, 255, 130);
+
+.score-container-card {
+  margin-top: 1.5em;
+  background-color: $primary-color-dark;
+}
+
 .score-container {
-  border: 3px solid red;
   max-height: 39em;
   overflow-x: auto;
 }
 
 .score-entry {
-  color: rgb(92, 171, 255)
+  color: $font-color;
+}
+.score-entry-rect {
+  width: 0.7em;
+  height: 0.7em;
+  margin: 0em 0.3em 0em 0.3em;
+}
+.score-entry-correct-rect {
+  fill: $correct-color;
 }
 
-.scoreEntryCorrectRect {
-  fill: greenyellow;
-}
-
-.scoreEntryFalseRect {
-  fill: red;
+.score-entry-false-rect {
+  fill: $error-color;
 }
 
 // .scoreEntryCorrect {

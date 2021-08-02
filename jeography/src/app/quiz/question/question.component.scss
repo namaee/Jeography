@@ -1,3 +1,12 @@
+$primary-color: rgb(48, 25, 77);
+$primary-color-dark: rgb(29, 15, 46);
+$secondary-color: rgb(255, 198, 99);
+$secondary-color-dark: rgb(255, 188, 71);
+$font-color: rgb(249, 231, 231);
+
+.question-display-card {
+  background-color: $primary-color;
+}
 .question-display {
   height: 10em;
   display: flex;
@@ -6,23 +15,35 @@
 }
 
 .question-display-name {
-  color: rgb(255, 198, 99);
-  font-size: 4em;
+  color: $font-color;
+  font-size: 5em;
   text-align: center;
   margin: 1em 0em 1em 0rem;
-  border: 3px solid rgb(96, 255, 189);
+  // border: 3px solid rgb(96, 255, 189);
 }
 
 .start-button {
-  color: rgb(255, 198, 99);
-  font-size: 4em;
+  color: $font-color;
+  font-size: 5em;
   text-align: center;
   margin: 1em 0em 1em 0rem;
-  border: 3px solid rgb(96, 255, 189);
+  // border: 3px solid rgb(96, 255, 189);
   cursor: pointer;
   transition: color 0.1s ease-in-out;
 }
 
 .start-button:hover {
-  color: rgb(48, 25, 77);
+  color: $secondary-color;
+}
+
+mat-expansion-panel {
+  background-color: $primary-color-dark;
+  color: $font-color;
+}
+mat-panel-title {
+  color: $font-color;
+}
+
+mat-expansion-panel-content {
+  background-color: $primary-color-dark !important;
 }

@@ -47,7 +47,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
   }
 
-  public onwheell(event: WheelEvent) {
+  public onwheel(event: WheelEvent) {
     this.mapDrag.checkMousePosition(event);
     if (this.mapDrag.mouseOnCanvas) { //FIX MOUSEONCANVAS
       event.preventDefault();
@@ -128,7 +128,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     const style: { [key: string]: string } = {};
     style['transform'] = 'scale(' + this.zoomLevel + ')';
     if (this.mapDrag != undefined) {
-        style['transform-origin'] = (50 - (this.mapDrag.currentX / 8)) + "% " + (50 - (this.mapDrag.currentY / 9)) + "%";
+        style['transform-origin'] = (50 - (this.mapDrag.currentX / 8)) + "% " + (50 - (this.mapDrag.currentY / 8)) + "%";
     }
     style['stroke'] = 'rgb(242, 242, 242)';
     style['stroke-width'] =  0.65 / this.zoomLevel + 'px';
