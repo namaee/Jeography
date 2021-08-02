@@ -1,27 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { QuizService } from '../quiz.service';
 import { Subscription } from 'rxjs';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { Settings } from '../quiz';
 
-export class Question {
-  name: string;
-  id: number;
-
-  constructor(name: string, id: number) {
-    this.name = name;
-    this.id = id;
-  }
-}
-
-export class Answer {
-  name: string;
-  tf: boolean;
-  qid: number;
-  constructor(name: string, tf: boolean, qid: number) {
-    this.name = name;
-    this.tf = tf;
-    this.qid = qid;
-  }
-}
 @Component({
   selector: 'app-quiz-question',
   templateUrl: './question.component.html',
@@ -44,5 +26,13 @@ export class QuestionComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  public onSettingChange(event: MatCheckboxChange) {
+    switch (event.source.value) {
+      case "feedback": this.qs.settings.feedback = event.checked; break;
+      case "kanji": this.qs.settings.kanji = event.checked; break;
+      default: 
+    }
   }
 }

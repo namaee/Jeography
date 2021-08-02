@@ -2,6 +2,8 @@
   <div class="question-display">
     <span *ngIf="!qs.state" (click)="startQuiz()" class="start-button" title="This is some text I want to display.">Start</span>
     <span *ngIf="qs.state" class="question-display-name">{{qs.questions[qs.questionIndex].name}}</span>
+    <span *ngIf="qs.state && qs.settings.kanji" class="question-display-name-kanji">{{qs.questions[qs.questionIndex].kanjiName}}</span>
+
   </div>
   <mat-expansion-panel>
     <mat-expansion-panel-header>
@@ -12,6 +14,13 @@
       
       </mat-panel-description>
     </mat-expansion-panel-header>
-  <p>I'm visible because I am open</p>
+    <div class="settings-container">
+      <mat-checkbox class="settings-checkbox" [checked]="true" (change)="onSettingChange($event)" value="feedback">Feedback</mat-checkbox>
+      <mat-checkbox class="settings-checkbox" (change)="onSettingChange($event)" value="kanji">Kanji</mat-checkbox>
+      <mat-checkbox class="settings-checkbox" (change)="onSettingChange($event)" value="">Check me!</mat-checkbox>
+      <mat-checkbox class="settings-checkbox" (change)="onSettingChange($event)" value="">Check me!</mat-checkbox>
+      <mat-checkbox class="settings-checkbox" (change)="onSettingChange($event)" value="">Check me!</mat-checkbox>
+    </div>
+
   </mat-expansion-panel>
 </mat-card>

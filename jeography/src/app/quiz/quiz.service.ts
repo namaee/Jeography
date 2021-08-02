@@ -1,13 +1,14 @@
 import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Answer, Question } from './question/question.component';
 import { prefectures } from '../data';
+import { Question, Answer,  Settings } from './quiz';
 
 
 @Injectable()
 export class QuizService implements OnInit {
   public state: boolean = false;
   public quizControl: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+  public settings: Settings = new Settings();
   public questions: Question[] = [];
   public answers: Answer[] = [];
   public questionIndex: number = 0;
@@ -24,7 +25,7 @@ export class QuizService implements OnInit {
   }
   public createQuestions() {
     prefectures.forEach((prefecture, i) => {
-      this.questions.push(new Question(prefecture, i));
+      this.questions.push(new Question(prefecture.name, prefecture.kanjiName, i));
     })
     this.shuffle(this.questions);
   }
@@ -38,6 +39,7 @@ export class QuizService implements OnInit {
 
   public resetQuiz() {
     this.state = false;
+    this.settings.reset();
     this.quizControl.next('reset');
   }
   public shuffle(ar) {

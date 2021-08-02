@@ -1,10 +1,11 @@
 <mat-card class="score-container-card">
   <div class="score-container">
     <mat-list-item *ngFor="let score of scores">
-      <svg class="score-entry-rect">
+      <svg *ngIf="qs.settings.feedback" class="score-entry-rect">
         <rect width="1em" height="1em" rx="1" [ngClass]="{'score-entry-correct-rect': score.tf, 'score-entry-false-rect': !score.tf}" />
       </svg>
-      <span [ngClass]="{'score-entry-correct': score.tf, 'score-entry-false': !score.tf}" class="score-entry">{{ score.areaName }}</span>
+      <span *ngIf="!qs.settings.kanji" [ngClass]="{'score-entry-correct': score.tf, 'score-entry-false': !score.tf}" class="score-entry">{{ score.areaName }}</span>
+      <span *ngIf="qs.settings.kanji" [ngClass]="{'score-entry-correct': score.tf, 'score-entry-false': !score.tf}" class="score-entry">{{ score.areaName + ' - ' + score.kanjiAreaName}}</span>
         <mat-divider></mat-divider>
     </mat-list-item>
   </div>

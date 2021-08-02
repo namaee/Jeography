@@ -11,15 +11,24 @@ $font-color: rgb(249, 231, 231);
   height: 10em;
   display: flex;
   justify-content: center;
-  flex-direction: row;
+  flex-direction: column;
+  // border: 3px solid rgb(255, 133, 111);
+
 }
 
 .question-display-name {
   color: $font-color;
   font-size: 5em;
   text-align: center;
-  margin: 1em 0em 1em 0rem;
+  margin: 0.3em 0em 0.4em 0rem;
   // border: 3px solid rgb(96, 255, 189);
+}
+
+.question-display-name-kanji {
+  color: $font-color;
+  font-size: 3em;
+  text-align: center;
+  margin: 0.4em 0em 0.3em 0rem;
 }
 
 .start-button {
@@ -46,4 +55,13 @@ mat-panel-title {
 
 mat-expansion-panel-content {
   background-color: $primary-color-dark !important;
+}
+
+.settings-container {
+  display: flex;
+  justify-content: center;
+}
+
+.settings-container > *{
+  margin: auto;
 }

@@ -26,8 +26,8 @@ export class LegendComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    prefectures.forEach((prefecture: string) => {
-      this.prefectures.push(new LegendEntry(prefecture))
+    prefectures.forEach((prefecture) => {
+      this.prefectures.push(new LegendEntry(prefecture.name, prefecture.kanjiName))
     })
   }
 
