@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Question } from './question/question.component';
+import { Answer, Question } from './question/question.component';
 import { prefectures } from '../data';
 
 
@@ -9,6 +9,7 @@ export class QuizService implements OnInit {
   public state: boolean = false;
   public quizControl: BehaviorSubject<string> = new BehaviorSubject<string>(null);
   public questions: Question[] = [];
+  public answers: Answer[] = [];
   public questionIndex: number = 0;
   
   constructor() {
@@ -28,7 +29,9 @@ export class QuizService implements OnInit {
     this.shuffle(this.questions);
   }
 
-  public nextQuestion() {
+  public nextQuestion(ans: string) {
+    let answer = new Answer(ans, ans == this.questions[this.questionIndex].name, this.questions[this.questionIndex].id)
+    this.answers.push(answer)
     this.questionIndex++
     this.quizControl.next('next')
   }

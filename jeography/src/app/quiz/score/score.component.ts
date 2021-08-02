@@ -5,10 +5,12 @@ import { QuizService } from '../quiz.service';
 
 export class Score {
   areaName: string;
+  tf: boolean;
   id: number;
 
-  constructor(areaName: string, id: number) {
+  constructor(areaName: string, tf: boolean, id: number) {
     this.areaName = areaName;
+    this.tf = tf;
     this.id = id;
   }
 }
@@ -20,6 +22,7 @@ export class Score {
 export class ScoreComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
   public scores: Score[] = [];
+  public scoreID: number = 0;
   constructor(private qs: QuizService) { }
 
   ngOnInit(): void {
@@ -37,7 +40,7 @@ export class ScoreComponent implements OnInit, OnDestroy {
     // this.qs.questions.slice(0, this.qs.questionIndex).forEach((question: Question) => {
     //   this.scores.
     // })
-    this.scores.unshift(new Score(this.qs.questions[this.qs.questionIndex - 1].name, 0))
+    this.scores.unshift(new Score(this.qs.questions[this.qs.questionIndex - 1].name, this.qs.answers[this.qs.questionIndex - 1].tf, this.scoreID++))
   }
 
   public ngOnDestroy(): void {

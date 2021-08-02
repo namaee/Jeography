@@ -86,9 +86,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     if (path.hasAttribute('title')) {
       // console.log(path.getAttribute('title'));
       if (this.qs.state && !this.mapDrag.dirty) {
-        this.qs.nextQuestion()
-        console.log('quiz log');
-        
+        this.qs.nextQuestion(path.getAttribute('title'))
       }
       //check using service if state is quiz, then ->
     } else {

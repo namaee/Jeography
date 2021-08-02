@@ -7,3 +7,19 @@
 .score-entry {
   color: rgb(92, 171, 255)
 }
+
+.scoreEntryCorrectRect {
+  fill: greenyellow;
+}
+
+.scoreEntryFalseRect {
+  fill: red;
+}
+
+// .scoreEntryCorrect {
+//   color: greenyellow;
+// }
+
+// .scoreEntryFalse {
+//   color: red;
+// }

@@ -1,6 +1,9 @@
 <div class="score-container">
   <mat-list-item *ngFor="let score of scores">
-    <span class="score-entry">{{ score.areaName }}</span>
+    <svg width="5" height="5">
+      <rect width="inherit" height="inherit" [ngClass]="{scoreEntryCorrectRect: score.tf, scoreEntryFalseRect: !score.tf}" />
+    </svg>
+    <span [ngClass]="{scoreEntryCorrect: score.tf, scoreEntryFalse: !score.tf}" class="score-entry">{{ score.areaName }}</span>
       <mat-divider></mat-divider>
   </mat-list-item>
 </div>

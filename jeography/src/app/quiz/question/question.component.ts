@@ -11,6 +11,17 @@ export class Question {
     this.id = id;
   }
 }
+
+export class Answer {
+  name: string;
+  tf: boolean;
+  qid: number;
+  constructor(name: string, tf: boolean, qid: number) {
+    this.name = name;
+    this.tf = tf;
+    this.qid = qid;
+  }
+}
 @Component({
   selector: 'app-quiz-question',
   templateUrl: './question.component.html',
