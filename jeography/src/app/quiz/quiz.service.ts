@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { prefectures } from '../data';
-import { Question, Answer,  Settings } from './quiz';
+import { Question, Answer,  Settings, Score } from './quiz';
 
 
 @Injectable()
@@ -11,6 +11,8 @@ export class QuizService implements OnInit {
   public settings: Settings = new Settings();
   public questions: Question[] = [];
   public answers: Answer[] = [];
+  public scores: Score[] = [];
+  public scoreID: number = 0;
   public questionIndex: number = 0;
   
   constructor() {
@@ -33,15 +35,29 @@ export class QuizService implements OnInit {
   public nextQuestion(ans: string) {
     let answer = new Answer(ans, ans == this.questions[this.questionIndex].name, this.questions[this.questionIndex].id)
     this.answers.push(answer)
+    this.updateScore();
     this.questionIndex++
-    this.quizControl.next('next')
   }
 
   public resetQuiz() {
     this.state = false;
     this.settings.reset();
-    this.quizControl.next('reset');
+    this.questions = [];
+    this.questionIndex = 0;
+    this.answers = []
+    this.scores = [];
+    this.scoreID = 0;
+    // this.quizControl.next('reset');
   }
+
+  
+  public updateScore() {
+    // this.qs.questions.slice(0, this.qs.questionIndex).forEach((question: Question) => {
+    //   this.scores.
+    // })
+    this.scores.unshift(new Score(this.questions[this.questionIndex].name, this.questions[this.questionIndex].kanjiName, this.answers[this.questionIndex].tf, this.scoreID++))
+  }
+
   public shuffle(ar) {
     var ci = ar.length, ri;
     while (0 !== ci) {

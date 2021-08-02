@@ -7,13 +7,24 @@ $font-color: rgb(249, 231, 231);
 .question-display-card {
   background-color: $primary-color;
 }
+.question-index {
+  position: absolute;
+  text-align: right;
+  width: 4em;
+  top: 1.5em;
+  right: 2em;
+  height: 1em;
+  color: $font-color;
+  font-size: 1.5em;
+  // border: 3px solid rgb(100, 82, 255);
+
+}
 .question-display {
   height: 10em;
   display: flex;
   justify-content: center;
   flex-direction: column;
   // border: 3px solid rgb(255, 133, 111);
-
 }
 
 .question-display-name {

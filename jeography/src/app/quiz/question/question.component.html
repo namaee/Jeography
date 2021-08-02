@@ -3,7 +3,7 @@
     <span *ngIf="!qs.state" (click)="startQuiz()" class="start-button" title="This is some text I want to display.">Start</span>
     <span *ngIf="qs.state" class="question-display-name">{{qs.questions[qs.questionIndex].name}}</span>
     <span *ngIf="qs.state && qs.settings.kanji" class="question-display-name-kanji">{{qs.questions[qs.questionIndex].kanjiName}}</span>
-
+    <span *ngIf="qs.state" class="question-index">{{qs.questionIndex + '/' + qs.questions.length}}</span>
   </div>
   <mat-expansion-panel>
     <mat-expansion-panel-header>

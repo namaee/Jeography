@@ -1,6 +1,6 @@
 <mat-card class="score-container-card">
   <div class="score-container">
-    <mat-list-item *ngFor="let score of scores">
+    <mat-list-item *ngFor="let score of qs.scores">
       <svg *ngIf="qs.settings.feedback" class="score-entry-rect">
         <rect width="1em" height="1em" rx="1" [ngClass]="{'score-entry-correct-rect': score.tf, 'score-entry-false-rect': !score.tf}" />
       </svg>
