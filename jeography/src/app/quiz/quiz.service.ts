@@ -1,18 +1,19 @@
 import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { prefectures } from '../data';
-import { Question, Answer,  Settings, Score } from './quiz';
+import { Question, Answer,  Settings, Score, GameState } from './quiz';
 
 
 @Injectable()
 export class QuizService implements OnInit {
-  public state: boolean = false;
+  public state: GameState = 1;
   public quizControl: BehaviorSubject<string> = new BehaviorSubject<string>(null);
   public settings: Settings = new Settings();
   public questions: Question[] = [];
   public answers: Answer[] = [];
   public scores: Score[] = [];
   public scoreID: number = 0;
+  public correctAmount: number = 0;
   public questionIndex: number = 0;
   
   constructor() {
@@ -22,8 +23,9 @@ export class QuizService implements OnInit {
   }
 
   startQuiz() {
+    this.resetQuiz();
     this.createQuestions()
-    this.state = true
+    this.state = 2
   }
   public createQuestions() {
     prefectures.forEach((prefecture, i) => {
@@ -33,20 +35,32 @@ export class QuizService implements OnInit {
   }
 
   public nextQuestion(ans: string) {
+    if (this.state == 3) return
     let answer = new Answer(ans, ans == this.questions[this.questionIndex].name, this.questions[this.questionIndex].id)
     this.answers.push(answer)
     this.updateScore();
+    if (this.questionIndex >= this.questions.length - 1) {
+      this.state = 3
+      this.scores.forEach((score) => {
+        if (score.tf) {
+          this.correctAmount++;
+        }
+      })    
+      this.state = 3
+      return;
+    }
     this.questionIndex++
   }
 
   public resetQuiz() {
-    this.state = false;
-    this.settings.reset();
+    this.state = 1;
+    // this.settings.reset();
     this.questions = [];
     this.questionIndex = 0;
     this.answers = []
     this.scores = [];
     this.scoreID = 0;
+    this.correctAmount = 0;
     // this.quizControl.next('reset');
   }
 

@@ -48,3 +48,9 @@ export class Settings {
     this.kanji = false;
   }
 }
+
+export enum GameState {
+  OFF = 1,
+  OCC = 2,
+  END = 3,
+}
