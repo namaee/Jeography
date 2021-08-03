@@ -14,6 +14,16 @@
 } 
 
 .toolbar > * {
-  margin: 0.5em;
+  margin: 0.5em 1em 0.5em 1em;
+  // size: 5em;
 } 
-html {background-color: black}
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+mat-icon {
+  // height: 3em;
+  // width: 3em;
+  font-size: 1.8em;
+}
+// html {background-color: black}

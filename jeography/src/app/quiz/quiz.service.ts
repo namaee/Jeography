@@ -6,7 +6,7 @@ import { Question, Answer,  Settings, Score, GameState } from './quiz';
 
 @Injectable()
 export class QuizService implements OnInit {
-  public state: GameState = 3;
+  public state: GameState = 1;
   public quizControl: BehaviorSubject<string> = new BehaviorSubject<string>(null);
   public settings: Settings = new Settings();
   public questions: Question[] = [];
