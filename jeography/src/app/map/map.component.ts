@@ -1,8 +1,7 @@
-import { AfterViewInit, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, QueryList, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
 import { State } from '../app.component';
-import { prefectures } from '../data';
+import { prefectures, prefecturesSvg } from '../data';
 import { QuizService } from '../quiz/quiz.service';
 import { MapService } from './map.service';
 import { MapDragDirective } from './mapDrag.directive';
@@ -15,10 +14,10 @@ import { MapDragDirective } from './mapDrag.directive';
 export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MapDragDirective)
   public mapDrag: MapDragDirective;
-
   @Input() state: State = null
 
   public prefectures = prefectures;
+  public prefecturesSvg = prefecturesSvg;
   private subscriptions: Subscription = new Subscription();
   public activePrefecture: string = '';
   public zoomLevel: number = 1;
@@ -85,7 +84,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     let path = event.target as SVGPathElement;
     if (path.hasAttribute('title')) {
       // console.log(path.getAttribute('title'));
-      if (this.qs.state && !this.mapDrag.dirty) {
+      if (this.state == State.QUIZ && !this.mapDrag.dirty) {
         this.qs.nextQuestion(path.getAttribute('title'))
       }
       //check using service if state is quiz, then ->
@@ -137,7 +136,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public mapPathStyle(title: string): { [key: string]: string } {
     const style: { [key: string]: string } = {};
-    style['fill'] = this.activePrefecture == title ? 'rgb(249, 231, 231)' : 'rgb(255, 198, 99)'
+    style['fill'] = this.activePrefecture == title && !this.mapDrag?.dirty ? 'rgb(226, 121, 130)' : 'rgb(255, 198, 99)'
     if (this.qs.state) {
       style['cursor'] = 'pointer';
     } else {
@@ -148,6 +147,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+  
+  public get stateEnum(): typeof State {
+    return State; 
   }
 }
 
