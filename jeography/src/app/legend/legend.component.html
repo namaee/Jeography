@@ -19,15 +19,19 @@
 
 <mat-card class="info-card">
   <div class="info-container"> 
-    <div class="info-header-container">
-      <img class="area-flag" src="../../assets/flag_hokkaido.svg"/>
+    <div *ngIf="mapService.activePrefecture" class="info-header-container">
+      <img class="area-flag" src="{{'../../assets/Flag_of_' + mapService.activePrefecture.name + '_Prefecture.svg'}}"/>
       <div class="area-names">
-        <span class="area-name">Hokkaido</span>
-        <span class="area-name-kanji">北海道</span>
+        <span class="area-name">{{mapService.activePrefecture?.macron}}</span>
+        <span class="area-name-kanji">{{mapService.activePrefecture?.kanjiName}}</span>
       </div>
     </div>
-    
-    <div class="general-information-container">
+    <div *ngIf="!mapService.activePrefecture" class="info-header-container">
+      <div>
+        no prefecture selected
+      </div>
+    </div>
+    <!-- <div class="general-information-container">
       <div class="general-information-left">
         <mat-list>
           <mat-list-item>capital</mat-list-item>
@@ -51,6 +55,6 @@
           <mat-list-item>5.321.321</mat-list-item>
         </mat-list>
       </div>
-    </div>
+    </div> -->
   </div>
 </mat-card>

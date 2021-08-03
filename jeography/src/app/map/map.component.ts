@@ -30,17 +30,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   
   constructor(private elementRef: ElementRef, public mapService: MapService, public qs: QuizService) {
-    this.subscriptions.add(
-      this.mapService.hover.subscribe((prefecture: string) => {
-        if (prefecture) {
-          // this.setHoverColor(prefecture);
-          this.activePrefecture = prefecture;
-        } else {
-          // this.resetHoverColor();
-          this.activePrefecture = '';
-        }
-      })
-    )  
   }
 
   ngOnInit(): void {
@@ -63,41 +52,21 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       '#2b2b2b';
   }
 
-
-  // //legend interaction to map
-  // public setHoverColor(name: string) {
-  //   if (this.prefectures && name) {
-  //     this.prefectures.find((prefecture) => {
-        
-  //     })
-  //   }
-  // }
-
-  // public resetHoverColor() {
-  //   this.prefectures.forEach((prefecture) => {
-  //     // prefecture.hover = false;
-  //   })
-  // }
-
   //map interaction to legend
   public onClick(event: MouseEvent) {
     let path = event.target as SVGPathElement;
     if (path.hasAttribute('title')) {
-      // console.log(path.getAttribute('title'));
       if (this.state == State.QUIZ && !this.mapDrag.dirty) {
         this.qs.nextQuestion(path.getAttribute('title'))
+      } else if (this.state == State.VIEW) {
+        if (this.activePrefecture == path.getAttribute('title')) {
+          this.activePrefecture = ''
+          this.mapService.setActivePrefecture('');
+          return;
+        }
+        this.activePrefecture = path.getAttribute('title');
+        this.mapService.setActivePrefecture(this.activePrefecture);
       }
-      //check using service if state is quiz, then ->
-    } else {
-      // console.log('NO PREFECTURE');
-    }
-  }
-
-  //map interaction to legend
-  public onHover(event: MouseEvent) {
-    let path = event.target as SVGPathElement;
-    if (path.hasAttribute('title')) {
-      this.mapService.prefectureHover(path.getAttribute('title'));
     }
   }
 
@@ -119,9 +88,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.zoomLevel = this.zoomLevel / 1.5;
   }
-  public onLeave() {
-    this.mapService.prefectureLeave();
-  }
 
   public get mapStyle(): { [key: string]: string } {
     const style: { [key: string]: string } = {};
@@ -131,17 +97,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     style['stroke'] = 'rgb(242, 242, 242)';
     style['stroke-width'] =  0.65 / this.zoomLevel + 'px';
-    return style;
-  }
-
-  public mapPathStyle(title: string): { [key: string]: string } {
-    const style: { [key: string]: string } = {};
-    style['fill'] = this.activePrefecture == title && !this.mapDrag?.dirty ? 'rgb(226, 121, 130)' : 'rgb(255, 198, 99)'
-    if (this.qs.state) {
-      style['cursor'] = 'pointer';
-    } else {
-      style['cursor'] = 'default';
-    }
     return style;
   }
 

@@ -54,3 +54,5 @@ export enum GameState {
   OCC = 2,
   END = 3,
 }
+
+export type Prefecture = {name: string, kanjiName: string, macron: string}

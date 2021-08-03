@@ -1,17 +1,17 @@
-$default-fill: rgb(92, 171, 255);
+$default-fill: rgb(255, 198, 99);
 $primary-color: rgb(48, 26, 75);
 $primary-color-dark: rgb(29, 15, 46);
-// $active-fill: rgb(255, 198, 99);
+$active-fill: rgb(226, 121, 130);
 $font-color: rgb(249, 231, 231);
 
 .map {
-  fill: $primary-color;
+  fill: $default-fill;
 }
 
-// .map path:hover {
-//   fill: $active-fill;
-//   cursor: pointer;
-// }
+.map path:hover {
+  fill: $active-fill;
+  cursor: pointer;
+}
 
 .map-container {
   background-color: $primary-color-dark;
@@ -43,14 +43,15 @@ $font-color: rgb(249, 231, 231);
   z-index: 999;
 }
 
-.map-drag {
-  transform-origin: center;
+.active-prefecture {
+  fill: $active-fill;
+
 }
 
-.circle {
-  z-index:999;
-  fill:"red";
-}
+// .map-drag {
+//   transform-origin: center;
+// }
+
 
 ::ng-deep .path-tooltip {
   background-color: $font-color !important;

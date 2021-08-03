@@ -29,12 +29,9 @@ $font-color: rgb(249, 231, 231);
   display: flex;
   height: 12vh;
   max-height: 12vh;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
   border: 2px solid blue;
-  > * {
-    margin: auto;
-  }
 }
 .area-names {
   display: flex;
@@ -42,6 +39,7 @@ $font-color: rgb(249, 231, 231);
   height: 100%;
   flex-direction: column;
   justify-content: center;
+  right: 0;
   flex-wrap: wrap;
   border: 2px solid green;
   color: $font-color;
@@ -53,7 +51,7 @@ $font-color: rgb(249, 231, 231);
 
 .area-flag { //ratio 3:2
   height: 12vh;
-  width: 18vh;
+  width: auto;
 }
 
 .area-name {
@@ -63,6 +61,7 @@ $font-color: rgb(249, 231, 231);
 
 .area-name-kanji {
   width: 100%;
+  font-size: 0.7em;
   border: 2px solid red;
 }
 
