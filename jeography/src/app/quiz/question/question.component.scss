@@ -6,6 +6,8 @@ $font-color: rgb(249, 231, 231);
 
 .question-display-card {
   background-color: $primary-color;
+    border: 3px solid rgb(100, 82, 255);
+
 }
 .question-index {
   position: absolute;
@@ -75,4 +77,35 @@ mat-expansion-panel-content {
 
 .settings-container > *{
   margin: auto;
+}
+
+.question-end-screen {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  // border: 3px solid rgb(96, 255, 189);
+}
+.question-end-screen > div {
+  color: $font-color;
+  font-size: 1.5em;
+  text-align: center;
+  margin: 0.65em 0em 0.4em 1em;
+}
+.question-end-screen-score {
+  color: $font-color;
+  font-size: 3em;
+  text-align: center;
+  width: 100%;
+  margin: 0.3em 0em 0.4em 0em;
+}
+
+.question-end-screen-replay {
+  color: $font-color;
+  font-size: 3em;
+  margin: 0.25em 0em 0.4em 0em;
+  transition: color 0.1s ease-in-out;
+
+}
+.question-end-screen-replay:hover {
+  color: $secondary-color;
 }

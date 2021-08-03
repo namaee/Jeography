@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { QuizService } from '../quiz.service';
-
+import { GameState } from '../quiz';
 @Component({
   selector: 'app-quiz-score',
   templateUrl: './score.component.html',

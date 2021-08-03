@@ -137,7 +137,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public mapPathStyle(title: string): { [key: string]: string } {
     const style: { [key: string]: string } = {};
-    style['fill'] = this.activePrefecture == title ? 'rgb(255, 198, 99)' : 'rgb(92, 171, 255)'
+    style['fill'] = this.activePrefecture == title ? 'rgb(249, 231, 231)' : 'rgb(255, 198, 99)'
     if (this.qs.state) {
       style['cursor'] = 'pointer';
     } else {

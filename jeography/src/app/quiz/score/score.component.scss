@@ -12,12 +12,15 @@ $correct-color: rgb(136, 255, 130);
 }
 
 .score-container {
-  max-height: 39em;
-  overflow-x: auto;
+  max-height: 35em;
+  overflow-y: auto;
+  padding-bottom: 1px;
 }
 
 .score-entry {
   color: $font-color;
+  max-width: 100%;
+
 }
 .score-entry-rect {
   width: 0.7em;
@@ -39,3 +42,8 @@ $correct-color: rgb(136, 255, 130);
 // .scoreEntryFalse {
 //   color: red;
 // }
+
+.mat-card .mat-divider-horizontal {
+  position: relative !important;
+  left: 0;
+}
