@@ -13,7 +13,8 @@ export enum State{
 })
 export class AppComponent {
   public state: State = State.QUIZ;
-  
+  public location = location;
+  public console = console
   constructor(private qs: QuizService) {
 
   }

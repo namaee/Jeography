@@ -4,6 +4,11 @@
     <span *ngIf="qs.state == 2" class="question-display-name">{{qs.questions[qs.questionIndex].name}}</span>
     <span *ngIf="qs.state == 2 && qs.settings.kanji" class="question-display-name-kanji">{{qs.questions[qs.questionIndex].kanjiName}}</span>
     <span *ngIf="qs.state == 2" class="question-index">{{qs.questionIndex + 1 + '/' + qs.questions.length}}</span>
+    <div *ngIf="qs.state == 2" class="question-reset">
+      <button disableRipple mat-icon-button>
+        <mat-icon class="question-reset-button" (click)="qs.startQuiz()" matTooltip="Reset" matTooltipPosition="above" matTooltipClass="tooltip-reset">refresh</mat-icon>
+      </button>
+    </div>
     <div class="question-end-screen" *ngIf="qs.state == 3">
       <span class="question-end-screen-score">{{qs.correctAmount + ' out of ' + qs.questions.length + ' correct (' + ((qs.correctAmount/qs.questions.length * 100) | number : '1.1-1') + '%)'}}</span>
       <button disableRipple mat-icon-button>

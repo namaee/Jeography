@@ -2,7 +2,6 @@
   display: flex;
   position: relative;
   justify-content: flex-start;
-  
 }
 .app-container > * {
   margin: 0em 5em 0em 5em;
@@ -15,15 +14,14 @@
 
 .toolbar > * {
   margin: 0.5em 1em 0.5em 1em;
-  // size: 5em;
 } 
 .toolbar-spacer {
   flex: 1 1 auto;
 }
 
+.selected-state {
+  color: rgb(249, 231, 231);
+}
 mat-icon {
-  // height: 3em;
-  // width: 3em;
   font-size: 1.8em;
 }
-// html {background-color: black}
