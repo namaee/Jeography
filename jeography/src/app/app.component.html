@@ -2,18 +2,28 @@
   <button mat-icon-button class="example-icon">
     <mat-icon>menu</mat-icon>
   </button>
-  <span>My App</span>
-  <button mat-icon-button class="example-icon favorite-icon">
-    <mat-icon>favorite</mat-icon>
+  <span>jeography</span>
+  <button (click)="stateSwitch(stateEnum.VIEW)" [ngClass]="{'selected-state': state == stateEnum.VIEW}" mat-icon-button class="toolbar-button" disableRipple>
+    <mat-icon>place</mat-icon>
   </button>
-  <button mat-icon-button class="example-icon">
-    <mat-icon>share</mat-icon>
+  <button (click)="stateSwitch(stateEnum.QUIZ)" [ngClass]="{'selected-state': state == stateEnum.QUIZ}" mat-icon-button class="toolbar-button" disableRipple>
+    <mat-icon>ballot</mat-icon>
+  </button>
+
+  <span class="toolbar-spacer"></span>
+  <button (click)="console.log('i dont do anything yet')" mat-icon-button class="toolbar-button" disableRipple>
+    <mat-icon>palette</mat-icon>
+  </button>
+  <button (click)="location.href = 'mailto:dsad@dsa.nl'" mat-icon-button class="toolbar-button" disableRipple>
+    <mat-icon>email</mat-icon>
   </button>
 </mat-toolbar>
 
 
 <div class="app-container">
   <app-menu></app-menu>
-  <app-map></app-map>
-  <app-legend></app-legend>
+  <app-map [state]="state"></app-map>
+  <app-legend *ngIf="state == 1"></app-legend>
+  <app-quiz *ngIf="state == 2"></app-quiz>
+
 </div>

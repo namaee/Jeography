@@ -1,8 +1,10 @@
 $default-fill: rgb(92, 171, 255);
+$primary-color: rgb(48, 26, 75);
+$primary-color-dark: rgb(29, 15, 46);
 $active-fill: rgb(255, 198, 99);
 
 .map {
-  fill: $default-fill;
+  fill: $primary-color;
 }
 
 .map path:hover {
@@ -11,11 +13,11 @@ $active-fill: rgb(255, 198, 99);
 }
 
 .map-container {
-  background-color: rgb(82, 82, 82);
+  background-color: $primary-color-dark;
   margin: 0 auto;
   position: relative;
   width: 800px;
-  height: 900px;
+  height: 800px;
   right: 100px;
   overflow: hidden;
 }

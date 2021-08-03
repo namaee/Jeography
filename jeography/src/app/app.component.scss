@@ -1,9 +1,10 @@
 .app-container {
   display: flex;
-  justify-content: flex-end;
+  position: relative;
+  justify-content: flex-start;
 }
 .app-container > * {
-  margin: auto;
+  margin: 0em 5em 0em 5em;
 }
 .toolbar {
   background-color:transparent;
@@ -12,5 +13,15 @@
 } 
 
 .toolbar > * {
-  margin: 0.5em;
+  margin: 0.5em 1em 0.5em 1em;
 } 
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.selected-state {
+  color: rgb(249, 231, 231);
+}
+mat-icon {
+  font-size: 1.8em;
+}
