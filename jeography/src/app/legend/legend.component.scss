@@ -1,8 +1,123 @@
-.legend-container {
-  border: 3px solid rgb(93, 255, 78);
+$primary-color: rgb(48, 25, 77);
+$primary-color-dark: rgb(29, 15, 46);
+$secondary-color: rgb(255, 198, 99);
+$secondary-color-dark: rgb(255, 188, 71);
+$font-color: rgb(249, 231, 231);
+
+.info-card {
+  background-color: $primary-color;
   width: 50em;
   margin-left: -10em;
   display: flex;
-  flex-flow: column wrap;
-  max-height: 37em;
+  flex-flow: column;
+  // height: 700px;
+  max-height: 800px;
+  padding: 2em;
 }
+
+.info-header-card{
+  background-color: $primary-color-dark;
+}
+
+.info-container {
+  width: 100%;
+  height: 100%;
+  max-height: inherit;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.info-header-container {
+  width: 100%;
+  display: flex;
+  height: 20%;
+  max-height: 20%;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  // border: 2px solid blue;
+}
+.area-names {
+  display: flex;
+  width: 55%;
+  height: 3em;
+  flex-direction: column;
+  justify-content: center;
+  right: 0;
+  flex-wrap: wrap;
+  // border: 2px solid green;
+  color: $font-color;
+  font-size: 4em;
+  > * {
+    margin: auto;
+  }
+}
+
+.area-flag { //ratio 3:2
+  height: 12.3em;
+  width: auto;
+}
+
+.area-name {
+  width: 100%;
+  // border: 2px solid red;
+}
+
+.area-name-kanji {
+  width: 100%;
+  font-size: 0.8em;
+  // border: 2px solid red;
+}
+
+.general-information-container {
+  margin-top: 2em;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  // border: 2px solid pink
+}
+
+.general-information-left {
+  height: 100%;
+  width: 50%;
+  // border: 2px solid orange;
+  font-weight: 600;
+}
+.general-information-right {
+  height: 100%;
+  width: 40%;
+  // border: 2px solid cornflowerblue;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// .legend-container {
+//   border: 3px solid rgb(93, 255, 78);
+//   width: 50em;
+//   margin-left: -10em;
+//   display: flex;
+//   flex-flow: column wrap;
+//   max-height: 37em;
+// }

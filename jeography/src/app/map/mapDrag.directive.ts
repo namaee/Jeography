@@ -102,11 +102,10 @@ export class MapDragDirective implements OnInit {
   }
 
   public checkOnControl(element: HTMLElement): boolean {
-    // console.log('test here');
     switch ((element.nodeName || '').toUpperCase()) {
       case 'BUTTON':
         return true;
-      case 'MAT-SLIDE-TOGGLE':
+      case 'MAT-ICON':
         return true;
       default:
         return element.parentElement ? this.checkOnControl(element.parentElement) : false;

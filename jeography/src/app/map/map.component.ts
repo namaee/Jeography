@@ -1,8 +1,7 @@
-import { AfterViewInit, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, QueryList, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
 import { State } from '../app.component';
-import { prefectures } from '../data';
+import { prefectures, prefecturesSvg } from '../data';
 import { QuizService } from '../quiz/quiz.service';
 import { MapService } from './map.service';
 import { MapDragDirective } from './mapDrag.directive';
@@ -15,10 +14,10 @@ import { MapDragDirective } from './mapDrag.directive';
 export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MapDragDirective)
   public mapDrag: MapDragDirective;
-
   @Input() state: State = null
 
   public prefectures = prefectures;
+  public prefecturesSvg = prefecturesSvg;
   private subscriptions: Subscription = new Subscription();
   public activePrefecture: string = '';
   public zoomLevel: number = 1;
@@ -31,17 +30,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   
   constructor(private elementRef: ElementRef, public mapService: MapService, public qs: QuizService) {
-    this.subscriptions.add(
-      this.mapService.hover.subscribe((prefecture: string) => {
-        if (prefecture) {
-          // this.setHoverColor(prefecture);
-          this.activePrefecture = prefecture;
-        } else {
-          // this.resetHoverColor();
-          this.activePrefecture = '';
-        }
-      })
-    )  
   }
 
   ngOnInit(): void {
@@ -64,41 +52,21 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       '#2b2b2b';
   }
 
-
-  // //legend interaction to map
-  // public setHoverColor(name: string) {
-  //   if (this.prefectures && name) {
-  //     this.prefectures.find((prefecture) => {
-        
-  //     })
-  //   }
-  // }
-
-  // public resetHoverColor() {
-  //   this.prefectures.forEach((prefecture) => {
-  //     // prefecture.hover = false;
-  //   })
-  // }
-
   //map interaction to legend
   public onClick(event: MouseEvent) {
     let path = event.target as SVGPathElement;
     if (path.hasAttribute('title')) {
-      // console.log(path.getAttribute('title'));
-      if (this.qs.state && !this.mapDrag.dirty) {
+      if (this.state == State.QUIZ && !this.mapDrag.dirty) {
         this.qs.nextQuestion(path.getAttribute('title'))
+      } else if (this.state == State.VIEW && !this.mapDrag.dirty) {
+        if (this.activePrefecture == path.getAttribute('title')) {
+          this.activePrefecture = ''
+          this.mapService.setActivePrefecture('');
+          return;
+        }
+        this.activePrefecture = path.getAttribute('title');
+        this.mapService.setActivePrefecture(this.activePrefecture);
       }
-      //check using service if state is quiz, then ->
-    } else {
-      // console.log('NO PREFECTURE');
-    }
-  }
-
-  //map interaction to legend
-  public onHover(event: MouseEvent) {
-    let path = event.target as SVGPathElement;
-    if (path.hasAttribute('title')) {
-      this.mapService.prefectureHover(path.getAttribute('title'));
     }
   }
 
@@ -120,9 +88,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.zoomLevel = this.zoomLevel / 1.5;
   }
-  public onLeave() {
-    this.mapService.prefectureLeave();
-  }
 
   public get mapStyle(): { [key: string]: string } {
     const style: { [key: string]: string } = {};
@@ -135,19 +100,12 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     return style;
   }
 
-  public mapPathStyle(title: string): { [key: string]: string } {
-    const style: { [key: string]: string } = {};
-    style['fill'] = this.activePrefecture == title ? 'rgb(249, 231, 231)' : 'rgb(255, 198, 99)'
-    if (this.qs.state) {
-      style['cursor'] = 'pointer';
-    } else {
-      style['cursor'] = 'default';
-    }
-    return style;
-  }
-
   public ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+  
+  public get stateEnum(): typeof State {
+    return State; 
   }
 }
 

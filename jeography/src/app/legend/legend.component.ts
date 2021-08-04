@@ -1,45 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { prefectures } from '../data';
 import { MapService } from '../map/map.service';
-import { LegendEntry } from './legend';
+
 @Component({
   selector: 'app-legend',
   templateUrl: './legend.component.html',
   styleUrls: ['./legend.component.scss']
 })
 export class LegendComponent implements OnInit {
-  public prefectures: LegendEntry[] = [];
-  private subscriptions: Subscription = new Subscription();
+  public prefectures = prefectures;
 
-  
   constructor(public mapService: MapService) {
-    this.subscriptions.add(
-      this.mapService.hover.subscribe((prefecture: string) => {
-        if (prefecture) {
-          this.setHoverColor(prefecture);
-        } else {
-          this.resetHoverColor();
-        }
-      })
-    )  
+  
   }
 
   ngOnInit(): void {
-    prefectures.forEach((prefecture) => {
-      this.prefectures.push(new LegendEntry(prefecture.name, prefecture.kanjiName))
-    })
+
   }
 
-  public setHoverColor(name: string) {
-    if (this.prefectures && name) {
-      this.prefectures.find((prefecture) => prefecture.name == name).hover = true;
-    }
+  public formatKM(num) {
+    num = num.toFixed(2).toString().replace('.', ',')
+    return num.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
   }
 
-  public resetHoverColor() {
-    this.prefectures.forEach((prefecture) => {
-      prefecture.hover = false;
-    })
+  public formatMI(num) {
+    num = (num / 2.58998811).toFixed(2).toString().replace('.', ',')
+    return num.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+  }
+
+  public formatPop(num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
   }
 }

@@ -29,7 +29,7 @@ export class QuizService implements OnInit {
   }
   public createQuestions() {
     prefectures.forEach((prefecture, i) => {
-      this.questions.push(new Question(prefecture.name, prefecture.kanjiName, i));
+      this.questions.push(new Question(prefecture.macron, prefecture.kanjiName, i));
     })
     this.shuffle(this.questions);
   }
