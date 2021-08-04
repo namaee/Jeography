@@ -47,15 +47,18 @@
           <mat-divider></mat-divider>
           <mat-list-item>population</mat-list-item>
           <mat-divider></mat-divider>
+          <mat-list-item>prefecture flower</mat-list-item>
+          <mat-divider></mat-divider>
         </mat-list>
       </div>
       <div class="general-information-right">
         <mat-list>
-          <mat-list-item>Sapporo</mat-list-item>
-          <mat-list-item>Hokkaido</mat-list-item>
-          <mat-list-item>Hokkaido</mat-list-item>
-          <mat-list-item>82.451.413km &sup2;</mat-list-item>
-          <mat-list-item>5.321.321</mat-list-item>
+          <mat-list-item>{{mapService.activePrefectureData?.capital}}</mat-list-item>
+          <mat-list-item>{{mapService.activePrefectureData?.region}}</mat-list-item>
+          <mat-list-item>{{mapService.activePrefectureData?.island}}</mat-list-item>
+          <mat-list-item>{{mapService.activePrefectureData?.area}}</mat-list-item>
+          <mat-list-item>{{mapService.activePrefectureData?.population}}</mat-list-item>
+          <mat-list-item>{{mapService.activePrefectureData?.flower}}</mat-list-item>
         </mat-list>
       </div>
     </div>

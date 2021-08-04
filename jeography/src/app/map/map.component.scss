@@ -14,13 +14,14 @@ $font-color: rgb(249, 231, 231);
 }
 
 .map-container {
-  background-color: $primary-color-dark;
+  background-color: rgb(39, 39, 39);
   margin: 0 auto;
   position: relative;
   width: 800px;
   height: 800px;
   right: 100px;
   overflow: hidden;
+  border-radius: 0.5em;
 }
 
 
