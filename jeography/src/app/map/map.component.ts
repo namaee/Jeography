@@ -58,7 +58,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     if (path.hasAttribute('title')) {
       if (this.state == State.QUIZ && !this.mapDrag.dirty) {
         this.qs.nextQuestion(path.getAttribute('title'))
-      } else if (this.state == State.VIEW) {
+      } else if (this.state == State.VIEW && !this.mapDrag.dirty) {
         if (this.activePrefecture == path.getAttribute('title')) {
           this.activePrefecture = ''
           this.mapService.setActivePrefecture('');
