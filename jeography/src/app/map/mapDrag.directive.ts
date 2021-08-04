@@ -113,7 +113,6 @@ export class MapDragDirective implements OnInit {
   }
 
   public resetView(): void {
-    console.log('reset');
     this.currentX = 0;
     this.currentY = 0;
     this.element.style.transform = "translate3d(0px, 0px, 0)";
