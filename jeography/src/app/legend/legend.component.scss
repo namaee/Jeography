@@ -74,22 +74,21 @@ $font-color: rgb(249, 231, 231);
   height: 100%;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-direction: row;
-
-  border: 2px solid pink
+  // border: 2px solid pink
 }
 
 .general-information-left {
   height: 100%;
-  width: 40%;
-  border: 2px solid orange;
+  width: 50%;
+  // border: 2px solid orange;
   font-weight: 600;
 }
 .general-information-right {
   height: 100%;
   width: 40%;
-  border: 2px solid cornflowerblue;
+  // border: 2px solid cornflowerblue;
 }
 
 

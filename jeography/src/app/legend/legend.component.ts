@@ -18,5 +18,17 @@ export class LegendComponent implements OnInit {
 
   }
 
+  public formatKM(num) {
+    num = num.toFixed(2).toString().replace('.', ',')
+    return num.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+  }
 
+  public formatMI(num) {
+    num = (num / 2.58998811).toFixed(2).toString().replace('.', ',')
+    return num.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+  }
+
+  public formatPop(num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+  }
 }

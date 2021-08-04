@@ -34,7 +34,7 @@
       </div>
     </mat-card>
     
-    <div class="general-information-container">
+    <div *ngIf="mapService.activePrefectureData" class="general-information-container">
       <div class="general-information-left">
         <mat-list>
           <mat-list-item>capital</mat-list-item>
@@ -56,8 +56,8 @@
           <mat-list-item>{{mapService.activePrefectureData?.capital}}</mat-list-item>
           <mat-list-item>{{mapService.activePrefectureData?.region}}</mat-list-item>
           <mat-list-item>{{mapService.activePrefectureData?.island}}</mat-list-item>
-          <mat-list-item>{{mapService.activePrefectureData?.area}}</mat-list-item>
-          <mat-list-item>{{mapService.activePrefectureData?.population}}</mat-list-item>
+          <mat-list-item [matTooltip]="formatMI(mapService.activePrefectureData?.area) + ' mi&#178;'" matTooltipPosition="left">{{formatKM(mapService.activePrefectureData?.area) + ' km&#178;'}}</mat-list-item>
+          <mat-list-item>{{formatPop(mapService.activePrefectureData?.population)}}</mat-list-item>
           <mat-list-item>{{mapService.activePrefectureData?.flower}}</mat-list-item>
         </mat-list>
       </div>

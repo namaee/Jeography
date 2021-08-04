@@ -20,7 +20,7 @@ export class MapService {
       return prefecture.name == pref;      
     })
     this.activePrefectureData = this.prefecturesData.find((prefecture) => {
-      return prefecture.name == this.activePrefecture.macron;      
+      return prefecture.name == this.activePrefecture?.macron;      
     })
   }
 }
