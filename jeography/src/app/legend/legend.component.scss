@@ -28,6 +28,14 @@ $font-color: rgb(249, 231, 231);
   justify-content: center;
   flex-direction: column;
 }
+
+.info-header-no-selection {
+  font-size: 2em;
+  color: $font-color;
+  // text-align: center;
+  margin: auto;
+}
+
 .info-header-container {
   width: 100%;
   display: flex;
@@ -37,6 +45,7 @@ $font-color: rgb(249, 231, 231);
   flex-wrap: wrap;
   // border: 2px solid blue;
 }
+
 .area-names {
   display: flex;
   width: 55%;

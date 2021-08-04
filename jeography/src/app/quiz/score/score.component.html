@@ -6,8 +6,8 @@
           <title>{{score.tf ? 'Correct' : 'Incorrect'}}</title>
         </rect>
       </svg>
-      <span *ngIf="!qs.settings.kanji" [ngClass]="{'score-entry-correct': score.tf, 'score-entry-false': !score.tf}" class="score-entry">{{ score.areaName }}</span>
-      <span *ngIf="qs.settings.kanji" [ngClass]="{'score-entry-correct': score.tf, 'score-entry-false': !score.tf}" class="score-entry">{{ score.areaName + ' - ' + score.kanjiAreaName}}</span>
+      <span *ngIf="!qs.settings.kanji" [ngClass]="{'score-entry-correct': score.tf, 'score-entry-false': !score.tf}" class="score-entry">{{ score.macronAreaName }}</span>
+      <span *ngIf="qs.settings.kanji" [ngClass]="{'score-entry-correct': score.tf, 'score-entry-false': !score.tf}" class="score-entry">{{ score.macronAreaName + ' - ' + score.kanjiAreaName}}</span>
       <mat-divider></mat-divider>
     </mat-list-item>
   </div>

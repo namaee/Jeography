@@ -1,17 +1,17 @@
 <mat-toolbar class="toolbar" color="primary">
-  <button mat-icon-button class="example-icon">
+  <!-- <button mat-icon-button class="example-icon">
     <mat-icon>menu</mat-icon>
-  </button>
+  </button> -->
   <span>jeography</span>
-  <button (click)="stateSwitch(stateEnum.VIEW)" [ngClass]="{'selected-state': state == stateEnum.VIEW}" mat-icon-button class="toolbar-button" disableRipple>
+  <button matTooltip="view the map" matTooltipClass="toolbar-tooltip" (click)="stateSwitch(stateEnum.VIEW)" [ngClass]="{'selected-state': state == stateEnum.VIEW}" mat-icon-button class="toolbar-button" disableRipple>
     <mat-icon>place</mat-icon>
   </button>
-  <button (click)="stateSwitch(stateEnum.QUIZ)" [ngClass]="{'selected-state': state == stateEnum.QUIZ}" mat-icon-button class="toolbar-button" disableRipple>
+  <button matTooltip="test yourself" matTooltipClass="toolbar-tooltip" (click)="stateSwitch(stateEnum.QUIZ)" [ngClass]="{'selected-state': state == stateEnum.QUIZ}" mat-icon-button class="toolbar-button" disableRipple>
     <mat-icon>ballot</mat-icon>
   </button>
 
   <span class="toolbar-spacer"></span>
-  <button (click)="console.log('i dont do anything yet')" mat-icon-button class="toolbar-button" disableRipple>
+  <button (click)="console.log('i dont do anything yet')" mat-icon-button class="toolbar-button-disabled" disableRipple>
     <mat-icon>palette</mat-icon>
   </button>
   <button (click)="location.href = 'mailto:sabersekai@gmail.com'" mat-icon-button class="toolbar-button" disableRipple>

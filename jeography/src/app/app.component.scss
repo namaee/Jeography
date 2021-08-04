@@ -1,3 +1,10 @@
+$default-fill: rgb(255, 198, 99);
+$primary-color: rgb(48, 26, 75);
+$primary-color-dark: rgb(29, 15, 46);
+$secondary-color: rgb(255, 198, 99);
+$active-fill: rgb(226, 121, 130);
+$font-color: rgb(249, 231, 231);
+
 .app-container {
   display: flex;
   position: relative;
@@ -24,4 +31,13 @@
 }
 mat-icon {
   font-size: 1.8em;
+}
+
+.toolbar-button-disabled {
+  cursor: default;
+}
+
+::ng-deep .toolbar-tooltip {
+  background-color: $secondary-color !important;
+  color: $primary-color !important;
 }

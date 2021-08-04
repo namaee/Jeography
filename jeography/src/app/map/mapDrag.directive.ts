@@ -87,7 +87,7 @@ export class MapDragDirective implements OnInit {
 
         setTimeout(() => {
           this.dirty = false;
-        }, 100);
+        }, 50);
     });
   }
 

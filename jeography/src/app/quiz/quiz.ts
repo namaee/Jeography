@@ -1,11 +1,13 @@
 export class Question {
   name: string;
   kanjiName: string;
+  macron: string;
   id: number;
 
-  constructor(name: string, kanjiName: string, id: number) {
+  constructor(name: string, kanjiName: string, macron: string, id: number) {
     this.name = name;
     this.kanjiName = kanjiName;
+    this.macron = macron;
     this.id = id;
   }
 }
@@ -24,12 +26,14 @@ export class Answer {
 export class Score {
   areaName: string;
   kanjiAreaName: string;
+  macronAreaName: string;
   tf: boolean;
   id: number;
 
-  constructor(areaName: string, kanjiAreaName: string, tf: boolean, id: number) {
+  constructor(areaName: string, kanjiAreaName: string, macronAreaName: string, tf: boolean, id: number) {
     this.areaName = areaName;
     this.kanjiAreaName = kanjiAreaName;
+    this.macronAreaName = macronAreaName;
     this.tf = tf;
     this.id = id;
   }

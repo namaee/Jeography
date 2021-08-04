@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, HostListener, Input, OnDestroy, O
 import { Subject, Subscription } from 'rxjs';
 import { State } from '../app.component';
 import { prefectures, prefecturesSvg } from '../data';
+import { GameState } from '../quiz/quiz';
 import { QuizService } from '../quiz/quiz.service';
 import { MapService } from './map.service';
 import { MapDragDirective } from './mapDrag.directive';
@@ -56,8 +57,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   public onClick(event: MouseEvent) {
     let path = event.target as SVGPathElement;
     if (path.hasAttribute('title')) {
-      if (this.state == State.QUIZ && !this.mapDrag.dirty) {
+      if (this.state == State.QUIZ && this.qs.state == GameState.OCC && !this.mapDrag.dirty) {
         this.qs.nextQuestion(path.getAttribute('title'))
+        console.log(this.qs.questionIndex);
+        
       } else if (this.state == State.VIEW && !this.mapDrag.dirty) {
         if (this.activePrefecture == path.getAttribute('title')) {
           this.activePrefecture = ''
@@ -100,6 +103,13 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     return style;
   }
 
+  public get mapPaths(): { [key: string]: string } {
+    const style: { [key: string]: string } = {};
+    if (this.mapDrag?.dirty) {
+      style['cursor'] =  'default'
+    }
+    return style;
+  }
   public ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
