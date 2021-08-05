@@ -57,18 +57,17 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   //map interaction to legend
   public onClick(event: MouseEvent) {
     console.log(((event.offsetX - 51) / 1.456) + 0.6 + ', ' + (event.offsetY - 14) / 1.456);
-
-    let path = event.target as SVGPathElement;
-    if (path.hasAttribute('title')) {
+    let ele = event.target as SVGPathElement;
+    if (ele.hasAttribute('title')) {
       if (this.state == State.QUIZ && this.qs.state == GameState.OCC && !this.mapDrag.dirty) {
-        this.qs.nextQuestion(path.getAttribute('title'))
+        this.qs.nextQuestion(ele.getAttribute('title'))
       } else if (this.state == State.VIEW && !this.mapDrag.dirty) {
-        if (this.active == path.getAttribute('title')) {
+        if (this.active == ele.getAttribute('title')) {
           this.active = ''
           this.mapService.setActive('', this.mapService.mode);
           return;
         }
-        this.active = path.getAttribute('title');
+        this.active = ele.getAttribute('title');
         this.mapService.setActive(this.active, this.mapService.mode);
       }
     }

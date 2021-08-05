@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { prefectures } from '../data';
-import { Question, Answer,  Settings, Score, GameState } from './quiz';
+import { prefectures, citiesSvg } from '../data';
+import { Question, Answer,  Settings, Score, GameState, Mode } from './quiz';
 
 
 @Injectable()
@@ -22,15 +22,22 @@ export class QuizService implements OnInit {
   ngOnInit(): void {
   }
 
-  startQuiz() {
+  startQuiz(mode: Mode) {
     this.resetQuiz();
-    this.createQuestions()
+    this.createQuestions(mode)
     this.state = 2
   }
-  public createQuestions() {
-    prefectures.forEach((prefecture, i) => {
-      this.questions.push(new Question(prefecture.name, prefecture.kanjiName, i));
-    })
+  public createQuestions(mode: Mode) {
+    if (mode == Mode.PREF) {
+      prefectures.forEach((prefecture, i) => {
+        this.questions.push(new Question(prefecture.name, prefecture.kanjiName, i));
+      })
+    } else if (mode == Mode.CIT) {
+      citiesSvg.forEach((city, i) => {
+        this.questions.push(new Question(city.title, "kanji place holder",  i));
+      })
+    } 
+
     this.shuffle(this.questions);
   }
 
