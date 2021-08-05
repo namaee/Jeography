@@ -33,6 +33,6 @@ export class LegendComponent implements OnInit {
   }
 
   public toStandardLatin(name) {
-    return (name.replace('ō','o')).replace('Ō', 'O');
+    return (name.replace(/ō/g,'o')).replace(/Ō/g, 'O');
   }
 }
