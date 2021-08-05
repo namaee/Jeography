@@ -15,7 +15,7 @@ export class MenuComponent implements OnInit {
   }
 
   switchMode(mode: Mode) {
-    // this.mapService.mode = mode;
+    this.mapService.mode = mode;
   }
 
   public get modeEnum(): typeof Mode {
