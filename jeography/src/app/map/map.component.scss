@@ -54,11 +54,17 @@ $font-color: rgb(249, 231, 231);
 // }
 
 .circle {
-  position: absolute;
-  z-index: 999;
+  fill: rgb(165, 1, 4);
+  stroke: rgb(46, 47, 47);
+
 }
 
 ::ng-deep .path-tooltip {
   background-color: $font-color !important;
+  color: rgb(226, 121, 130) !important;
+}
+
+::ng-deep .circle-tooltip {
+  background-color: rgb(46, 47, 47) !important;
   color: rgb(226, 121, 130) !important;
 }

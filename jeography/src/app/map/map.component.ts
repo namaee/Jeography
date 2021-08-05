@@ -118,6 +118,13 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     return style;
   }
+
+  public get cityCircles(): { [key: string]: string } {
+    const style: { [key: string]: string } = {};
+    style['stroke-width'] =  0.65 - 0.7 * ((Math.log(this.zoomLevel) / Math.log(1.5)) / 12) + 'px';
+    return style;
+  }
+  
   public ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
