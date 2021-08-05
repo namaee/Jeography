@@ -1,8 +1,8 @@
 <mat-toolbar class="toolbar" color="primary">
-  <button mat-icon-button class="example-icon">
+  <!-- <button mat-icon-button class="example-icon">
     <mat-icon>menu</mat-icon>
-  </button>
-  <span>jeography</span>
+  </button> -->
+  <span class="title">jeography</span>
   <button matTooltip="view the map" matTooltipClass="toolbar-tooltip" (click)="stateSwitch(stateEnum.VIEW)" [ngClass]="{'selected-state': state == stateEnum.VIEW}" mat-icon-button class="toolbar-button" disableRipple>
     <mat-icon>place</mat-icon>
   </button>
@@ -21,7 +21,7 @@
 
 
 <div class="app-container">
-  <app-menu></app-menu>
+  <app-menu class="menu"></app-menu>
   <app-map [state]="state"></app-map>
   <app-legend *ngIf="state == 1"></app-legend>
   <app-quiz *ngIf="state == 2"></app-quiz>

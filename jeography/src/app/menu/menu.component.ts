@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MapService } from '../map/map.service';
+import { Mode } from '../quiz/quiz';
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(public mapService: MapService) { }
 
   ngOnInit(): void {
   }
 
+  switchMode(mode: Mode) {
+    this.mapService.mode = mode;
+  }
+
+  public get modeEnum(): typeof Mode {
+    return Mode; 
+  }
+  
 }

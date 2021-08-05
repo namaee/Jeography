@@ -1,4 +1,35 @@
+$primary-color: rgb(48, 25, 77);
+$primary-color-dark: rgb(29, 15, 46);
+$secondary-color: rgb(255, 198, 99);
+$secondary-color-dark: rgb(255, 188, 71);
+$font-color: rgb(249, 231, 231);
+$error-color: rgb(226, 121, 130);
+$correct-color: rgb(136, 255, 130);
+
 .menu-container {
-  border: 3px solid rgb(93, 255, 78);
+  // border: 3px solid rgb(93, 255, 78);
+  position: relative;
+  top: 5em;
   width: 10em;
+}
+
+.mode-list {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  // border: 3px solid rgb(255, 161, 124);
+}
+.mode-switch {
+  margin-bottom: 2em;
+  color: $secondary-color;
+  font-weight: 500;
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+  // border: 3px solid rgb(85, 158, 255);
+  cursor: pointer;
+}
+
+.wip {
+  color:$error-color;
+  white-space: nowrap;
+  cursor: default;
 }

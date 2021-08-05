@@ -5,13 +5,18 @@ $secondary-color: rgb(255, 198, 99);
 $active-fill: rgb(226, 121, 130);
 $font-color: rgb(249, 231, 231);
 
+.title {
+  position: relative;
+  left: -1.1em;
+}
+
 .app-container {
   display: flex;
   position: relative;
   justify-content: flex-start;
 }
 .app-container > * {
-  margin: 0em 5em 0em 5em;
+  margin: 0em 3.5em 0em 3.5em;
 }
 .toolbar {
   background-color:transparent;
@@ -19,6 +24,11 @@ $font-color: rgb(249, 231, 231);
   color: #ffc663;
 } 
 
+.menu {
+  position: relative;
+  // border: 3px solid orange;
+  left: -2em;
+}
 .toolbar > * {
   margin: 0.5em 1em 0.5em 1em;
 } 
