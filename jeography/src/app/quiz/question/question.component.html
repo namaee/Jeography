@@ -31,10 +31,9 @@
     <div class="settings-container">
       <mat-checkbox class="settings-checkbox" [checked]="qs.settings.feedback" (change)="onSettingChange($event)" value="feedback">Feedback</mat-checkbox>
       <mat-checkbox class="settings-checkbox" [checked]="qs.settings.kanji" (change)="onSettingChange($event)" value="kanji">Kanji</mat-checkbox>
-      <mat-checkbox class="settings-checkbox" (change)="onSettingChange($event)" value="">Check me!</mat-checkbox>
-      <mat-checkbox class="settings-checkbox" (change)="onSettingChange($event)" value="">Check me!</mat-checkbox>
-      <mat-checkbox class="settings-checkbox" (change)="onSettingChange($event)" value="">Check me!</mat-checkbox>
+      <mat-checkbox class="settings-checkbox" matTooltip="wip" disabled (change)="onSettingChange($event)" value="">Flag</mat-checkbox>
+      <mat-checkbox class="settings-checkbox" [checked]="true" matTooltip="wip" disabled (change)="onSettingChange($event)" value="">Borders</mat-checkbox>
+      <mat-checkbox class="settings-checkbox" matTooltip="wip" disabled (change)="onSettingChange($event)" value="">Kanji only</mat-checkbox>
     </div>
-
   </mat-expansion-panel>
 </mat-card>

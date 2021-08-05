@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { State } from '../app.component';
-import { prefectures, prefecturesSvg, regionSvg } from '../data';
+import { prefectures, prefecturesSvg, regionSvg, citiesSvg} from '../data';
 import { GameState, Mode } from '../quiz/quiz';
 import { QuizService } from '../quiz/quiz.service';
 import { MapService } from './map.service';
@@ -19,6 +19,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   public prefectures = prefectures;
   public prefecturesSvg = prefecturesSvg;
   public regionsSvg = regionSvg;
+  public citiesSvg = citiesSvg;
   private subscriptions: Subscription = new Subscription();
   public active: string = '';
   public zoomLevel: number = 1;
@@ -55,7 +56,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   //map interaction to legend
   public onClick(event: MouseEvent) {
-    console.log((event.offsetX - 51) / 1.454 + ', ' + (event.offsetY - 14) / 1.456);
+    // console.log(((event.offsetX - 51) / 1.456) + 0.6 + ', ' + (event.offsetY - 14) / 1.456);
 
     let path = event.target as SVGPathElement;
     if (path.hasAttribute('title')) {
