@@ -29,7 +29,7 @@ export class QuizService implements OnInit {
   }
   public createQuestions() {
     prefectures.forEach((prefecture, i) => {
-      this.questions.push(new Question(prefecture.name, prefecture.kanjiName, prefecture.macron,i));
+      this.questions.push(new Question(prefecture.name, prefecture.kanjiName, i));
     })
     this.shuffle(this.questions);
   }
@@ -69,7 +69,7 @@ export class QuizService implements OnInit {
     // this.qs.questions.slice(0, this.qs.questionIndex).forEach((question: Question) => {
     //   this.scores.
     // })
-    this.scores.unshift(new Score(this.questions[this.questionIndex].name, this.questions[this.questionIndex].kanjiName, this.questions[this.questionIndex].macron, this.answers[this.questionIndex].tf, this.scoreID++))
+    this.scores.unshift(new Score(this.questions[this.questionIndex].name, this.questions[this.questionIndex].kanjiName, this.answers[this.questionIndex].tf, this.scoreID++))
   }
 
   public shuffle(ar) {

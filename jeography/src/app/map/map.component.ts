@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { State } from '../app.component';
-import { prefectures, prefecturesSvg } from '../data';
-import { GameState } from '../quiz/quiz';
+import { prefectures, prefecturesSvg, regionSvg } from '../data';
+import { GameState, Mode } from '../quiz/quiz';
 import { QuizService } from '../quiz/quiz.service';
 import { MapService } from './map.service';
 import { MapDragDirective } from './mapDrag.directive';
@@ -16,11 +16,12 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MapDragDirective)
   public mapDrag: MapDragDirective;
   @Input() state: State = null
-
+  public mode: Mode = Mode.PREF;
   public prefectures = prefectures;
   public prefecturesSvg = prefecturesSvg;
+  public regionsSvg = regionSvg;
   private subscriptions: Subscription = new Subscription();
-  public activePrefecture: string = '';
+  public active: string = '';
   public zoomLevel: number = 1;
 
   private mouseWheel: Subject<WheelEvent> = new Subject<WheelEvent>();
@@ -60,13 +61,13 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       if (this.state == State.QUIZ && this.qs.state == GameState.OCC && !this.mapDrag.dirty) {
         this.qs.nextQuestion(path.getAttribute('title'))
       } else if (this.state == State.VIEW && !this.mapDrag.dirty) {
-        if (this.activePrefecture == path.getAttribute('title')) {
-          this.activePrefecture = ''
-          this.mapService.setActivePrefecture('');
+        if (this.active == path.getAttribute('title')) {
+          this.active = ''
+          this.mapService.setActive('', this.mode);
           return;
         }
-        this.activePrefecture = path.getAttribute('title');
-        this.mapService.setActivePrefecture(this.activePrefecture);
+        this.active = path.getAttribute('title');
+        this.mapService.setActive(this.active, this.mode);
       }
     }
   }
@@ -104,7 +105,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   public get mapPaths(): { [key: string]: string } {
     const style: { [key: string]: string } = {};
     if (this.mapDrag?.dirty) {
-      style['cursor'] =  'default'
+      style['cursor'] =  'grabbing'
     }
     return style;
   }

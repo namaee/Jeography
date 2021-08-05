@@ -31,4 +31,8 @@ export class LegendComponent implements OnInit {
   public formatPop(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
   }
+
+  public toStandardLatin(name) {
+    return (name.replace('ō','o')).replace('Ō', 'O');
+  }
 }

@@ -1,13 +1,11 @@
 export class Question {
   name: string;
   kanjiName: string;
-  macron: string;
   id: number;
 
-  constructor(name: string, kanjiName: string, macron: string, id: number) {
+  constructor(name: string, kanjiName: string, id: number) {
     this.name = name;
     this.kanjiName = kanjiName;
-    this.macron = macron;
     this.id = id;
   }
 }
@@ -26,14 +24,12 @@ export class Answer {
 export class Score {
   areaName: string;
   kanjiAreaName: string;
-  macronAreaName: string;
   tf: boolean;
   id: number;
 
-  constructor(areaName: string, kanjiAreaName: string, macronAreaName: string, tf: boolean, id: number) {
+  constructor(areaName: string, kanjiAreaName: string, tf: boolean, id: number) {
     this.areaName = areaName;
     this.kanjiAreaName = kanjiAreaName;
-    this.macronAreaName = macronAreaName;
     this.tf = tf;
     this.id = id;
   }
@@ -59,4 +55,11 @@ export enum GameState {
   END = 3,
 }
 
-export type Prefecture = {name: string, kanjiName: string, macron: string}
+export enum Mode {
+  PREF = 1,
+  REG = 2,
+  CIT = 3,
+}
+
+export type Prefecture = {name: string, kanjiName: string}
+export type Region = {name: string, kanjiName: string}
