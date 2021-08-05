@@ -1,9 +1,7 @@
 <div class="menu-container">
-  <mat-list>
-    <mat-list-item (click)="switchMode(modeEnum.PREF)">prefectures</mat-list-item>
-    <mat-divider></mat-divider>
-    <mat-list-item (click)="switchMode(modeEnum.REG)">regions</mat-list-item>
-    <mat-divider></mat-divider>
-    <mat-list-item>Item 3</mat-list-item>
+  <mat-list class="mode-list">
+    <mat-list-item class="mode-switch" (click)="switchMode(modeEnum.PREF)">prefectures</mat-list-item>
+    <mat-list-item class="mode-switch wip" >cities (wip)</mat-list-item>
+    <mat-list-item class="mode-switch wip" >regions (wip)</mat-list-item>
   </mat-list>
 </div>
