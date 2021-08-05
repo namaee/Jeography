@@ -34,7 +34,7 @@ export class QuizService implements OnInit {
       })
     } else if (mode == Mode.CIT) {
       citiesSvg.forEach((city, i) => {
-        this.questions.push(new Question(city.title, "kanji place holder",  i));
+        this.questions.push(new Question(city.title, city.kanjiName, i));
       })
     } 
 
