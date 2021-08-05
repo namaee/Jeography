@@ -56,8 +56,8 @@
           <mat-list-item>{{mapService.activePrefectureData?.capital}}</mat-list-item>
           <mat-list-item>{{mapService.activePrefectureData?.region}}</mat-list-item>
           <mat-list-item>{{mapService.activePrefectureData?.island}}</mat-list-item>
-          <mat-list-item [matTooltip]="formatMI(mapService.activePrefectureData?.area) + ' mi&#178;'" matTooltipPosition="left">{{formatKM(mapService.activePrefectureData?.area) + ' km&#178;'}}</mat-list-item>
-          <mat-list-item>{{formatPop(mapService.activePrefectureData?.population)}}</mat-list-item>
+          <mat-list-item [matTooltip]="formatMI(mapService.activePrefectureData?.area) + ' mi&#178;'" matTooltipPosition="left">{{formatKM(mapService.activePrefectureData?.area) + ' km&#178;'  + ' (' + getAreaRank(mapService.activePrefecture?.name) + numberRankSuffix(getAreaRank(mapService.activePrefecture?.name)) + ')'}}</mat-list-item>
+          <mat-list-item>{{formatPop(mapService.activePrefectureData?.population) + ' (' + getPopRank(mapService.activePrefecture?.name) + numberRankSuffix(getPopRank(mapService.activePrefecture?.name)) + ')'}}</mat-list-item>
           <mat-list-item>{{mapService.activePrefectureData?.flower}}</mat-list-item>
         </mat-list>
       </div>
