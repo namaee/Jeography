@@ -35,24 +35,43 @@
   (click)="onClick($event)"
   >
 
+  <!-- prefectures -->
   <g *ngIf="mapService.mode == modeEnum.PREF">
     <path *ngFor="let prefSvg of prefecturesSvg" [attr.d]="prefSvg.d" [attr.title]="prefSvg.title" 
-    [ngClass]="{'active-prefecture': activePrefecture == prefSvg.title && state == stateEnum.VIEW}"
+    [ngClass]="{'active-prefecture': active == prefSvg.title && state == stateEnum.VIEW}"
     [ngStyle]="mapPaths"
     [matTooltip]="prefSvg.title" matTooltipPosition="right" matTooltipClass="path-tooltip" 
     [matTooltipDisabled]="(mapDrag ? mapDrag.dirty : false) || state == stateEnum.QUIZ"></path>
   </g>
 
+  <!-- regions -->
   <g *ngIf="mapService.mode == modeEnum.REG" 
   transform="translate(87.402329,-95.007708)">
     <g transform="matrix(0.65068506,0,0,0.65068506,-49.459746,-158.34468)">
       <path *ngFor="let prefSvg of regionsSvg" [attr.d]="prefSvg.d" [attr.title]="prefSvg.title" 
-      [ngClass]="{'active-prefecture': activePrefecture == prefSvg.title && state == stateEnum.VIEW}"
+      [ngClass]="{'active-prefecture': active == prefSvg.title && state == stateEnum.VIEW}"
       [ngStyle]="mapPaths"
       [matTooltip]="prefSvg.title" matTooltipPosition="right" matTooltipClass="path-tooltip" [matTooltipDisabled]="(mapDrag ? mapDrag.dirty : false) || state == stateEnum.QUIZ">
       </path>
     </g>
   </g>
+
+  <!-- cities -->
+  <g *ngIf="mapService.mode == modeEnum.CIT">
+
+
+    <path *ngFor="let prefSvg of prefecturesSvg" [attr.d]="prefSvg.d" [attr.title]="prefSvg.title" 
+    [ngClass]="{'active-prefecture': active == prefSvg.title && state == stateEnum.VIEW}"
+    [ngStyle]="mapPaths"
+    [matTooltip]="prefSvg.title" matTooltipPosition="right" matTooltipClass="path-tooltip" 
+    [matTooltipDisabled]="(mapDrag ? mapDrag.dirty : false) || state == stateEnum.QUIZ"></path>
+
+    <circle class="circle" cx="316.8" cy="255.8" [attr.r]="0.5 + 1 / (zoomLevel / 2)" stroke="black" [attr.stroke-width]="0.2 + 0.5 / (zoomLevel / 2)" fill="red" ></circle>
+    <!-- <circle class="circle" cx="200px" cy="200px" r="50" stroke="black" stroke-width="3" fill="red" ></circle> -->
+
+  </g>
+
+
 </svg>
 </div>
 <!-- <object class="map" type="image/svg+xml" data="../../assets/japan.svg"></object> -->

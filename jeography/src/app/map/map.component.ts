@@ -55,6 +55,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   //map interaction to legend
   public onClick(event: MouseEvent) {
+    console.log((event.offsetX - 51) / 1.454 + ', ' + (event.offsetY - 14) / 1.456);
+
     let path = event.target as SVGPathElement;
     if (path.hasAttribute('title')) {
       if (this.state == State.QUIZ && this.qs.state == GameState.OCC && !this.mapDrag.dirty) {
@@ -97,7 +99,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
         style['transform-origin'] = (50 - (this.mapDrag.currentX / 8)) + "% " + (50 - (this.mapDrag.currentY / 8)) + "%";
     }
     style['stroke'] = 'rgb(242, 242, 242)';
-    if (this.mapService.mode == Mode.PREF) {
+    if (this.mapService.mode == Mode.PREF || this.mapService.mode == Mode.CIT) {
       style['stroke-width'] =  0.65 / this.zoomLevel + 'px';
     } else if (this.mapService.mode == Mode.REG) {
       style['stroke-width'] =  1 / this.zoomLevel + 'px';

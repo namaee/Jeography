@@ -53,6 +53,10 @@ $font-color: rgb(249, 231, 231);
 //   transform-origin: center;
 // }
 
+.circle {
+  position: absolute;
+  z-index: 999;
+}
 
 ::ng-deep .path-tooltip {
   background-color: $font-color !important;
