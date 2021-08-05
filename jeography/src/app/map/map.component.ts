@@ -16,7 +16,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MapDragDirective)
   public mapDrag: MapDragDirective;
   @Input() state: State = null
-  public mode: Mode = Mode.PREF;
   public prefectures = prefectures;
   public prefecturesSvg = prefecturesSvg;
   public regionsSvg = regionSvg;
@@ -63,11 +62,11 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       } else if (this.state == State.VIEW && !this.mapDrag.dirty) {
         if (this.active == path.getAttribute('title')) {
           this.active = ''
-          this.mapService.setActive('', this.mode);
+          this.mapService.setActive('', this.mapService.mode);
           return;
         }
         this.active = path.getAttribute('title');
-        this.mapService.setActive(this.active, this.mode);
+        this.mapService.setActive(this.active, this.mapService.mode);
       }
     }
   }
@@ -98,7 +97,14 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
         style['transform-origin'] = (50 - (this.mapDrag.currentX / 8)) + "% " + (50 - (this.mapDrag.currentY / 8)) + "%";
     }
     style['stroke'] = 'rgb(242, 242, 242)';
-    style['stroke-width'] =  0.65 / this.zoomLevel + 'px';
+    if (this.mapService.mode == Mode.PREF) {
+      style['stroke-width'] =  0.65 / this.zoomLevel + 'px';
+    } else if (this.mapService.mode == Mode.REG) {
+      style['stroke-width'] =  1 / this.zoomLevel + 'px';
+    }
+    if (this.mapDrag?.dirty) {
+      style['cursor'] =  'grabbing'
+    }
     return style;
   }
 
@@ -115,6 +121,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   
   public get stateEnum(): typeof State {
     return State; 
+  }
+
+  public get modeEnum(): typeof Mode {
+    return Mode; 
   }
 }
 

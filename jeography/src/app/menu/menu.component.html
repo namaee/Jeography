@@ -1,8 +1,8 @@
-<div hidden class="menu-container">
+<div class="menu-container">
   <mat-list>
-    <mat-list-item>Item 1</mat-list-item>
+    <mat-list-item (click)="switchMode(modeEnum.PREF)">prefectures</mat-list-item>
     <mat-divider></mat-divider>
-    <mat-list-item>Item 2</mat-list-item>
+    <mat-list-item (click)="switchMode(modeEnum.REG)">regions</mat-list-item>
     <mat-divider></mat-divider>
     <mat-list-item>Item 3</mat-list-item>
   </mat-list>
