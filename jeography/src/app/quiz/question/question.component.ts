@@ -109,7 +109,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
         }
       }
     })
-    if (cc == oc) return true
+    if (cc == oc && oc != 0) return true
     return false;
   }
   //value is name

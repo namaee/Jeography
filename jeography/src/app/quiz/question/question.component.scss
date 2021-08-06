@@ -183,6 +183,10 @@ mat-expansion-panel-content {
   align-content: flex-start;
   overflow-x: auto;
   overflow-y: hidden;
+  > * {
+    max-width: 20%;
+    overflow: hidden;
+  }
 }
 
 .pick-top-buttons {
@@ -203,21 +207,31 @@ mat-expansion-panel-content {
   // border: 3px solid red;
   display: inline-block;
   padding-right: 2em;
-  // min-width: 100%;
+
 }
 .pick-checkbox ::ng-deep .mat-checkbox-frame {
   border-width: 1px;
   transform: scale(0.6) !important;
 }
-
 .pick-checkbox ::ng-deep .mat-checkbox-background {
   transform: scale(0.6) !important;
 }
-
 .pick-checkbox ::ng-deep .mat-checkbox-ripple {
   transform: scale(0.6) !important;
   display: none;
 }
 .pick-panel-header {
   display: none;
+}
+.pick-checkbox-parent {
+  display: inline-block;
+  padding-right: 2em;
+  color: rgb(255, 102, 102);
+}
+.pick-checkbox-filler{
+  z-index: -999;
+}
+
+::ng-deep .divider {
+  max-width: 17% !important;
 }

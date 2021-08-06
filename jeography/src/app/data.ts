@@ -219,4 +219,5 @@ export const citiesSvg: {cx: string, cy: string, title: string, kanjiName: strin
   {cx: "80.3", cy: "472.6",  title: 'Naha', kanjiName: '那覇市', prefecture: 'Okinawa', capital: true},
   {cx: "214.9", cy: "294.6", title: 'Tokushima', kanjiName: '徳島市', prefecture: 'Tokushima', capital: true},
   {cx: "195.6", cy: "306.3", title: 'Kōchi', kanjiName: '高知市', prefecture: 'Kōchi', capital: true},
+  
 ]
