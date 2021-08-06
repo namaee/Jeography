@@ -66,11 +66,11 @@
     [ngStyle]="mapPaths"
     ></path>
 
-    <circle *ngFor="let citySvg of citiesSvg" class="circle" 
+    <circle *ngFor="let citySvg of citiesSvg" [ngClass]="citySvg.capital ? 'capital-circle' : 'circle'" 
     [ngStyle]="cityCircles" 
     [attr.title]="citySvg.title" [attr.cx]= "citySvg.cx" [attr.cy]="citySvg.cy" 
     [attr.r]="0.5 + 1 / (zoomLevel / 2)" [attr.stroke-width]="0.2 + 0.5 / (zoomLevel / 2)" 
-    [matTooltip]="citySvg.title" matTooltipPosition="before" matTooltipClass="circle-tooltip" [matTooltipDisabled]="(mapDrag ? mapDrag.dirty : false) || state == stateEnum.QUIZ"
+    [matTooltip]="citySvg.title" matTooltipPosition="before" [matTooltipClass]="citySvg.capital ? 'capital-circle-tooltip' : 'circle-tooltip'" [matTooltipDisabled]="(mapDrag ? mapDrag.dirty : false) || state == stateEnum.QUIZ"
     (click)="onClick($event)"
     ></circle>
     <!-- <circle class="circle" cx="316.8" cy="255.8" [attr.r]="0.5 + 1 / (zoomLevel / 2)" stroke="black" [attr.stroke-width]="0.2 + 0.5 / (zoomLevel / 2)" fill="red" ></circle> -->

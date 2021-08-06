@@ -63,13 +63,21 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
         this.qs.nextQuestion(ele.getAttribute('title'))
       } else if (this.state == State.VIEW && !this.mapDrag.dirty) {
         if (this.active == ele.getAttribute('title')) {
-          this.active = ''
+          this.setActive('', this.mapService.mode)
           this.mapService.setActive('', this.mapService.mode);
           return;
         }
-        this.active = ele.getAttribute('title');
+        this.setActive(ele.getAttribute('title'), this.mapService.mode)
         this.mapService.setActive(this.active, this.mapService.mode);
       }
+    }
+  }
+
+  public setActive(title: string, mode: Mode) {
+    if (mode == Mode.PREF) {
+      this.active = title
+    } else if (mode == Mode.REG) {
+
     }
   }
 

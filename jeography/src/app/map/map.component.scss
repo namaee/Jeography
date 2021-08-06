@@ -59,6 +59,17 @@ $font-color: rgb(249, 231, 231);
 }
 
 .circle:hover {
+  fill: rgb(221, 0, 4);
+  cursor: pointer;
+}
+
+.capital-circle {
+  fill: rgb(10, 129, 255);
+  stroke: rgb(46, 47, 47);
+}
+
+.capital-circle:hover {
+  fill: rgb(88, 169, 255);
   cursor: pointer;
 }
 
@@ -70,4 +81,9 @@ $font-color: rgb(249, 231, 231);
 ::ng-deep .circle-tooltip {
   background-color: rgb(46, 47, 47) !important;
   color: rgb(226, 121, 130) !important;
+}
+
+::ng-deep .capital-circle-tooltip {
+  background-color: rgb(46, 47, 47) !important;
+  color: rgb(134, 193, 255) !important;
 }
