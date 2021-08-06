@@ -88,11 +88,14 @@ mat-expansion-panel-content {
 }
 
 .settings-container {
+  z-index: 5;
   display: flex;
   justify-content: center;
 }
 
 .settings-container > *{
+  z-index: 5;
+
   margin: auto;
 }
 
@@ -129,4 +132,69 @@ mat-expansion-panel-content {
   background: $primary-color-dark;
   color: $font-color !important;
   font-size: 12px;
+}
+
+.panel {
+  // border: 2px solid blanchedalmond;
+  z-index: 0;
+  margin-left: -2em;
+  margin-right: -2em;
+  // z-index: -9999;
+}
+
+.top-pick-card {
+  background-color: rgb(44, 44, 44);
+  margin-bottom: -1em;
+  margin-top: 1em;
+  max-height: 30em;
+  > * {
+    font-size: .8em;
+  }
+}
+
+.pick-card {
+  background-color: rgb(44, 44, 44);
+  max-height: 30em;
+  margin-bottom: -1em;
+  margin-top: 1em;
+
+  > * {
+    padding-left: 1em;
+
+    font-size: .8em;
+  }
+}
+.pick-container {
+  // border: 2px solid green;
+  width: inherit;
+  max-width: inherit;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: inherit;
+  align-content: flex-start;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.pick-checkbox {
+  // border: 3px solid red;
+  display: inline-block;
+  padding-right: 2em;
+  // min-width: 100%;
+}
+.pick-checkbox ::ng-deep .mat-checkbox-frame {
+  transform: scale(0.5) !important;
+}
+
+.pick-checkbox ::ng-deep .mat-checkbox-background {
+  transform: scale(0.5) !important;
+}
+
+.pick-checkbox ::ng-deep .mat-checkbox-ripple {
+  transform: scale(0.5);
+  display: none;
+}
+.pick-panel-header {
+  display: none;
 }

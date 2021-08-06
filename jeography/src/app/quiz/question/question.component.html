@@ -34,6 +34,34 @@
       <mat-checkbox class="settings-checkbox" matTooltip="wip" disabled (change)="onSettingChange($event)" value="">Flag</mat-checkbox>
       <mat-checkbox class="settings-checkbox" [checked]="true" matTooltip="wip" disabled (change)="onSettingChange($event)" value="">Borders</mat-checkbox>
       <mat-checkbox class="settings-checkbox" matTooltip="wip" disabled (change)="onSettingChange($event)" value="">Kanji only</mat-checkbox>
+      <button (click)="togglePickPanel()" disableRipple mat-button>Select</button>
     </div>
+    <mat-expansion-panel disabled [class.mat-elevation-z0]="true" hideToggle [expanded]="pickPanelExpanded" class="panel">
+      <mat-expansion-panel-header class="pick-panel-header" disableRipple #panelH (click)="panelH._toggle()">
+        <mat-panel-title>
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <!-- <mat-card [class.mat-elevation-z0]="true" class="top-pick-card"> -->
+
+        <mat-card [class.mat-elevation-z0]="true" class="pick-card">
+          
+          <div class="pick-container">
+
+            <ng-container *ngFor="let citySvg of citiesSvg; let i = index" >
+            <mat-checkbox disableRipple class="pick-checkbox">{{citySvg.title}}</mat-checkbox>
+            <!-- <mat-checkbox disableRipple class="pick-checkbox">{{citySvg.title}}</mat-checkbox> -->
+
+  <!-- 
+            <mat-checkbox  disableRipple class="pick-checkbox">Feedback</mat-checkbox>
+            <mat-checkbox  disableRipple class="pick-checkbox">Feedback</mat-checkbox> -->
+          </ng-container>
+          </div>
+
+        <!-- </mat-card> -->
+
+      </mat-card> 
+    </mat-expansion-panel>
   </mat-expansion-panel>
 </mat-card>

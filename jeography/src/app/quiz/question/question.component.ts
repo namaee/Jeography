@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { QuizService } from '../quiz.service';
 import { Subscription } from 'rxjs';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { Mode, Settings } from '../quiz';
+import { Mode } from '../quiz';
 import { MapService } from 'src/app/map/map.service';
+import { prefectures, citiesSvg } from '../../data';
 
 @Component({
   selector: 'app-quiz-question',
@@ -12,6 +13,9 @@ import { MapService } from 'src/app/map/map.service';
 })
 export class QuestionComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
+  public pickPanelExpanded: boolean = false;
+  public prefectures = prefectures;
+  public citiesSvg = citiesSvg;
   constructor(public qs: QuizService, public ms: MapService) { }
 
   ngOnInit(): void {
@@ -30,6 +34,9 @@ export class QuestionComponent implements OnInit, OnDestroy {
     
   }
 
+  public togglePickPanel(){ 
+    this.pickPanelExpanded = !this.pickPanelExpanded
+  }
   public ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
