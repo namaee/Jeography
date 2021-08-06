@@ -52,8 +52,16 @@
           </div>
 
           <div class="pick-container">
-            <ng-container *ngFor="let citySvg of citiesSvg; let i = index">
-              <mat-checkbox  #sel [value]="citySvg.title" (click)="checkSelect(citySvg.title)" class="pick-checkbox">{{citySvg.title}}</mat-checkbox>
+            <!-- <ng-container *ngFor="let citySvg of citiesSvg; let i = index">
+              <mat-checkbox  #sel [value]="citySvg.title" class="pick-checkbox">{{citySvg.capital ? citySvg.title + ' (c)' : citySvg.title}}</mat-checkbox>
+            </ng-container> -->
+            <ng-container *ngFor="let cityPrefecture of prefectureViewGroup | keyvalue">
+              <mat-checkbox class="pick-checkbox">{{"PREF: " + cityPrefecture.key}}</mat-checkbox>
+
+              <ng-container *ngFor="let city of cityPrefecture.value; let i = index">
+                <mat-checkbox  #sel [value]="city.name" class="pick-checkbox">{{city.capital ? city.name + ' (c)' : city.name}}</mat-checkbox>
+              </ng-container>
+
             </ng-container>
           </div>
           

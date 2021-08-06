@@ -18,22 +18,28 @@ export class QuestionComponent implements OnInit, OnDestroy {
   public pickPanelExpanded: boolean = false;
   public prefectures = prefectures;
   public citiesSvg = citiesSvg;
-  public prefectureView: {prefecture: string, name: string, capital}[] = []
-  public cityTypeView: {cityType: string, name: string, capital}[]
-  
-  public selections: {checked: boolean, name: string}[] = [];
+  public prefectureViewGroup: Map<string, {prefecture: string, name: string, capital: boolean}[]> = new Map();
+  public prefectureView: {prefecture: string, name: string, capital: boolean}[] = []
+  public cityTypeView: {cityType: string, name: string, capital: boolean}[]
   
   @ViewChildren('sel') sel;
   constructor(public qs: QuizService, public ms: MapService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    
     this.subscriptions.add(
       this.qs.quizControl.subscribe((msg: string) => {
       })
-    )  
-    citiesSvg.forEach((city) => {
-      this.selections.push({checked: false, name: city.title})
+    )
+    this.prefectures.forEach((prefecture) => {
+      this.prefectureViewGroup.set(prefecture.name, [])
     })
+
+    citiesSvg.sort((a, b) => a.title > b.title ? 1 : 0).forEach((city) => {
+      this.prefectureViewGroup.get(city.prefecture).push({prefecture: city.prefecture, name: city.title, capital: city.capital})
+    })
+    console.log(this.prefectureViewGroup);
+    
   }
 
   public startQuiz() {
@@ -49,6 +55,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
       selObj._checked = true;
     })
   }
+
   public deselectAll() {
     this.sel._results.forEach((selObj) => {
       selObj._checked = false;
@@ -65,23 +72,6 @@ export class QuestionComponent implements OnInit, OnDestroy {
     this.sel._results.forEach((selObj) => {
       if (this.lookUpCapital(selObj.value)) selObj._checked = false;
     })
-  }
-
-  public fillSelect(name: string) {
-    this.selections.forEach((selection) => {
-      if (selection.name == name) {
-        return selection.checked;
-      }
-    })
-  }
-
-  public checkSelect(name: string) {
-    this.selections.forEach((selection) => {
-      if (selection.name == name) {
-        selection.checked = !selection.checked
-      }
-    })
-    console.log(this.sel._results);    
   }
 
   public lookUpCapital(name: string) {
