@@ -206,15 +206,16 @@ mat-expansion-panel-content {
   // min-width: 100%;
 }
 .pick-checkbox ::ng-deep .mat-checkbox-frame {
-  transform: scale(0.5) !important;
+  border-width: 1px;
+  transform: scale(0.6) !important;
 }
 
 .pick-checkbox ::ng-deep .mat-checkbox-background {
-  transform: scale(0.5) !important;
+  transform: scale(0.6) !important;
 }
 
 .pick-checkbox ::ng-deep .mat-checkbox-ripple {
-  transform: scale(0.5) !important;
+  transform: scale(0.6) !important;
   display: none;
 }
 .pick-panel-header {
