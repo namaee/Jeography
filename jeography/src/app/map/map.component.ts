@@ -105,7 +105,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       style['stroke-width'] =  1 - ((Math.log(this.zoomLevel) / Math.log(1.5)) / 12) + 'px';
     }
     if (this.mapDrag?.dirty) {
-      style['cursor'] =  'grabbing'
+      style['cursor'] = 'grabbing'
     }
     return style;
   }
@@ -113,7 +113,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   public get mapPaths(): { [key: string]: string } {
     const style: { [key: string]: string } = {};
     if (this.mapDrag?.dirty) {
-      style['cursor'] =  'grabbing'
+      style['cursor'] = 'grabbing'
     }
     return style;
   }

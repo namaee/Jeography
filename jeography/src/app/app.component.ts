@@ -23,6 +23,7 @@ export class AppComponent {
     if (this.state == State.QUIZ && state == State.VIEW && this.qs.state == GameState.OCC) {
       if (confirm("Test progress will be lost.")) {
         this.state = state;
+        this.qs.resetQuiz();
       }  
       return;
     }

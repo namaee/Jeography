@@ -41,7 +41,7 @@
     <path *ngFor="let prefSvg of prefecturesSvg" [attr.d]="prefSvg.d" [attr.title]="prefSvg.title" 
     [ngClass]="{'active-prefecture': active == prefSvg.title && state == stateEnum.VIEW}"
     [ngStyle]="mapPaths"
-    [matTooltip]="prefSvg.title" matTooltipPosition="right" matTooltipClass="path-tooltip" 
+    [matTooltip]="prefSvg.title" matTooltipPosition="before" matTooltipClass="path-tooltip" 
     [matTooltipDisabled]="(mapDrag ? mapDrag.dirty : false) || state == stateEnum.QUIZ"
     (click)="onClick($event)"
     ></path>
@@ -54,7 +54,7 @@
       <path *ngFor="let prefSvg of regionsSvg" [attr.d]="prefSvg.d" [attr.title]="prefSvg.title" 
       [ngClass]="{'active-prefecture': active == prefSvg.title && state == stateEnum.VIEW}"
       [ngStyle]="mapPaths"
-      [matTooltip]="prefSvg.title" matTooltipPosition="right" matTooltipClass="path-tooltip" [matTooltipDisabled]="(mapDrag ? mapDrag.dirty : false) || state == stateEnum.QUIZ"
+      [matTooltip]="prefSvg.title" matTooltipPosition="before" matTooltipClass="path-tooltip" [matTooltipDisabled]="(mapDrag ? mapDrag.dirty : false) || state == stateEnum.QUIZ"
       (click)="onClick($event)"
       ></path>
     </g>
@@ -70,7 +70,7 @@
     [ngStyle]="cityCircles" 
     [attr.title]="citySvg.title" [attr.cx]= "citySvg.cx" [attr.cy]="citySvg.cy" 
     [attr.r]="0.5 + 1 / (zoomLevel / 2)" [attr.stroke-width]="0.2 + 0.5 / (zoomLevel / 2)" 
-    [matTooltip]="citySvg.title" matTooltipPosition="above" matTooltipClass="circle-tooltip"
+    [matTooltip]="citySvg.title" matTooltipPosition="before" matTooltipClass="circle-tooltip" [matTooltipDisabled]="(mapDrag ? mapDrag.dirty : false) || state == stateEnum.QUIZ"
     (click)="onClick($event)"
     ></circle>
     <!-- <circle class="circle" cx="316.8" cy="255.8" [attr.r]="0.5 + 1 / (zoomLevel / 2)" stroke="black" [attr.stroke-width]="0.2 + 0.5 / (zoomLevel / 2)" fill="red" ></circle> -->

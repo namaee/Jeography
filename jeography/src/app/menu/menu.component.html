@@ -1,7 +1,7 @@
 <div class="menu-container">
   <mat-list class="mode-list">
-    <mat-list-item class="mode-switch" (click)="switchMode(modeEnum.PREF)">prefectures</mat-list-item>
-    <mat-list-item class="mode-switch wip" (click)="switchMode(modeEnum.CIT)">cities (wip)</mat-list-item>
-    <mat-list-item class="mode-switch wip" (click)="switchMode(modeEnum.REG)">regions (wip)</mat-list-item>
+    <mat-list-item [ngStyle]="modeSwitch" class="mode-switch" (click)="switchMode(modeEnum.PREF)">prefectures</mat-list-item>
+    <mat-list-item [ngStyle]="modeSwitch" class="mode-switch wip" (click)="switchMode(modeEnum.CIT)">cities (wip)</mat-list-item>
+    <mat-list-item [ngStyle]="modeSwitch" class="mode-switch wip" (click)="switchMode(modeEnum.REG)">regions (wip)</mat-list-item>
   </mat-list>
 </div>

@@ -6,7 +6,7 @@ import { Mode, Prefecture, Region } from '../quiz/quiz';
 @Injectable()
 export class MapService {
   public hover: BehaviorSubject<string> = new BehaviorSubject<string>(null);
-  public mode: Mode = Mode.PREF;
+  public mode: Mode = Mode.CIT;
   public prefectures = prefectures
   public prefecturesData = prefecturesData
   public regionsData = regionSvg;
