@@ -34,7 +34,7 @@
       <mat-checkbox class="settings-checkbox" matTooltip="wip" disabled (change)="onSettingChange($event)" value="">Flag</mat-checkbox>
       <mat-checkbox class="settings-checkbox" [checked]="true" matTooltip="wip" disabled (change)="onSettingChange($event)" value="">Borders</mat-checkbox>
       <mat-checkbox class="settings-checkbox" matTooltip="wip" disabled (change)="onSettingChange($event)" value="">Kanji only</mat-checkbox>
-      <button (click)="togglePickPanel()" disableRipple mat-button>Select</button>
+      <button (click)="togglePickPanel()" mat-flat-button color="accent">Select</button>
     </div>
     <mat-expansion-panel disabled [class.mat-elevation-z0]="true" hideToggle [expanded]="pickPanelExpanded" class="panel">
       <mat-expansion-panel-header class="pick-panel-header" disableRipple #panelH (click)="panelH._toggle()">
@@ -43,25 +43,21 @@
         <mat-panel-description>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <!-- <mat-card [class.mat-elevation-z0]="true" class="top-pick-card"> -->
-
         <mat-card [class.mat-elevation-z0]="true" class="pick-card">
-          
-          <div class="pick-container">
-
-            <ng-container *ngFor="let citySvg of citiesSvg; let i = index" >
-            <mat-checkbox disableRipple class="pick-checkbox">{{citySvg.title}}</mat-checkbox>
-            <!-- <mat-checkbox disableRipple class="pick-checkbox">{{citySvg.title}}</mat-checkbox> -->
-
-  <!-- 
-            <mat-checkbox  disableRipple class="pick-checkbox">Feedback</mat-checkbox>
-            <mat-checkbox  disableRipple class="pick-checkbox">Feedback</mat-checkbox> -->
-          </ng-container>
+          <div class="pick-top-buttons">
+            <button class="pick-top-button" mat-flat-button color="accent" (click)="selectAll()">Select All</button>
+            <button class="pick-top-button" mat-flat-button color="accent" (click)="deselectAll()">Deselect All</button>
+            <button class="pick-top-button" mat-flat-button color="accent" (click)="selectAllC()">Select All Capitals</button>
+            <button class="pick-top-button" mat-flat-button color="accent" (click)="deselectAllC()">Deselect All Capitals</button>
           </div>
 
-        <!-- </mat-card> -->
-
-      </mat-card> 
+          <div class="pick-container">
+            <ng-container *ngFor="let citySvg of citiesSvg; let i = index">
+              <mat-checkbox  #sel [value]="citySvg.title" (click)="checkSelect(citySvg.title)" class="pick-checkbox">{{citySvg.title}}</mat-checkbox>
+            </ng-container>
+          </div>
+          
+        </mat-card> 
     </mat-expansion-panel>
   </mat-expansion-panel>
 </mat-card>

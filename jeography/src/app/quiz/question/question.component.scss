@@ -153,7 +153,12 @@ mat-expansion-panel-content {
 }
 
 .pick-card {
+  display: flex;
+  flex-direction: column;
   background-color: rgb(44, 44, 44);
+  // border: 2px solid rgb(80, 255, 80);
+
+  height: 30em;
   max-height: 30em;
   margin-bottom: -1em;
   margin-top: 1em;
@@ -165,17 +170,34 @@ mat-expansion-panel-content {
   }
 }
 .pick-container {
+  position: relative;
+  top: 1em;
   // border: 2px solid green;
   width: inherit;
   max-width: inherit;
+  margin-bottom: -1em;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  max-height: inherit;
+  // max-height: 36em;
   align-content: flex-start;
   overflow-x: auto;
   overflow-y: hidden;
 }
+
+.pick-top-buttons {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  // top: -1em;
+  // border: 2px solid orangered;
+  > * {
+    margin: 0.6em;
+    font-size: 1em;
+  }
+}
+
 
 .pick-checkbox {
   // border: 3px solid red;
