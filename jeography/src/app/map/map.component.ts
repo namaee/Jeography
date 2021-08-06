@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { State } from '../app.component';
-import { prefectures, prefecturesSvg, regionSvg } from '../data';
+import { prefectures, prefecturesSvg, regionSvg, citiesSvg} from '../data';
 import { GameState, Mode } from '../quiz/quiz';
 import { QuizService } from '../quiz/quiz.service';
 import { MapService } from './map.service';
@@ -19,6 +19,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   public prefectures = prefectures;
   public prefecturesSvg = prefecturesSvg;
   public regionsSvg = regionSvg;
+  public citiesSvg = citiesSvg;
   private subscriptions: Subscription = new Subscription();
   public active: string = '';
   public zoomLevel: number = 1;
@@ -55,17 +56,18 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   //map interaction to legend
   public onClick(event: MouseEvent) {
-    let path = event.target as SVGPathElement;
-    if (path.hasAttribute('title')) {
+    console.log(((event.offsetX - 51) / 1.456) + 0.6 + ', ' + (event.offsetY - 14) / 1.456);
+    let ele = event.target as SVGPathElement;
+    if (ele.hasAttribute('title')) {
       if (this.state == State.QUIZ && this.qs.state == GameState.OCC && !this.mapDrag.dirty) {
-        this.qs.nextQuestion(path.getAttribute('title'))
+        this.qs.nextQuestion(ele.getAttribute('title'))
       } else if (this.state == State.VIEW && !this.mapDrag.dirty) {
-        if (this.active == path.getAttribute('title')) {
+        if (this.active == ele.getAttribute('title')) {
           this.active = ''
           this.mapService.setActive('', this.mapService.mode);
           return;
         }
-        this.active = path.getAttribute('title');
+        this.active = ele.getAttribute('title');
         this.mapService.setActive(this.active, this.mapService.mode);
       }
     }
@@ -97,10 +99,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
         style['transform-origin'] = (50 - (this.mapDrag.currentX / 8)) + "% " + (50 - (this.mapDrag.currentY / 8)) + "%";
     }
     style['stroke'] = 'rgb(242, 242, 242)';
-    if (this.mapService.mode == Mode.PREF) {
-      style['stroke-width'] =  0.65 / this.zoomLevel + 'px';
+    if (this.mapService.mode == Mode.PREF || this.mapService.mode == Mode.CIT) {
+      style['stroke-width'] =  0.65 - 0.7 * ((Math.log(this.zoomLevel) / Math.log(1.5)) / 12) + 'px';
     } else if (this.mapService.mode == Mode.REG) {
-      style['stroke-width'] =  1 / this.zoomLevel + 'px';
+      style['stroke-width'] =  1 - ((Math.log(this.zoomLevel) / Math.log(1.5)) / 12) + 'px';
     }
     if (this.mapDrag?.dirty) {
       style['cursor'] =  'grabbing'
@@ -115,6 +117,13 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     return style;
   }
+
+  public get cityCircles(): { [key: string]: string } {
+    const style: { [key: string]: string } = {};
+    style['stroke-width'] =  0.65 - 0.7 * ((Math.log(this.zoomLevel) / Math.log(1.5)) / 12) + 'px';
+    return style;
+  }
+  
   public ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }

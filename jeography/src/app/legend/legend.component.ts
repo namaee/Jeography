@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { prefectures, prefecturesData } from '../data';
 import { MapService } from '../map/map.service';
+import { Mode } from '../quiz/quiz';
 
 @Component({
   selector: 'app-legend',
@@ -59,5 +60,9 @@ export class LegendComponent implements OnInit {
 
   public toStandardLatin(name) {
     return (name.replace(/ō/g,'o')).replace(/Ō/g, 'O');
+  }
+
+  public get modeEnum(): typeof Mode {
+    return Mode; 
   }
 }

@@ -2,7 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { QuizService } from '../quiz.service';
 import { Subscription } from 'rxjs';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { Settings } from '../quiz';
+import { Mode, Settings } from '../quiz';
+import { MapService } from 'src/app/map/map.service';
 
 @Component({
   selector: 'app-quiz-question',
@@ -11,7 +12,7 @@ import { Settings } from '../quiz';
 })
 export class QuestionComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
-  constructor(public qs: QuizService) { }
+  constructor(public qs: QuizService, public ms: MapService) { }
 
   ngOnInit(): void {
     this.subscriptions.add(
@@ -21,7 +22,12 @@ export class QuestionComponent implements OnInit, OnDestroy {
   }
 
   public startQuiz() {
-    this.qs.startQuiz();
+    switch (this.ms.mode) {
+      case Mode.PREF: this.qs.startQuiz(Mode.PREF); break;
+      case Mode.CIT: this.qs.startQuiz(Mode.CIT); break;
+
+    }
+    
   }
 
   public ngOnDestroy(): void {

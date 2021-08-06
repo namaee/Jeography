@@ -6,13 +6,13 @@
     <span *ngIf="qs.state == 2" class="question-index">{{qs.questionIndex + 1 + '/' + qs.questions.length}}</span>
     <div *ngIf="qs.state == 2" class="question-reset">
       <button disableRipple mat-icon-button>
-        <mat-icon class="question-reset-button" (click)="qs.startQuiz()" matTooltip="Reset" matTooltipPosition="above" matTooltipClass="tooltip-reset">refresh</mat-icon>
+        <mat-icon class="question-reset-button" (click)="startQuiz()" matTooltip="Reset" matTooltipPosition="above" matTooltipClass="tooltip-reset">refresh</mat-icon>
       </button>
     </div>
     <div class="question-end-screen" *ngIf="qs.state == 3">
       <span class="question-end-screen-score">{{qs.correctAmount + ' out of ' + qs.questions.length + ' correct (' + ((qs.correctAmount/qs.questions.length * 100) | number : '1.1-1') + '%)'}}</span>
       <button disableRipple mat-icon-button>
-        <mat-icon class="question-end-screen-replay" (click)="qs.startQuiz()">refresh</mat-icon>
+        <mat-icon class="question-end-screen-replay" (click)="startQuiz()">refresh</mat-icon>
       </button>
       <div>
         do again
@@ -31,10 +31,9 @@
     <div class="settings-container">
       <mat-checkbox class="settings-checkbox" [checked]="qs.settings.feedback" (change)="onSettingChange($event)" value="feedback">Feedback</mat-checkbox>
       <mat-checkbox class="settings-checkbox" [checked]="qs.settings.kanji" (change)="onSettingChange($event)" value="kanji">Kanji</mat-checkbox>
-      <mat-checkbox class="settings-checkbox" (change)="onSettingChange($event)" value="">Check me!</mat-checkbox>
-      <mat-checkbox class="settings-checkbox" (change)="onSettingChange($event)" value="">Check me!</mat-checkbox>
-      <mat-checkbox class="settings-checkbox" (change)="onSettingChange($event)" value="">Check me!</mat-checkbox>
+      <mat-checkbox class="settings-checkbox" matTooltip="wip" disabled (change)="onSettingChange($event)" value="">Flag</mat-checkbox>
+      <mat-checkbox class="settings-checkbox" [checked]="true" matTooltip="wip" disabled (change)="onSettingChange($event)" value="">Borders</mat-checkbox>
+      <mat-checkbox class="settings-checkbox" matTooltip="wip" disabled (change)="onSettingChange($event)" value="">Kanji only</mat-checkbox>
     </div>
-
   </mat-expansion-panel>
 </mat-card>
