@@ -18,6 +18,9 @@ export class QuestionComponent implements OnInit, OnDestroy {
   public pickPanelExpanded: boolean = false;
   public prefectures = prefectures;
   public citiesSvg = citiesSvg;
+  public prefectureView: {prefecture: string, name: string, capital}[] = []
+  public cityTypeView: {cityType: string, name: string, capital}[]
+  
   public selections: {checked: boolean, name: string}[] = [];
   
   @ViewChildren('sel') sel;
@@ -52,12 +55,16 @@ export class QuestionComponent implements OnInit, OnDestroy {
     })
   }
   
-  
   public selectAllC() {
-    
+    this.sel._results.forEach((selObj) => {
+      if (this.lookUpCapital(selObj.value)) selObj._checked = true;
+    })
   }
+
   public deselectAllC() {
-    
+    this.sel._results.forEach((selObj) => {
+      if (this.lookUpCapital(selObj.value)) selObj._checked = false;
+    })
   }
 
   public fillSelect(name: string) {
@@ -75,6 +82,13 @@ export class QuestionComponent implements OnInit, OnDestroy {
       }
     })
     console.log(this.sel._results);    
+  }
+
+  public lookUpCapital(name: string) {
+    let res = this.citiesSvg.find((city) => {
+      return city.title == name;      
+    })
+    return res.capital;
   }
 
   public togglePickPanel(){ 
