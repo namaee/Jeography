@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild, View
 import { QuizService } from '../quiz.service';
 import { Subscription } from 'rxjs';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { Mode } from '../quiz';
+import { GameState, Mode } from '../quiz';
 import { MapService } from 'src/app/map/map.service';
 import { prefectures, citiesSvg } from '../../data';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -22,6 +22,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
   public prefectureView: {prefecture: string, name: string, capital: boolean}[] = []
   public cityTypeView: {cityType: string, name: string, capital: boolean}[]
   
+  @ViewChildren('selPref') selPref;
   @ViewChildren('sel') sel;
   constructor(public qs: QuizService, public ms: MapService, private cdr: ChangeDetectorRef) { }
 
@@ -35,10 +36,9 @@ export class QuestionComponent implements OnInit, OnDestroy {
       this.prefectureViewGroup.set(prefecture.name, [])
     })
 
-    citiesSvg.sort((a, b) => a.title > b.title ? 1 : 0).forEach((city) => {
+    citiesSvg.sort((a, b) => new Intl.Collator('jp').compare(a.title, b.title)).forEach((city) => {
       this.prefectureViewGroup.get(city.prefecture).push({prefecture: city.prefecture, name: city.title, capital: city.capital})
     })
-    console.log(this.prefectureViewGroup);
     
   }
 
@@ -74,11 +74,57 @@ export class QuestionComponent implements OnInit, OnDestroy {
     })
   }
 
+
+  public checkIndeterminate(name: string) {
+    let cc = 0;
+    let oc = 0;
+    this.sel?._results.forEach((selObj) => {
+      if (this.lookUpPref(selObj.value) == name) {
+        oc++;
+        if (selObj._checked == true) {
+          cc++;
+        }
+      }
+    })
+    if (cc == oc || cc == 0) return false
+    return true;
+  }
+
+  public selectAllSubChoice(name: string, checked: boolean) {
+    this.sel?._results.forEach((selObj) => {
+      if (this.lookUpPref(selObj.value) == name) {
+        selObj._checked = checked;
+      }
+    })
+  }
+
+  public checkAllCompleted(name: string) {
+    let cc = 0;
+    let oc = 0;
+    this.sel?._results.forEach((selObj) => {
+      if (this.lookUpPref(selObj.value) == name) {
+        oc++;
+        if (selObj._checked == true) {
+          cc++;
+        }
+      }
+    })
+    if (cc == oc) return true
+    return false;
+  }
+  //value is name
   public lookUpCapital(name: string) {
     let res = this.citiesSvg.find((city) => {
       return city.title == name;      
     })
     return res.capital;
+  }
+
+  public lookUpPref(name: string) {
+    let res = this.citiesSvg.find((city) => {
+      return city.title == name;      
+    })
+    return res.prefecture;
   }
 
   public togglePickPanel(){ 
@@ -94,5 +140,9 @@ export class QuestionComponent implements OnInit, OnDestroy {
       case "kanji": this.qs.settings.kanji = event.checked; break;
       default: 
     }
+  }
+    
+  public get gameStateEnum(): typeof GameState {
+    return GameState; 
   }
 }

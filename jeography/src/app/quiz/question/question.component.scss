@@ -214,7 +214,7 @@ mat-expansion-panel-content {
 }
 
 .pick-checkbox ::ng-deep .mat-checkbox-ripple {
-  transform: scale(0.5);
+  transform: scale(0.5) !important;
   display: none;
 }
 .pick-panel-header {
