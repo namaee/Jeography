@@ -67,7 +67,12 @@
     ></path>
 
     <g *ngFor="let citySvg of citiesSvg">
-      <circle *ngIf="state == stateEnum.VIEW || (state == stateEnum.QUIZ && qs.questionSelection.includes(citySvg.title))"  [ngClass]="citySvg.capital ? 'capital-circle' : 'circle'" 
+      <circle *ngIf="state == stateEnum.VIEW || (state == stateEnum.QUIZ && qs.questionSelection.includes(citySvg.title))"  
+      [ngClass]="{'desig-circle': citySvg.type == 1, 
+      'core-circle': citySvg.type == 2, 
+      'special-circle': citySvg.type == 3, 
+      'city-circle': citySvg.type == 4, 
+      'sward-circle': citySvg.type == 5}" 
       [ngStyle]="cityCircles" 
       [attr.title]="citySvg.title" [attr.cx]= "citySvg.cx" [attr.cy]="citySvg.cy" 
       [attr.r]="0.5 + 1 / (zoomLevel / 2)" [attr.stroke-width]="0.2 + 0.5 / (zoomLevel / 2)" 
