@@ -14,6 +14,8 @@ import { QuizComponent } from './quiz/quiz.component';
 import { QuestionComponent } from './quiz/question/question.component';
 import { ScoreComponent } from './quiz/score/score.component';
 import { QuizService } from './quiz/quiz.service';
+import { SettingsComponent } from './quiz/settings/settings.component';
+import { SettingsService } from './quiz/settings/settings.service';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { QuizService } from './quiz/quiz.service';
     QuizComponent,
     QuestionComponent,
     ScoreComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,7 @@ import { QuizService } from './quiz/quiz.service';
     MaterialModule,
     BrowserAnimationsModule,
   ],
-  providers: [MapService, QuizService],
+  providers: [MapService, QuizService, SettingsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
