@@ -182,6 +182,7 @@ export class SettingsComponent implements OnInit {
     switch (event.source.value) {
       case "feedback": this.qs.settings.feedback = event.checked; break;
       case "kanji": this.qs.settings.kanji = event.checked; break;
+      case "flag": this.qs.settings.flag = event.checked; break;
       default: 
     }
   }

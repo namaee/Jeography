@@ -111,7 +111,7 @@ export const prefecturesData: {name: string, capital: string, region: string, is
   {name: 'Gunma', capital: 'Maebashi', region: 'Kantō', island: 'Honshū', area: 6362.28, population: 1937000, flower: 'japanese azalea'},
   {name: 'Hiroshima', capital: 'Hiroshima', region: 'Chūgoku', island: 'Honshū', area: 8479.63, population: 2811000, flower: 'momiji'},
   {name: 'Hokkaidō', capital: 'Sapporo', region: 'Hokkaidō', island: 'Hokkaidō', area: 83423.84, population: 5281000, flower: 'hamanasu'},
-  {name: 'Hyogo', capital: 'Kobe', region: 'Kansai', island: 'Honshū', area: 8400.29, population: 5469000, flower: 'nojigiku'},
+  {name: 'Hyōgo', capital: 'Kobe', region: 'Kansai', island: 'Honshū', area: 8400.29, population: 5469000, flower: 'nojigiku'},
   {name: 'Ibaraki', capital: 'Mito', region: 'Kantō', island: 'Honshū', area: 6097.19, population: 2871000, flower: 'rose'},
   {name: 'Ishikawa', capital: 'Kanazawa', region: 'Chūbu', island: 'Honshū', area: 4186.09, population: 1140000, flower: 'black lily'},
   {name: 'Iwate', capital: 'Morioka', region: 'Tōhoku', island: 'Honshū', area: 15275.01, population: 1229000, flower: 'paulownia'},

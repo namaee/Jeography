@@ -12,7 +12,7 @@
   <div class="settings-container">
     <mat-checkbox class="settings-checkbox" [checked]="qs.settings.feedback" (change)="onSettingChange($event)" value="feedback">feedback</mat-checkbox>
     <mat-checkbox class="settings-checkbox" [checked]="qs.settings.kanji" (change)="onSettingChange($event)" value="kanji">kanji</mat-checkbox>
-    <mat-checkbox class="settings-checkbox" *ngIf="ms.mode.value == modeEnum.PREF" matTooltip="wip" disabled (change)="onSettingChange($event)" value="">flag</mat-checkbox>
+    <mat-checkbox class="settings-checkbox" *ngIf="ms.mode.value == modeEnum.PREF" [checked]="qs.settings.flag" (change)="onSettingChange($event)" value="flag">flag</mat-checkbox>
     <mat-checkbox class="settings-checkbox" *ngIf="ms.mode.value == modeEnum.CIT" [checked]="true" matTooltip="wip" disabled (change)="onSettingChange($event)" value="">capitals</mat-checkbox>
     <mat-checkbox class="settings-checkbox" *ngIf="ms.mode.value == modeEnum.CIT" [checked]="true" matTooltip="wip" disabled (change)="onSettingChange($event)" value="">city types</mat-checkbox>
     <mat-checkbox class="settings-checkbox" matTooltip="wip" disabled (change)="onSettingChange($event)" value="">kanji only</mat-checkbox>

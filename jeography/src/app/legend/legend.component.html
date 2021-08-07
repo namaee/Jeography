@@ -64,3 +64,22 @@
     </div>
   </div>
 </mat-card>
+
+<mat-card *ngIf="mapService.mode.value == modeEnum.CIT" class="info-card">
+  <div class="info-container"> 
+    <mat-card class="info-header-card">
+      <div *ngIf="mapService.activeCity" class="info-header-container">
+        <!-- <img class="area-flag" src="{{'../../assets/Flag_of_' + toStandardLatin(mapService.activePrefecture.name) + '_Prefecture.svg'}}"/> -->
+        <div class="area-names">
+          <span class="area-name">{{mapService.activeCity?.name}}</span>
+          <span class="area-name-kanji">{{mapService.activeCity?.kanjiName}}</span>
+        </div>
+      </div>
+      <div *ngIf="!mapService.activeCity" class="info-header-container">
+        <div class="info-header-no-selection">
+          no city selected
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</mat-card>

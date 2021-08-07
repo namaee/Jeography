@@ -38,14 +38,17 @@ export class Score {
 export class Settings {
   feedback: boolean;
   kanji: boolean;
+  flag: boolean;
   
   constructor() {
     this.feedback = true;
     this.kanji = false;
+    this.flag = false;
   }
   public reset() {
     this.feedback = true;
     this.kanji = false;
+    this.flag = false;
   }
 }
 
@@ -69,5 +72,4 @@ export enum CType {
   WARD = 5, //23
 }
 
-export type Prefecture = {name: string, kanjiName: string}
-export type Region = {name: string, kanjiName: string}
+export type Name = {name: string, kanjiName: string}

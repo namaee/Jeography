@@ -21,7 +21,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   public regionsSvg = regionSvg;
   public citiesSvg = citiesSvg;
   private subscriptions: Subscription = new Subscription();
-  public active: string = '';
+  public activePref: string = '';
+  public activeCit: string = '';
+  public activeReg: string = '';
   public zoomLevel: number = 1;
 
   private mouseWheel: Subject<WheelEvent> = new Subject<WheelEvent>();
@@ -62,22 +64,28 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       if (this.state == State.QUIZ && this.qs.state == GameState.OCC && !this.mapDrag.dirty) {
         this.qs.nextQuestion(ele.getAttribute('title'))
       } else if (this.state == State.VIEW && !this.mapDrag.dirty) {
-        if (this.active == ele.getAttribute('title')) {
-          this.setActive('', this.mapService.mode.value)
-          this.mapService.setActive('', this.mapService.mode.value);
-          return;
-        }
-        this.setActive(ele.getAttribute('title'), this.mapService.mode.value)
-        this.mapService.setActive(this.active, this.mapService.mode.value);
+        this.setActive(ele)
       }
     }
   }
 
-  public setActive(title: string, mode: Mode) {
-    if (mode == Mode.PREF) {
-      this.active = title
-    } else if (mode == Mode.REG) {
-
+  public setActive(ele: SVGPathElement) {
+    if (this.mapService.mode.value == Mode.PREF) {
+      if (this.activePref == ele.getAttribute('title')) {
+        this.activePref = ''
+        this.mapService.setActive('', this.mapService.mode.value);
+      } else {
+        this.activePref = ele.getAttribute('title')
+        this.mapService.setActive(this.activePref, this.mapService.mode.value);
+      }
+    } else if (this.mapService.mode.value == Mode.CIT) {
+      if (this.activeCit == ele.getAttribute('title')) {
+        this.activeCit = ''
+        this.mapService.setActive('', this.mapService.mode.value);
+      } else {
+        this.activeCit = ele.getAttribute('title')
+        this.mapService.setActive(this.activeCit, this.mapService.mode.value);
+      }
     }
   }
 

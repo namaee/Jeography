@@ -48,4 +48,8 @@ export class QuestionComponent implements OnInit {
   public get modeEnum(): typeof Mode {
     return Mode; 
   }
+
+  public toStandardLatin(name) {
+    return (name.replace(/ō/g,'o')).replace(/Ō/g, 'O');
+  }
 }
