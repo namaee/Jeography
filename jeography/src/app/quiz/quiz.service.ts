@@ -9,6 +9,7 @@ export class QuizService implements OnInit {
   public state: GameState = 1;
   public quizControl: BehaviorSubject<string> = new BehaviorSubject<string>(null);
   public settings: Settings = new Settings();
+  public questionSelection: string[] = [];
   public questions: Question[] = [];
   public answers: Answer[] = [];
   public scores: Score[] = [];
@@ -30,10 +31,12 @@ export class QuizService implements OnInit {
   public createQuestions(mode: Mode) {
     if (mode == Mode.PREF) {
       prefectures.forEach((prefecture, i) => {
+        if (this.questionSelection.includes(prefecture.name))
         this.questions.push(new Question(prefecture.name, prefecture.kanjiName, i));
       })
     } else if (mode == Mode.CIT) {
       citiesSvg.forEach((city, i) => {
+        if (this.questionSelection.includes(city.title))
         this.questions.push(new Question(city.title, city.kanjiName, i));
       })
     } 

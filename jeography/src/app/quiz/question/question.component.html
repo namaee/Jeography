@@ -6,7 +6,7 @@
     <span *ngIf="qs.state == 2" class="question-index">{{qs.questionIndex + 1 + '/' + qs.questions.length}}</span>
     <div *ngIf="qs.state == 2" class="question-reset">
       <button disableRipple mat-icon-button>
-        <mat-icon class="question-reset-button" (click)="startQuiz()" matTooltip="Reset" matTooltipPosition="above" matTooltipClass="tooltip-reset">refresh</mat-icon>
+        <mat-icon class="question-reset-button" (click)="endQuiz()" matTooltip="Stop" matTooltipPosition="above" matTooltipClass="tooltip-reset">close</mat-icon>
       </button>
     </div>
     <div class="question-end-screen" *ngIf="qs.state == 3">
@@ -24,6 +24,9 @@
       <mat-panel-title>
       Settings
       </mat-panel-title>
+      <mat-panel-description>
+        {{(ms.mode.value == modeEnum.PREF ? prefSelection.length : (ms.mode.value == modeEnum.CIT ? citSelection.length : regSelection.length)) + ' selected'}}
+      </mat-panel-description>
       <mat-panel-description>
       
       </mat-panel-description>
@@ -47,8 +50,8 @@
           <div class="pick-top-buttons">
             <button class="pick-top-button" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="accent" (click)="selectAll()">Select All</button>
             <button class="pick-top-button" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="accent" (click)="deselectAll()">Deselect All</button>
-            <button class="pick-top-button" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="accent" (click)="selectAllC()">Select All Capitals</button>
-            <button class="pick-top-button" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="accent" (click)="deselectAllC()">Deselect All Capitals</button>
+            <button class="pick-top-button" *ngIf="ms.mode.value == modeEnum.CIT" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="accent" (click)="selectAllC()">Select All Capitals</button>
+            <button class="pick-top-button" *ngIf="ms.mode.value == modeEnum.CIT" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="accent" (click)="deselectAllC()">Deselect All Capitals</button>
           </div>
 
           <div class="pick-container">
@@ -56,20 +59,24 @@
               <mat-checkbox [disabled]="qs.state == gameStateEnum.OCC" #sel [value]="citySvg.title" class="pick-checkbox">{{citySvg.capital ? citySvg.title + ' (c)' : citySvg.title}}</mat-checkbox>
             </ng-container> -->
 
-            <ng-container *ngFor="let cityPrefecture of prefectureViewGroup | keyvalue">
-              <mat-checkbox #selPref [checked]="checkAllCompleted(cityPrefecture.key)" [indeterminate]="checkIndeterminate(cityPrefecture.key)" class="pick-checkbox pick-checkbox-parent" (change)="selectAllSubChoice(cityPrefecture.key, $event.checked)">
-                {{cityPrefecture.key}}
-              </mat-checkbox>
-              <mat-divider class="divider" [inset]="true"></mat-divider>
-
-              
-              <ng-container *ngFor="let city of cityPrefecture.value; let i = index">
-                <mat-checkbox  #sel [value]="city.name" class="pick-checkbox">{{city.capital ? city.name + ' (c)' : city.name}}</mat-checkbox>
+            <ng-container *ngIf="ms.mode.value == modeEnum.CIT">
+              <ng-container *ngFor="let cityPrefecture of prefectureViewGroup | keyvalue">
+                <mat-checkbox #selPref [disabled]="qs.state == gameStateEnum.OCC" [checked]="checkAllCompleted(cityPrefecture.key)" [indeterminate]="checkIndeterminate(cityPrefecture.key)" class="pick-checkbox pick-checkbox-parent" (change)="selectAllSubChoice(cityPrefecture.key, $event.checked)">
+                  {{cityPrefecture.key}}
+                </mat-checkbox>
+                <mat-divider class="divider" [inset]="true"></mat-divider>
+                <ng-container *ngFor="let city of cityPrefecture.value; let i = index">
+                  <mat-checkbox [checked]="citSelection.includes(city.name)" #sel [disabled]="qs.state == gameStateEnum.OCC" (change)="updateSelection()" [value]="city.name" class="pick-checkbox">{{city.capital ? city.name + ' (c)' : city.name}}</mat-checkbox>
+                </ng-container>
+                <div class="pick-checkbox-filler">i am a filler</div>
               </ng-container>
-              <div class="pick-checkbox-filler">i am a filler</div>
-
             </ng-container>
 
+            <ng-container *ngIf="ms.mode.value == modeEnum.PREF" >
+              <ng-container *ngFor="let pref of prefectures" >
+                <mat-checkbox #sel (change)="updateSelection()" [checked]="prefSelection.includes(pref.name)" [disabled]="qs.state == gameStateEnum.OCC" [value]="pref.name" class="pick-checkbox">{{pref.name}}</mat-checkbox>
+              </ng-container>
+            </ng-container>
           </div>
           
         </mat-card> 

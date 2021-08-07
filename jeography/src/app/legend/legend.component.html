@@ -17,7 +17,7 @@
   </mat-list-item>
 </div> -->
 
-<mat-card *ngIf="mapService.mode == modeEnum.PREF" class="info-card">
+<mat-card *ngIf="mapService.mode.value == modeEnum.PREF" class="info-card">
   <div class="info-container"> 
     <mat-card class="info-header-card">
       <div *ngIf="mapService.activePrefecture" class="info-header-container">

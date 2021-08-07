@@ -61,5 +61,13 @@ export enum Mode {
   CIT = 3,
 }
 
+export enum CType {
+  DESIG = 1, //20
+  CORE = 2, //62
+  SPEC = 3, //23
+  CITY = 4, //687
+  WARD = 5, //23
+}
+
 export type Prefecture = {name: string, kanjiName: string}
 export type Region = {name: string, kanjiName: string}

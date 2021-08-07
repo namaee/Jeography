@@ -63,12 +63,12 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
         this.qs.nextQuestion(ele.getAttribute('title'))
       } else if (this.state == State.VIEW && !this.mapDrag.dirty) {
         if (this.active == ele.getAttribute('title')) {
-          this.setActive('', this.mapService.mode)
-          this.mapService.setActive('', this.mapService.mode);
+          this.setActive('', this.mapService.mode.value)
+          this.mapService.setActive('', this.mapService.mode.value);
           return;
         }
-        this.setActive(ele.getAttribute('title'), this.mapService.mode)
-        this.mapService.setActive(this.active, this.mapService.mode);
+        this.setActive(ele.getAttribute('title'), this.mapService.mode.value)
+        this.mapService.setActive(this.active, this.mapService.mode.value);
       }
     }
   }
@@ -107,9 +107,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
         style['transform-origin'] = (50 - (this.mapDrag.currentX / 8)) + "% " + (50 - (this.mapDrag.currentY / 8)) + "%";
     }
     style['stroke'] = 'rgb(242, 242, 242)';
-    if (this.mapService.mode == Mode.PREF || this.mapService.mode == Mode.CIT) {
+    if (this.mapService.mode.value == Mode.PREF || this.mapService.mode.value == Mode.CIT) {
       style['stroke-width'] =  0.65 - 0.7 * ((Math.log(this.zoomLevel) / Math.log(1.5)) / 12) + 'px';
-    } else if (this.mapService.mode == Mode.REG) {
+    } else if (this.mapService.mode.value == Mode.REG) {
       style['stroke-width'] =  1 - ((Math.log(this.zoomLevel) / Math.log(1.5)) / 12) + 'px';
     }
     if (this.mapDrag?.dirty) {
