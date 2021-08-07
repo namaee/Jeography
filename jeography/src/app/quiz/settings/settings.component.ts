@@ -5,8 +5,6 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { GameState, Mode } from '../quiz';
 import { MapService } from 'src/app/map/map.service';
 import { prefectures, citiesSvg } from '../../data';
-import { SelectionModel } from '@angular/cdk/collections';
-import { MatListOption } from '@angular/material/list';
 import { SettingsService } from './settings.service';
 
 @Component({
@@ -19,9 +17,11 @@ export class SettingsComponent implements OnInit {
   private subscriptions: Subscription = new Subscription();
   public pickPanelExpanded: boolean = false;
   //mode: PREF
+  @ViewChildren('prefSel') prefSel;
   public prefectures = prefectures;
-
   //mode: CIT
+  @ViewChildren('citSelfPref') citSelfPref;
+  @ViewChildren('citSel') citSel;
   public citiesSvg = citiesSvg;
   public prefectureViewGroup: Map<string, {prefecture: string, name: string, capital: boolean}[]> = new Map();
   public prefectureView: {prefecture: string, name: string, capital: boolean}[] = []
@@ -30,8 +30,6 @@ export class SettingsComponent implements OnInit {
   public regSelection: string[] = [];
 
   
-  @ViewChildren('selPref') selPref;
-  @ViewChildren('sel') sel;
   constructor(public qs: QuizService, public ms: MapService, public ss: SettingsService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
@@ -53,14 +51,14 @@ export class SettingsComponent implements OnInit {
   public updateSelection() {
     if (this.ms.mode.value == Mode.PREF) {
       this.ss.prefSelection = [];
-      this.sel?._results.forEach((selObj) => {
+      this.prefSel?._results.forEach((selObj) => {
         if (selObj._checked) this.ss.prefSelection.push(selObj.value)
         
       })
       this.qs.questionSelection = this.ss.prefSelection
     } else if (this.ms.mode.value == Mode.CIT) {
       this.ss.citSelection = [];
-      this.sel?._results.forEach((selObj) => {
+      this.citSel?._results.forEach((selObj) => {
         if (selObj._checked) this.ss.citSelection.push(selObj.value)
       })
       this.qs.questionSelection = this.ss.citSelection
@@ -70,28 +68,40 @@ export class SettingsComponent implements OnInit {
   }
 
   public selectAll() {
-    this.sel._results.forEach((selObj) => {
-      selObj._checked = true;
-    })
+    if (this.ms.mode.value == Mode.PREF) {
+      this.prefSel._results.forEach((selObj) => {
+        selObj._checked = true;
+      })
+    } else if (this.ms.mode.value == Mode.CIT) {
+      this.citSel._results.forEach((selObj) => {
+        selObj._checked = true;
+      })
+    }
     this.updateSelection();
   }
 
   public deselectAll() {
-    this.sel._results.forEach((selObj) => {
-      selObj._checked = false;
-    })
+    if (this.ms.mode.value == Mode.PREF) {
+      this.prefSel._results.forEach((selObj) => {
+        selObj._checked = false;
+      })
+    } else if (this.ms.mode.value == Mode.CIT) {
+      this.citSel._results.forEach((selObj) => {
+        selObj._checked = false;
+      })
+    }
     this.updateSelection();
   }
   
   public selectAllC() {
-    this.sel._results.forEach((selObj) => {
+    this.citSel._results.forEach((selObj) => {
       if (this.lookUpCapital(selObj.value)) selObj._checked = true;
     })
     this.updateSelection();
   }
 
   public deselectAllC() {
-    this.sel._results.forEach((selObj) => {
+    this.citSel._results.forEach((selObj) => {
       if (this.lookUpCapital(selObj.value)) selObj._checked = false;
     })
     this.updateSelection();
@@ -99,42 +109,54 @@ export class SettingsComponent implements OnInit {
 
 
   public checkIndeterminate(name: string) {
-    let cc = 0;
-    let oc = 0;
-    this.sel?._results.forEach((selObj) => {
-      if (this.lookUpPref(selObj.value) == name) {
-        oc++;
-        if (selObj._checked == true) {
-          cc++;
+    if (this.ms.mode.value == Mode.PREF) {
+
+    } else if (this.ms.mode.value == Mode.CIT) {
+      let cc = 0;
+      let oc = 0;
+      this.citSel?._results.forEach((selObj) => {
+        if (this.lookUpPref(selObj.value) == name) {
+          oc++;
+          if (selObj._checked == true) {
+            cc++;
+          }
         }
-      }
-    })
-    if (cc == oc || cc == 0) return false
-    return true;
+      })
+      if (cc == oc || cc == 0) return false
+      return true;
+    }
   }
 
   public selectAllSubChoice(name: string, checked: boolean) {
-    this.sel?._results.forEach((selObj) => {
-      if (this.lookUpPref(selObj.value) == name) {
-        selObj._checked = checked;
-      }
-    })
+    if (this.ms.mode.value == Mode.PREF) {
+
+    } else if (this.ms.mode.value == Mode.CIT) {
+      this.citSel?._results.forEach((selObj) => {
+        if (this.lookUpPref(selObj.value) == name) {
+          selObj._checked = checked;
+        }
+      })
+    }
     this.updateSelection();
   }
 
   public checkAllCompleted(name: string) {
-    let cc = 0;
-    let oc = 0;
-    this.sel?._results.forEach((selObj) => {
-      if (this.lookUpPref(selObj.value) == name) {
-        oc++;
-        if (selObj._checked == true) {
-          cc++;
+    if (this.ms.mode.value == Mode.PREF) {
+
+    } else if (this.ms.mode.value == Mode.CIT) {
+      let cc = 0;
+      let oc = 0;
+      this.citSel?._results.forEach((selObj) => {
+        if (this.lookUpPref(selObj.value) == name) {
+          oc++;
+          if (selObj._checked == true) {
+            cc++;
+          }
         }
-      }
-    })
-    if (cc == oc && oc != 0) return true
-    return false;
+      })
+      if (cc == oc && oc != 0) return true
+      return false;
+    }
   }
   //value is name
   public lookUpCapital(name: string) {
@@ -152,16 +174,6 @@ export class SettingsComponent implements OnInit {
     return res?.prefecture;
   }
 
-  public countSelected() {
-    let c = 0;
-    this.sel?._results.forEach((selObj) => {
-      if (selObj._checked == true) {
-        c++;
-      }
-    })
-    return c;
-  }
-
   public togglePickPanel(){ 
     this.pickPanelExpanded = !this.pickPanelExpanded
   }
@@ -174,6 +186,21 @@ export class SettingsComponent implements OnInit {
     }
   }
 
+  public setDescription() {
+    if (this.ms.mode.value == Mode.PREF) {
+      if (this.ss.prefSelection.length == 1) {
+        return "1 prefecture selected"
+      } else {
+        return this.ss.prefSelection.length + " prefectures selected"
+      }
+    } else if (this.ms.mode.value == Mode.CIT) {
+      if (this.ss.prefSelection.length == 1) {
+        return "1 city selected"
+      } else {
+        return this.ss.citSelection.length + " cities selected"
+      }
+    }
+  }
   public ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }

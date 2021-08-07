@@ -4,6 +4,11 @@ $secondary-color: rgb(255, 198, 99);
 $secondary-color-dark: rgb(255, 188, 71);
 $font-color: rgb(249, 231, 231);
 
+.settings-panel-description {
+  position: relative !important;
+  margin-left: 7em;
+}
+
 mat-expansion-panel {
   background-color: $primary-color-dark;
   color: $font-color;
@@ -21,12 +26,12 @@ mat-expansion-panel-content {
 .settings-container {
   z-index: 5;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
 .settings-container > *{
   z-index: 5;
-
   margin: auto;
 }
 
@@ -122,3 +127,4 @@ mat-expansion-panel-content {
 ::ng-deep .divider {
   max-width: 17% !important;
 }
+

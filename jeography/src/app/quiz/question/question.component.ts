@@ -15,17 +15,24 @@ import { SettingsService } from '../settings/settings.service';
   styleUrls: ['./question.component.scss']
 })
 export class QuestionComponent implements OnInit {
-  @ViewChild('settings') settings
   constructor(public qs: QuizService, public ms: MapService, public ss: SettingsService) { }
 
   ngOnInit(): void {
-    
-
   }
+
   public startQuiz() {
+    
     switch (this.ms.mode.value) {
-      case Mode.PREF: if (this.ss.prefSelection.length > 0) this.qs.startQuiz(Mode.PREF); break;
-      case Mode.CIT: if (this.ss.citSelection.length > 0) this.qs.startQuiz(Mode.CIT); break;
+      case Mode.PREF: {
+        this.qs.questionSelection = this.ss.prefSelection 
+        if (this.ss.prefSelection.length > 0) this.qs.startQuiz(Mode.PREF);
+        break;
+       }
+      case Mode.CIT: {
+        this.qs.questionSelection = this.ss.citSelection 
+        if (this.ss.citSelection.length > 0) this.qs.startQuiz(Mode.CIT); 
+        break;
+      }
 
     }
   }
@@ -33,7 +40,7 @@ export class QuestionComponent implements OnInit {
   public endQuiz() {
     this.qs.state = GameState.END
   }
-  
+
   public get gameStateEnum(): typeof GameState {
     return GameState; 
   }

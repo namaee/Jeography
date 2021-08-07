@@ -18,15 +18,20 @@ export class MenuComponent implements OnInit {
   switchMode(mode: Mode) {
     if (this.qs.state == GameState.OCC) return
     // this.ms.mode = mode;
+    if (mode == Mode.REG) return;
     this.ms.mode.next(mode)
   }
 
-  public get modeSwitch(): { [key: string]: string } {
+  public modeSwitch(mode: Mode): { [key: string]: string } {
     const style: { [key: string]: string } = {};
     if (this.qs.state == GameState.OCC) {
       style['cursor'] = 'default'
     } else {
       style['cursor'] = 'pointer'
+    }
+    if (this.ms.mode.value == mode) {
+      style['color'] = 'rgb(249, 231, 231)'
+
     }
     return style;
   }
