@@ -109,12 +109,27 @@ $font-color: rgb(249, 231, 231);
   color: rgb(226, 121, 130) !important;
 }
 
-::ng-deep .circle-tooltip {
+::ng-deep .desig-circle-tooltip {
   background-color: rgb(46, 47, 47) !important;
   color: rgb(226, 121, 130) !important;
 }
 
-::ng-deep .capital-circle-tooltip {
+::ng-deep .core-circle-tooltip {
   background-color: rgb(46, 47, 47) !important;
   color: rgb(134, 193, 255) !important;
+}
+
+::ng-deep .special-circle-tooltip {
+  background-color: rgb(46, 47, 47) !important;
+  color: rgb(49, 177, 98) !important;
+}
+
+::ng-deep .city-circle-tooltip {
+  background-color: rgb(46, 47, 47) !important;
+  color: rgb(236, 135, 67) !important;
+}
+
+::ng-deep .sward-circle-tooltip {
+  background-color: rgb(46, 47, 47) !important;
+  color: rgb(200, 118, 255) !important;
 }

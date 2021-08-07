@@ -13,7 +13,7 @@ export class MapService {
   public regionsData = regionSvg;
   public activePrefectureData: {name: string, capital: string, region: string, island: string, area: number, population: number, flower: string}; 
   public activePrefecture: Name;
-  public activeCity: Name;
+  public activeCity: typeof citiesSvg[0] = null;
   public activeRegion: Name;
 
   constructor() {
@@ -28,13 +28,12 @@ export class MapService {
         return prefecture.name == name;      
       })
     } else if (mode == Mode.CIT) {
-       let ac = this.citiesSvg.find((city) => {
-        return city.title == name;      
-      })
-      if (ac) {
-        this.activeCity = {name: ac.title, kanjiName: ac.kanjiName}
+      if (name != this.activeCity?.title) {
+        this.activeCity = this.citiesSvg.find((city) => {
+          return city.title == name;      
+        })
       } else {
-        this.activeCity = undefined
+        this.activeCity = null;
       }
     }
   }

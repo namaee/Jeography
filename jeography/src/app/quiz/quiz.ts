@@ -24,12 +24,16 @@ export class Answer {
 export class Score {
   areaName: string;
   kanjiAreaName: string;
+  pickedAreaName: string;
+  pickedKanjiName: string;
   tf: boolean;
   id: number;
 
-  constructor(areaName: string, kanjiAreaName: string, tf: boolean, id: number) {
+  constructor(areaName: string, kanjiAreaName: string, pickedAreaName: string, pickedKanjiName: string, tf: boolean, id: number) {
     this.areaName = areaName;
     this.kanjiAreaName = kanjiAreaName;
+    this.pickedAreaName = pickedAreaName;
+    this.pickedKanjiName = pickedKanjiName;
     this.tf = tf;
     this.id = id;
   }

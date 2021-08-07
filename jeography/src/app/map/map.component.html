@@ -67,7 +67,7 @@
     ></path>
 
     <g *ngFor="let citySvg of citiesSvg">
-      <circle *ngIf="state == stateEnum.VIEW || (state == stateEnum.QUIZ && qs.questionSelection.includes(citySvg.title))"  
+      <circle *ngIf="(state == stateEnum.VIEW || (state == stateEnum.QUIZ && qs.questionSelection.includes(citySvg.title))) && !mapService.activeCity"  
       [ngClass]="{'desig-circle': citySvg.type == 1, 
       'core-circle': citySvg.type == 2, 
       'special-circle': citySvg.type == 3, 
@@ -75,14 +75,35 @@
       'sward-circle': citySvg.type == 5}" 
       [ngStyle]="cityCircles" 
       [attr.title]="citySvg.title" [attr.cx]= "citySvg.cx" [attr.cy]="citySvg.cy" 
-      [attr.r]="0.5 + 1 / (zoomLevel / 2)" [attr.stroke-width]="0.2 + 0.5 / (zoomLevel / 2)" 
-      [matTooltip]="citySvg.title" matTooltipPosition="before" [matTooltipClass]="citySvg.capital ? 'capital-circle-tooltip' : 'circle-tooltip'" [matTooltipDisabled]="(mapDrag ? mapDrag.dirty : false) || state == stateEnum.QUIZ"
+      [attr.r]="0.5 + 1 / (zoomLevel / 2)" 
+      [matTooltip]="citySvg.title" matTooltipPosition="before" 
+      [matTooltipClass]="{'desig-circle-tooltip': citySvg.type == 1, 
+      'core-circle-tooltip': citySvg.type == 2, 
+      'special-circle-tooltip': citySvg.type == 3, 
+      'city-circle-tooltip': citySvg.type == 4, 
+      'sward-circle-tooltip': citySvg.type == 5}"
+      [matTooltipDisabled]="(mapDrag ? mapDrag.dirty : false) || state == stateEnum.QUIZ"
       (click)="onClick($event)"
       ></circle>
     </g>
 
-    <!-- <circle class="circle" cx="316.8" cy="255.8" [attr.r]="0.5 + 1 / (zoomLevel / 2)" stroke="black" [attr.stroke-width]="0.2 + 0.5 / (zoomLevel / 2)" fill="red" ></circle> -->
-    <!-- <circle class="circle" cx="200px" cy="200px" r="50" stroke="black" stroke-width="3" fill="red" ></circle> -->
+    <circle *ngIf="mapService.activeCity" 
+    [ngClass]="{'desig-circle': mapService.activeCity.type == 1, 
+    'core-circle': mapService.activeCity.type == 2, 
+    'special-circle': mapService.activeCity.type == 3, 
+    'city-circle': mapService.activeCity.type == 4, 
+    'sward-circle': mapService.activeCity.type == 5}" 
+    [ngStyle]="cityCircles" 
+    [attr.title]="mapService.activeCity.title" [attr.cx]= "mapService.activeCity.cx" [attr.cy]="mapService.activeCity.cy" 
+    [attr.r]="0.5 + 1 / (zoomLevel / 2)"
+    [matTooltip]="mapService.activeCity.title" matTooltipPosition="before" 
+    [matTooltipClass]="{'desig-circle-tooltip': mapService.activeCity.type == 1, 
+    'core-circle-tooltip': mapService.activeCity.type == 2, 
+    'special-circle-tooltip': mapService.activeCity.type == 3, 
+    'city-circle-tooltip': mapService.activeCity.type == 4, 
+    'sward-circle-tooltip': mapService.activeCity.type == 5}"
+    [matTooltipDisabled]="(mapDrag ? mapDrag.dirty : false) || state == stateEnum.QUIZ"
+    ></circle>
 
   </g>
 

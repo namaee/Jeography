@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { State } from '../app.component';
 import { prefectures, prefecturesSvg, regionSvg, citiesSvg} from '../data';
@@ -22,7 +22,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   public citiesSvg = citiesSvg;
   private subscriptions: Subscription = new Subscription();
   public activePref: string = '';
-  public activeCit: string = '';
+  public activeCit: typeof citiesSvg[0] = null;
   public activeReg: string = '';
   public zoomLevel: number = 1;
 
@@ -79,13 +79,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
         this.mapService.setActive(this.activePref, this.mapService.mode.value);
       }
     } else if (this.mapService.mode.value == Mode.CIT) {
-      if (this.activeCit == ele.getAttribute('title')) {
-        this.activeCit = ''
-        this.mapService.setActive('', this.mapService.mode.value);
-      } else {
-        this.activeCit = ele.getAttribute('title')
-        this.mapService.setActive(this.activeCit, this.mapService.mode.value);
-      }
+
     }
   }
 

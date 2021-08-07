@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { prefectures } from '../data';
+import { citiesSvg, prefectures } from '../data';
 import { MapService } from '../map/map.service';
 import { Mode } from '../quiz/quiz';
 
@@ -10,13 +10,18 @@ import { Mode } from '../quiz/quiz';
 })
 export class LegendComponent implements OnInit {
   public prefectures = prefectures;
+  public citiesSvg = citiesSvg;
 
-  constructor(public mapService: MapService) {
+  constructor(public ms: MapService) {
   
   }
 
   ngOnInit(): void {
+    this.citiesSvg.sort((a, b) => new Intl.Collator('jp').compare(a.title, b.title))
+  }
 
+  public setActive(name: string) {
+    this.ms.setActive(name, Mode.CIT)
   }
 
   public formatKM(num) {

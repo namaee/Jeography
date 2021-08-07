@@ -7,6 +7,7 @@ import { Question, Answer,  Settings, Score, GameState, Mode } from './quiz';
 @Injectable()
 export class QuizService implements OnInit {
   public state: GameState = 1;
+  public prefectures = prefectures;
   public quizControl: BehaviorSubject<string> = new BehaviorSubject<string>(null);
   public settings: Settings = new Settings();
   public questionSelection: string[] = [];
@@ -46,9 +47,15 @@ export class QuizService implements OnInit {
 
   public nextQuestion(ans: string) {
     if (this.state == 3) return
-    let answer = new Answer(ans, ans == this.questions[this.questionIndex].name, this.questions[this.questionIndex].id)
-    this.answers.push(answer)
-    this.updateScore();
+    // let answer = new Answer(ans, ans == this.questions[this.questionIndex].name, this.questions[this.questionIndex].id)
+    this.scores.unshift(new Score(
+      this.questions[this.questionIndex].name, 
+      this.questions[this.questionIndex].kanjiName, 
+      ans, this.returnKanjiName(ans), 
+      ans == this.questions[this.questionIndex].name, 
+      this.scoreID++))
+    // this.answers.push(answer)
+    // this.updateScore();
     if (this.questionIndex >= this.questions.length - 1) {
       this.state = 3
       this.scores.forEach((score) => {
@@ -75,13 +82,19 @@ export class QuizService implements OnInit {
   }
 
   
-  public updateScore() {
-    // this.qs.questions.slice(0, this.qs.questionIndex).forEach((question: Question) => {
-    //   this.scores.
-    // })
-    this.scores.unshift(new Score(this.questions[this.questionIndex].name, this.questions[this.questionIndex].kanjiName, this.answers[this.questionIndex].tf, this.scoreID++))
-  }
+  // public updateScore() {
+  //   // this.qs.questions.slice(0, this.qs.questionIndex).forEach((question: Question) => {
+  //   //   this.scores.
+  //   // })
+  //   this.scores.unshift(new Score(this.questions[this.questionIndex].name, this.questions[this.questionIndex].kanjiName, this.answers[this.questionIndex].tf, this.answers[this.questionIndex], this.scoreID++))
+  // }
 
+  public returnKanjiName(pref: string) {
+    let prefecture = this.prefectures.find((prefecture) => {
+      return prefecture.name == pref;      
+    })
+    return prefecture.kanjiName;
+  }
   public shuffle(ar) {
     var ci = ar.length, ri;
     while (0 !== ci) {

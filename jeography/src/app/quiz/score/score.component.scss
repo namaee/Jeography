@@ -13,15 +13,29 @@ $correct-color: rgb(136, 255, 130);
 
 .score-container {
   max-height: 35em;
+  width: 100%;
   overflow-y: auto;
   padding-bottom: 1px;
+  // border: 2px orange solid;
+}
+
+.score-list {
+  display: block;
+  // border: 2px red solid;
 }
 
 .score-entry {
   color: $font-color;
-  max-width: 100%;
-
+  width: 40%;
+  display: inline-block;
+  // border: 2px rgb(185, 99, 211) solid;
 }
+
+.score-entry-answer{
+  color: rgb(177, 177, 177);
+  // font-size: 0.7em;
+}
+
 .score-entry-rect {
   width: 0.7em;
   height: 0.7em;

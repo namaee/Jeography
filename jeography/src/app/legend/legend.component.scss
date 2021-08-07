@@ -11,8 +11,9 @@ $font-color: rgb(249, 231, 231);
   display: flex;
   flex-flow: column;
   // height: 700px;
-  max-height: 800px;
+  max-height: 53.15em;
   padding: 2em;
+  // border: 1px solid orange;
 }
 
 .info-header-card{
@@ -99,16 +100,46 @@ $font-color: rgb(249, 231, 231);
   width: 40%;
   // border: 2px solid cornflowerblue;
 }
+///////////////////////   CITY   ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+.top-list {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  // border: 2px solid green;
+  max-height: inherit;
+  > * {
+    margin: 0em 0.5em 0em 0.5em;
+    color: $font-color;
+  }
+}
 
+.swap-button {
+  margin: 1em !important;
+  color: $primary-color !important;
+}
+.city-type-item {
+  color: $secondary-color !important;
+  font-size: 1.3em;
+  cursor: default;
+}
+.cities {
+  cursor: pointer;
+  margin-left: 1em;
+}
 
+.city-type-item-filler {
+  z-index: -999;
+}
 
-
-
-
-
-
-
+.city-active-icon {
+  position: absolute;
+  top: -.1em;
+  left: -0.4em;
+  // border: 1px solid orange;
+}
 
 
 
