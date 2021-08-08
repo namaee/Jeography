@@ -138,7 +138,7 @@ export const prefecturesData: {name: string, capital: string, region: string, is
   {name: 'Saitama', capital: 'Saitama', region: 'Kantō', island: 'Honshū', area: 3797.75, population: 7338000, flower: 'primrose'},
   {name: 'Shiga', capital: 'Ōtsu', region: 'Kansai', island: 'Honshū', area: 4017.38, population: 1412000, flower: 'rhododendron'},
   {name: 'Shimane', capital: 'Matsue', region: 'Chūgoku', island: 'Honshū', area: 6708.26, population: 665000, flower: 'moutan peony'},
-  {name: 'Shizuoka', capital: 'Shizuoka', region: 'Chūbu', island: 'Honshū', area: 7777.42, population: 363800, flower: 'azalea'},
+  {name: 'Shizuoka', capital: 'Shizuoka', region: 'Chūbu', island: 'Honshū', area: 7777.42, population: 3638000, flower: 'azalea'},
   {name: 'Tochigi', capital: 'Utsunomiya', region: 'Kantō', island: 'Honshū', area: 6408.09, population: 1944000, flower: 'rhododendron albrechtii'},
   {name: 'Tokushima', capital: 'Tokushima', region: 'Shikoku', island: 'Shikoku', area: 4146.80, population: 728000, flower: 'sudachi'},
   {name: 'Tōkyō', capital: 'Tōkyō', region: 'Kantō', island: 'Honshū', area: 2194.07, population: 13960000, flower: 'yoshino cherry'},
