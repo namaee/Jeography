@@ -113,33 +113,69 @@ $font-color: rgb(249, 231, 231);
   > * {
     margin: 0em 0.5em 0em 0.5em;
     color: $font-color;
+    max-width: 11em;
   }
 }
 
 .swap-button {
   margin: 1em !important;
+  width: 6em !important;
   color: $primary-color !important;
+  margin-top: 0.35em !important;
 }
 .city-type-item {
   color: $secondary-color !important;
-  font-size: 1.3em;
   cursor: default;
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
 }
 .cities {
   cursor: pointer;
-  margin-left: 1em;
+  margin-left: 1em !important;
+  // border: 1px solid paleturquoise;
+  display: block;
 }
-
 .city-type-item-filler {
+  position: relative;
   z-index: -999;
 }
-
 .city-active-icon {
   position: absolute;
   top: -.1em;
   left: -0.4em;
   // border: 1px solid orange;
 }
+
+.prefecture-item {
+  color: $secondary-color !important;
+  cursor: default;
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+.top-list-pref {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  // border: 2px solid green;
+  max-height: inherit;
+  > * {
+    margin: 0em 0.8em 0em 0.5em;
+    color: $font-color;
+    max-width: 11em;
+
+  }
+}
+.cities-pref {
+  cursor: pointer;
+  margin-left: 1em !important;
+  // border: 1px solid paleturquoise;
+  display: block;
+}
+
+
+
+
 
 
 
