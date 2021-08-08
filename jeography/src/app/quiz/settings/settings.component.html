@@ -39,16 +39,16 @@
           </ng-container> -->
 
           <ng-container *ngIf="ms.mode.value == modeEnum.CIT">
-            <ng-container *ngFor="let cityPrefecture of prefectureViewGroup | keyvalue">
-              <mat-checkbox #citSelPref [disabled]="qs.state == gameStateEnum.OCC" [checked]="checkAllCompleted(cityPrefecture.key)" [indeterminate]="checkIndeterminate(cityPrefecture.key)" class="pick-checkbox pick-checkbox-parent" (change)="selectAllSubChoice(cityPrefecture.key, $event.checked)">
-                {{cityPrefecture.key}}
+            <div *ngFor="let cityRegion of regionViewGroup | keyvalue">
+              <mat-checkbox #citSelPref [disabled]="qs.state == gameStateEnum.OCC" [checked]="checkAllCompleted(cityRegion.key)" [indeterminate]="checkIndeterminate(cityRegion.key)" class="pick-checkbox pick-checkbox-parent" (change)="selectAllSubChoice(cityRegion.key, $event.checked)">
+                {{cityRegion.key}}
               </mat-checkbox>
               <mat-divider class="divider" [inset]="true"></mat-divider>
-              <ng-container *ngFor="let city of cityPrefecture.value; let i = index">
+              <ng-container *ngFor="let city of cityRegion.value; let i = index">
                 <mat-checkbox #citSel [checked]="ss.citSelection.includes(city.name)"  [disabled]="qs.state == gameStateEnum.OCC" (change)="updateSelection()" [value]="city.name" class="pick-checkbox">{{city.capital ? city.name + ' (c)' : city.name}}</mat-checkbox>
               </ng-container>
               <div class="pick-checkbox-filler">i am a filler</div>
-            </ng-container>
+            </div>
           </ng-container>
 
           <ng-container *ngIf="ms.mode.value == modeEnum.PREF" >

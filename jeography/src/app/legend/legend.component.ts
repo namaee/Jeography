@@ -15,7 +15,6 @@ export class LegendComponent implements OnInit {
   public regionSvg = regionSvg;
 
   public view: number = 0;
-
   public regionViewGroup: Map<string, {region: string, name: string, capital: boolean}[]> = new Map();
   public regionView: {region: string, name: string, capital: boolean}[] = []
   public cityTypeView: {cityType: string, name: string, capital: boolean}[]

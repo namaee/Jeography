@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { GameState, Mode } from '../quiz';
 import { MapService } from 'src/app/map/map.service';
-import { prefectures, citiesSvg } from '../../data';
+import { prefectures, citiesSvg, regionSvg, prefecturesData} from '../../data';
 import { SettingsService } from './settings.service';
 
 @Component({
@@ -19,14 +19,16 @@ export class SettingsComponent implements OnInit {
   //mode: PREF
   @ViewChildren('prefSel') prefSel;
   public prefectures = prefectures;
+  public prefecturesData = prefecturesData;
   //mode: CIT
   @ViewChildren('citSelfPref') citSelfPref;
   @ViewChildren('citSel') citSel;
   public citiesSvg = citiesSvg;
-  public prefectureViewGroup: Map<string, {prefecture: string, name: string, capital: boolean}[]> = new Map();
-  public prefectureView: {prefecture: string, name: string, capital: boolean}[] = []
+  public regionViewGroup: Map<string, {region: string, name: string, capital: boolean}[]> = new Map();
+  public regionView: {region: string, name: string, capital: boolean}[] = []
   public cityTypeView: {cityType: string, name: string, capital: boolean}[]
   //mode: REG
+  public regionSvg = regionSvg;
   public regSelection: string[] = [];
 
   
@@ -40,11 +42,16 @@ export class SettingsComponent implements OnInit {
     )  
     this.prefectures.sort((a, b) => new Intl.Collator('jp').compare(a.name, b.name))
     this.prefectures.forEach((prefecture) => {
-      this.prefectureViewGroup.set(prefecture.name, [])
       this.ss.prefSelection.push(prefecture.name)
     })
-    citiesSvg.sort((a, b) => new Intl.Collator('jp').compare(a.title, b.title)).forEach((city) => {
-      this.prefectureViewGroup.get(city.prefecture).push({prefecture: city.prefecture, name: city.title, capital: city.capital})
+
+    this.regionSvg.sort((a, b) => new Intl.Collator('jp').compare(a.title, b.title))
+    this.regionSvg.forEach((region) => {
+      this.regionViewGroup.set(region.title, [])
+    })
+
+    this.citiesSvg.sort((a, b) => new Intl.Collator('jp').compare(a.title, b.title)).forEach((city) => {
+      this.regionViewGroup.get(this.prefToRegion(city.prefecture)).push({region: this.prefToRegion(city.prefecture), name: city.title, capital: city.capital})
     })
   }
 
@@ -115,7 +122,7 @@ export class SettingsComponent implements OnInit {
       let cc = 0;
       let oc = 0;
       this.citSel?._results.forEach((selObj) => {
-        if (this.lookUpPref(selObj.value) == name) {
+        if (this.prefToRegion(this.lookUpPref(selObj.value)) == name) {
           oc++;
           if (selObj._checked == true) {
             cc++;
@@ -132,7 +139,7 @@ export class SettingsComponent implements OnInit {
 
     } else if (this.ms.mode.value == Mode.CIT) {
       this.citSel?._results.forEach((selObj) => {
-        if (this.lookUpPref(selObj.value) == name) {
+        if (this.prefToRegion(this.lookUpPref(selObj.value)) == name) {
           selObj._checked = checked;
         }
       })
@@ -147,7 +154,7 @@ export class SettingsComponent implements OnInit {
       let cc = 0;
       let oc = 0;
       this.citSel?._results.forEach((selObj) => {
-        if (this.lookUpPref(selObj.value) == name) {
+        if (this.prefToRegion(this.lookUpPref(selObj.value)) == name) {
           oc++;
           if (selObj._checked == true) {
             cc++;
@@ -172,6 +179,13 @@ export class SettingsComponent implements OnInit {
     })
     
     return res?.prefecture;
+  }
+
+  public prefToRegion(name: string) {
+    let pref = this.prefecturesData.find((prefecture) => {
+      return prefecture.name == name;      
+    })
+    return pref.region
   }
 
   public togglePickPanel(){ 

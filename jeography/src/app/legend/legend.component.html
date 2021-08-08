@@ -68,7 +68,7 @@
 <mat-card *ngIf="ms.mode.value == modeEnum.CIT" class="info-card">
   <div *ngIf="view == 1" class="top-list">
     <button class="swap-button" mat-flat-button color="accent" (click)="swapLegendView(0)">Swap</button>
-    <mat-list-item class="city-type-item">SPECIAL WARD</mat-list-item>
+    <mat-list-item class="city-type-item">special wards</mat-list-item>
     <mat-list-item *ngFor="let city of citiesSvg" class="" (click)="setActive(city.title)">
       <div *ngIf="city.type == 5">
         <mat-icon *ngIf="ms.activeCity?.title == city.title" class="city-active-icon">keyboard_arrow_right</mat-icon>
@@ -76,7 +76,7 @@
       </div>
     </mat-list-item>
     <mat-list-item class="city-type-item-filler">filler</mat-list-item>
-    <mat-list-item class="city-type-item">DESIGNATED CITIES</mat-list-item>
+    <mat-list-item class="city-type-item">designated cities</mat-list-item>
     <mat-list-item *ngFor="let city of citiesSvg" class="" (click)="setActive(city.title)">
       <div *ngIf="city.type == 1">
         <mat-icon *ngIf="ms.activeCity?.title == city.title" class="city-active-icon">keyboard_arrow_right</mat-icon>
@@ -84,7 +84,7 @@
       </div>
     </mat-list-item>
     <mat-list-item class="city-type-item-filler">filler</mat-list-item>
-    <mat-list-item class="city-type-item">CORE CITIES</mat-list-item>
+    <mat-list-item class="city-type-item">core cities</mat-list-item>
     <mat-list-item *ngFor="let city of citiesSvg" class="" (click)="setActive(city.title)">
       <div *ngIf="city.type == 2">
         <mat-icon *ngIf="ms.activeCity?.title == city.title" class="city-active-icon">keyboard_arrow_right</mat-icon>
@@ -92,7 +92,7 @@
       </div>
     </mat-list-item>
     <mat-list-item class="city-type-item-filler">filler</mat-list-item>
-    <mat-list-item class="city-type-item">SPECIAL CITIES</mat-list-item>
+    <mat-list-item class="city-type-item">special cities</mat-list-item>
     <mat-list-item *ngFor="let city of citiesSvg" class="" (click)="setActive(city.title)">
       <div *ngIf="city.type == 3">
         <mat-icon *ngIf="ms.activeCity?.title == city.title" class="city-active-icon">keyboard_arrow_right</mat-icon>
@@ -100,7 +100,7 @@
       </div>
     </mat-list-item>
     <mat-list-item class="city-type-item-filler">filler</mat-list-item>
-    <mat-list-item class="city-type-item">CITY CITIES</mat-list-item>
+    <mat-list-item class="city-type-item">cities</mat-list-item>
     <mat-list-item *ngFor="let city of citiesSvg" class="" (click)="setActive(city.title)">
       <div *ngIf="city.type == 4">
         <mat-icon *ngIf="ms.activeCity?.title == city.title" class="city-active-icon">keyboard_arrow_right</mat-icon>
@@ -112,8 +112,8 @@
   <div *ngIf="view == 0" class="top-list">
     <button class="swap-button" mat-flat-button color="accent" (click)="swapLegendView(1)">Swap</button>
       <div class="prefecture-group" *ngFor="let cityPrefecture of regionViewGroup | keyvalue">
-        <mat-list-item class="prefecture-item">
-          {{cityPrefecture.key.toUpperCase()}}
+        <mat-list-item class="region-item">
+          {{cityPrefecture.key.toLowerCase()}}
         </mat-list-item>
         <ng-container *ngFor="let city of cityPrefecture.value">
           <div [ngStyle]="{'position': 'relative'}">

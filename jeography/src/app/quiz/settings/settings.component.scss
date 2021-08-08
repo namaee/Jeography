@@ -118,13 +118,14 @@ mat-expansion-panel-content {
 .pick-checkbox-parent {
   display: inline-block;
   padding-right: 2em;
-  color: rgb(255, 102, 102);
+  color: $secondary-color;
 }
 .pick-checkbox-filler{
+  position: relative;
   z-index: -999;
 }
 
 ::ng-deep .divider {
-  max-width: 17% !important;
+  max-width: 85% !important;
 }
 
