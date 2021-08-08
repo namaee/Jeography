@@ -11,7 +11,7 @@ $font-color: rgb(249, 231, 231);
   display: flex;
   flex-flow: column;
   // height: 700px;
-  max-height: 53.15em;
+  max-height: 43.65em;
   padding: 2em;
   // border: 1px solid orange;
 }
@@ -62,7 +62,19 @@ $font-color: rgb(249, 231, 231);
     margin: auto;
   }
 }
-
+.area-names-city{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: row;
+  justify-content: center;
+  right: 0;
+  color: $font-color;
+  font-size: 4em;
+  > * {
+    margin: 0.25em 0.2em 0em 0.2em;
+  }
+}
 .area-flag { //ratio 3:2
   height: 12.3em;
   width: auto;
@@ -75,6 +87,13 @@ $font-color: rgb(249, 231, 231);
 
 .area-name-kanji {
   width: 100%;
+  font-size: 0.8em;
+  // border: 2px solid red;
+}
+
+
+.area-name-kanji-city {
+  margin-top: 0.35em !important;
   font-size: 0.8em;
   // border: 2px solid red;
 }
@@ -109,7 +128,7 @@ $font-color: rgb(249, 231, 231);
   flex-wrap: wrap;
   align-content: flex-start;
   // border: 2px solid green;
-  height: 51em;
+  height: 41em;
   max-height: inherit;
   > * {
     margin: 0em 0.5em 0em 0.5em;
@@ -118,14 +137,14 @@ $font-color: rgb(249, 231, 231);
   }
 }
 
-.top-list-type {
+.top-list-pref {
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
   flex-wrap: wrap;
   align-content: flex-start;
   // border: 2px solid green;
-  height: 51em;
+  height: 41em;
   max-height: inherit;
   > * {
     margin: 0em 1em 0em 0.5em;
@@ -221,7 +240,21 @@ $font-color: rgb(249, 231, 231);
   height: 100%;
 }
 
+.cit-card-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
 
+.display-card {
+  background-color: $primary-color-dark;
+  height: 3.5em;
+  width: 100%;
+  width: 50em;
+  margin-left: -10em;
+  padding: 2em;
+  margin-bottom: 2em;
+}
 
 
 

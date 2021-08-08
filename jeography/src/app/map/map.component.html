@@ -144,6 +144,7 @@
     'city-circle-tooltip': mapService.activeCity.type == 4, 
     'sward-circle-tooltip': mapService.activeCity.type == 5}"
     [matTooltipDisabled]="(mapDrag ? mapDrag.dirty : false) || state == stateEnum.QUIZ"
+    (click)="onClick($event)"
     ></circle>
 
   </g>

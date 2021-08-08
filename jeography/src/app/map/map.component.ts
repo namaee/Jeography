@@ -39,7 +39,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   debugger(event: MouseEvent) {
-    console.log('cx: "' + Math.round((((event.offsetX - 51) / 1.456) ) * 10) / 10 + '", cy: "' + Math.round(((event.offsetY - 14) / 1.456) * 10) / 10 + '"');
+    // console.log('cx: "' + Math.round((((event.offsetX - 51) / 1.456) ) * 10) / 10 + '", cy: "' + Math.round(((event.offsetY - 14) / 1.456) * 10) / 10 + '"');
 
   }
   ngOnInit(): void {
@@ -92,7 +92,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
         this.mapService.setActive(this.activePref, this.mapService.mode.value);
       }
     } else if (this.mapService.mode.value == Mode.CIT) {
-
+      this.mapService.setActive(ele.getAttribute('title'), this.mapService.mode.value);
     }
   }
 
