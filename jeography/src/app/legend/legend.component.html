@@ -117,7 +117,7 @@
             {{cityPrefecture.key.toLowerCase()}}
           </mat-list-item>
           <ng-container *ngFor="let city of cityPrefecture.value">
-            <!-- <div class="city-region-item-container" [ngStyle]="{'position': 'relative'}"> -->
+            <div class="city-region-item-container" [ngStyle]="{'position': 'relative'}">
               <mat-icon *ngIf="ms.activeCity?.title == city.name" class="city-active-icon">keyboard_arrow_right</mat-icon>
               <mat-list-item class="cities" (click)="setActive(city.name)">
                 {{city.name}}
@@ -133,7 +133,7 @@
                 </rect>
                 </svg>
               </mat-list-item>
-            <!-- </div> -->
+            </div>
           </ng-container>
         <div class="city-type-item-filler">i am a filler</div>
       </ng-container>
