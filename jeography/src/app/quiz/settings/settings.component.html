@@ -27,11 +27,11 @@
     </mat-expansion-panel-header>
       <mat-card [class.mat-elevation-z0]="true" class="pick-card">
         <div class="pick-top-buttons">
-          <button class="pick-top-button" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="primary" (click)="selectAll()">Select All</button>
-          <button class="pick-top-button" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="primary" (click)="deselectAll()">Deselect All</button>
-          <button class="pick-top-button" *ngIf="ms.mode.value == modeEnum.CIT" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="primary" (click)="selectAllC()">Select All Capitals</button>
-          <button class="pick-top-button" *ngIf="ms.mode.value == modeEnum.CIT" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="primary" (click)="deselectAllC()">Deselect All Capitals</button>
-          <button class="pick-top-button swap-button" *ngIf="ms.mode.value == modeEnum.CIT" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="accent" (click)="swapView()">{{view == 0 ? 'Regions' : 'Types'}}</button>
+          <button class="pick-top-button" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="primary" (click)="selectAll()">select all</button>
+          <button class="pick-top-button" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="primary" (click)="deselectAll()">deselect all</button>
+          <button class="pick-top-button" *ngIf="ms.mode.value == modeEnum.CIT" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="primary" (click)="selectAllC()">select all capitals</button>
+          <button class="pick-top-button" *ngIf="ms.mode.value == modeEnum.CIT" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="primary" (click)="deselectAllC()">deselect all capitals</button>
+          <button class="pick-top-button swap-button" *ngIf="ms.mode.value == modeEnum.CIT" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="accent" (click)="swapView()">{{view == 0 ? 'region' : 'type'}}</button>
         </div>
 
         <div class="pick-container">
