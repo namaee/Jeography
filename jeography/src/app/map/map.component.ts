@@ -1,5 +1,7 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
+import tippy from 'tippy.js';
+import 'tippy.js/dist/tippy.css'; 
 import { State } from '../app.component';
 import { prefectures, prefecturesSvg, regionSvg, citiesSvg} from '../data';
 import { GameState, Mode } from '../quiz/quiz';
@@ -37,6 +39,13 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    const template = document.getElementById('info-info');
+    tippy('.info-info', {
+      content: template,
+      delay: 0,
+      duration: [200, 0],
+      placement: 'bottom-end',
+    })
   }
 
   public onwheel(event: WheelEvent) {

@@ -16,7 +16,48 @@
       <mat-icon>remove</mat-icon>
     </button>
   </div>
+  <mat-icon [hidden]="mapService.mode.value != modeEnum.CIT" class="info-info">info</mat-icon>
+  <mat-card id="info-info" [class.mat-elevation-z5]="true">
+    <div class="info-with-rect">
+      <svg class="info-rect">
+        <rect width="1em" height="1em" rx="1" class="sward-rect">
+        </rect>
+      </svg>
+      <span class="info-text">Special Wards</span>
+    </div>
 
+    <div class="info-with-rect">
+      <svg class="info-rect">
+        <rect width="1em" height="1em" rx="1" class="desig-rect">
+        </rect>
+      </svg>
+      <span class="info-text">Designated cities</span>
+    </div>
+    
+    <div class="info-with-rect">
+      <svg class="info-rect">
+        <rect width="1em" height="1em" rx="1" class="core-rect">
+        </rect>
+      </svg>
+      <span class="info-text">Core Cities</span>
+    </div>
+
+    <div class="info-with-rect">
+      <svg class="info-rect">
+        <rect width="1em" height="1em" rx="1" class="special-rect">
+        </rect>
+      </svg>
+      <span class="info-text">Special Cities</span>
+    </div>
+
+    <div class="info-with-rect">
+      <svg class="info-rect">
+        <rect width="1em" height="1em" rx="1" class="city-rect">
+        </rect>
+      </svg>
+      <span class="info-text">Cities</span>
+    </div>
+  </mat-card>
     <!-- </svg:g> -->
 <div class="map-drag" mapDrag (wheel)="onwheel($event)">
   <svg
