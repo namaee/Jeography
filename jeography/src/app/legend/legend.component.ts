@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { citiesSvg, prefectures, prefecturesData, regionSvg } from '../data';
 import { MapService } from '../map/map.service';
-import { Mode } from '../quiz/quiz';
+import { CType, Mode } from '../quiz/quiz';
 
 @Component({
   selector: 'app-legend',
@@ -15,9 +15,9 @@ export class LegendComponent implements OnInit {
   public regionSvg = regionSvg;
 
   public view: number = 0;
-  public regionViewGroup: Map<string, {region: string, name: string, capital: boolean}[]> = new Map();
-  public regionView: {region: string, name: string, capital: boolean}[] = []
-  public cityTypeView: {cityType: string, name: string, capital: boolean}[]
+  public regionViewGroup: Map<string, {region: string, name: string, capital: boolean, type: CType}[]> = new Map();
+  public regionView: {region: string, name: string, capital: boolean, type: CType}[] = []
+  public cityTypeView: {cityType: string, name: string, capital: boolean, type: CType}[]
 
   constructor(public ms: MapService, public cdr: ChangeDetectorRef) {
   
@@ -32,7 +32,7 @@ export class LegendComponent implements OnInit {
       this.regionViewGroup.set(region.title, [])
     })
     this.citiesSvg.forEach((city) => {
-      this.regionViewGroup.get(this.prefToRegion(city.prefecture)).push({region: this.prefToRegion(city.prefecture), name: city.title, capital: city.capital})
+      this.regionViewGroup.get(this.prefToRegion(city.prefecture)).push({region: this.prefToRegion(city.prefecture), name: city.title, capital: city.capital, type: city.type})
     })
   }
 
@@ -51,6 +51,15 @@ export class LegendComponent implements OnInit {
     return pref.region
   }
 
+  public rectType(type: CType) {
+    switch (type) {
+      case CType.DESIG: return "Designated City";
+      case CType.CORE: return "Core City";
+      case CType.SPEC: return "Special City";
+      case CType.CITY: return "City";
+      case CType.WARD: return "Special Wards";
+    }
+  }
   public formatKM(num) {
     num = num.toFixed(2).toString().replace('.', ',')
     return num.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')

@@ -39,6 +39,7 @@ export class QuestionComponent implements OnInit {
     
   public endQuiz() {
     this.qs.state = GameState.END
+    this.ss.openSettings(this.qs.state)
   }
 
   public get gameStateEnum(): typeof GameState {

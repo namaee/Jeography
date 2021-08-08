@@ -27,10 +27,11 @@
     </mat-expansion-panel-header>
       <mat-card [class.mat-elevation-z0]="true" class="pick-card">
         <div class="pick-top-buttons">
-          <button class="pick-top-button" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="accent" (click)="selectAll()">Select All</button>
-          <button class="pick-top-button" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="accent" (click)="deselectAll()">Deselect All</button>
-          <button class="pick-top-button" *ngIf="ms.mode.value == modeEnum.CIT" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="accent" (click)="selectAllC()">Select All Capitals</button>
-          <button class="pick-top-button" *ngIf="ms.mode.value == modeEnum.CIT" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="accent" (click)="deselectAllC()">Deselect All Capitals</button>
+          <button class="pick-top-button" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="primary" (click)="selectAll()">Select All</button>
+          <button class="pick-top-button" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="primary" (click)="deselectAll()">Deselect All</button>
+          <button class="pick-top-button" *ngIf="ms.mode.value == modeEnum.CIT" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="primary" (click)="selectAllC()">Select All Capitals</button>
+          <button class="pick-top-button" *ngIf="ms.mode.value == modeEnum.CIT" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="primary" (click)="deselectAllC()">Deselect All Capitals</button>
+          <button class="pick-top-button" *ngIf="ms.mode.value == modeEnum.CIT" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="accent" (click)="swapView()">Swap</button>
         </div>
 
         <div class="pick-container">
@@ -38,8 +39,8 @@
             <mat-checkbox [disabled]="qs.state == gameStateEnum.OCC" #sel [value]="citySvg.title" class="pick-checkbox">{{citySvg.capital ? citySvg.title + ' (c)' : citySvg.title}}</mat-checkbox>
           </ng-container> -->
 
-          <ng-container *ngIf="ms.mode.value == modeEnum.CIT">
-            <div *ngFor="let cityRegion of regionViewGroup | keyvalue">
+          <ng-container *ngIf="view == 1 && ms.mode.value == modeEnum.CIT">
+            <ng-container *ngFor="let cityRegion of regionViewGroup | keyvalue">
               <mat-checkbox #citSelPref [disabled]="qs.state == gameStateEnum.OCC" [checked]="checkAllCompleted(cityRegion.key)" [indeterminate]="checkIndeterminate(cityRegion.key)" class="pick-checkbox pick-checkbox-parent" (change)="selectAllSubChoice(cityRegion.key, $event.checked)">
                 {{cityRegion.key}}
               </mat-checkbox>
@@ -48,8 +49,56 @@
                 <mat-checkbox #citSel [checked]="ss.citSelection.includes(city.name)"  [disabled]="qs.state == gameStateEnum.OCC" (change)="updateSelection()" [value]="city.name" class="pick-checkbox">{{city.capital ? city.name + ' (c)' : city.name}}</mat-checkbox>
               </ng-container>
               <div class="pick-checkbox-filler">i am a filler</div>
-            </div>
+            </ng-container>
           </ng-container>
+
+          <ng-container *ngIf="view == 0 && ms.mode.value == modeEnum.CIT" class="pick-city-type-container">
+            <mat-checkbox [checked]="checkAllCompletedType(5)" [disabled]="qs.state == gameStateEnum.OCC" [indeterminate]="checkIndeterminateType(5)" class="pick-checkbox pick-checkbox-parent" (change)="selectAllSubChoiceType(5, $event.checked)">special wards</mat-checkbox>
+            <mat-divider class="divider-reg" [inset]="true"></mat-divider>
+            <ng-container *ngFor="let city of citiesSvg">
+              <mat-checkbox #citSelType5 [checked]="ss.citSelection.includes(city.title)" [disabled]="qs.state == gameStateEnum.OCC" (change)="updateSelection()" [value]="city.title" *ngIf="city.type == 5" class="pick-checkbox">
+                <span class="cities">{{city.title}}</span>
+              </mat-checkbox>
+            </ng-container>
+            <div class="pick-checkbox-filler">i am a filler</div>
+
+            <mat-checkbox [checked]="checkAllCompletedType(1)" [disabled]="qs.state == gameStateEnum.OCC" [indeterminate]="checkIndeterminateType(1)" class="pick-checkbox pick-checkbox-parent" (change)="selectAllSubChoiceType(1, $event.checked)">designated cities</mat-checkbox>
+            <mat-divider class="divider-reg" [inset]="true"></mat-divider>
+            <ng-container *ngFor="let city of citiesSvg">
+              <mat-checkbox #citSelType1 [checked]="ss.citSelection.includes(city.title)" [disabled]="qs.state == gameStateEnum.OCC" (change)="updateSelection()" [value]="city.title" *ngIf="city.type == 1" class="pick-checkbox">
+                <span class="cities">{{city.title}}</span>
+              </mat-checkbox>
+            </ng-container>
+            <div class="pick-checkbox-filler">i am a filler</div>
+
+            <mat-checkbox [checked]="checkAllCompletedType(2)" [disabled]="qs.state == gameStateEnum.OCC" [indeterminate]="checkIndeterminateType(2)" class="pick-checkbox pick-checkbox-parent" (change)="selectAllSubChoiceType(2, $event.checked)">core cities</mat-checkbox>
+            <mat-divider class="divider-reg" [inset]="true"></mat-divider>
+            <ng-container *ngFor="let city of citiesSvg">
+              <mat-checkbox #citSelType2 [checked]="ss.citSelection.includes(city.title)" [disabled]="qs.state == gameStateEnum.OCC" (change)="updateSelection()" [value]="city.title" *ngIf="city.type == 2" class="pick-checkbox">
+                <span class="cities">{{city.title}}</span>
+              </mat-checkbox>
+            </ng-container>
+            <div class="pick-checkbox-filler">i am a filler</div>
+            
+            <mat-checkbox [checked]="checkAllCompletedType(3)" [disabled]="qs.state == gameStateEnum.OCC" [indeterminate]="checkIndeterminateType(3)" class="pick-checkbox pick-checkbox-parent" (change)="selectAllSubChoiceType(3, $event.checked)">special cities</mat-checkbox>
+            <mat-divider class="divider-reg" [inset]="true"></mat-divider>
+            <ng-container *ngFor="let city of citiesSvg">
+              <mat-checkbox #citSelType3 [checked]="ss.citSelection.includes(city.title)" [disabled]="qs.state == gameStateEnum.OCC" (change)="updateSelection()" [value]="city.title" *ngIf="city.type == 3" class="pick-checkbox">
+                <span class="cities">{{city.title}}</span>
+              </mat-checkbox>
+            </ng-container>
+            <div class="pick-checkbox-filler">i am a filler</div>
+
+            <mat-checkbox [checked]="checkAllCompletedType(4)" [disabled]="qs.state == gameStateEnum.OCC" [indeterminate]="checkIndeterminateType(4)" class="pick-checkbox pick-checkbox-parent" (change)="selectAllSubChoiceType(4, $event.checked)">cities</mat-checkbox>
+            <mat-divider class="divider-reg" [inset]="true"></mat-divider>
+            <ng-container *ngFor="let city of citiesSvg">
+              <mat-checkbox #citSelType4 [checked]="ss.citSelection.includes(city.title)" [disabled]="qs.state == gameStateEnum.OCC" (change)="updateSelection()" [value]="city.title" *ngIf="city.type == 4" class="pick-checkbox">
+                <span class="cities">{{city.title}}</span>
+              </mat-checkbox>
+            </ng-container>
+            <div class="pick-checkbox-filler">i am a filler</div>
+          </ng-container>
+
 
           <ng-container *ngIf="ms.mode.value == modeEnum.PREF" >
             <ng-container *ngFor="let pref of prefectures" >

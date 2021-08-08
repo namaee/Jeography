@@ -116,11 +116,23 @@
           {{cityPrefecture.key.toLowerCase()}}
         </mat-list-item>
         <ng-container *ngFor="let city of cityPrefecture.value">
-          <div [ngStyle]="{'position': 'relative'}">
+          <div class="city-region-item-container" [ngStyle]="{'position': 'relative'}">
             <mat-icon *ngIf="ms.activeCity?.title == city.name" class="city-active-icon">keyboard_arrow_right</mat-icon>
             <mat-list-item class="cities" (click)="setActive(city.name)">
               {{city.name}}
+              <svg class="rect-container">
+                <rect width="0.8em" height="0.8em" rx="1" 
+                [ngClass]="{'desig-rect': city.type == 1, 
+                'core-rect': city.type == 2, 
+                'special-rect': city.type == 3, 
+                'city-rect': city.type == 4, 
+                'sward-rect': city.type == 5}" 
+                class="rect">
+                <title>{{rectType(city.type)}}</title>
+              </rect>
+              </svg>
             </mat-list-item>
+            
           </div>
         </ng-container>
       <div class="city-type-item-filler">i am a filler</div>

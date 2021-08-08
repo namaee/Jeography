@@ -126,6 +126,9 @@ mat-expansion-panel-content {
 }
 
 ::ng-deep .divider {
-  max-width: 85% !important;
+  max-width: 16% !important;
 }
 
+::ng-deep .divider-reg {
+  max-width: 16% !important;
+}
