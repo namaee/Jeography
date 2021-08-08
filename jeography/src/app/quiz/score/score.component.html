@@ -1,13 +1,17 @@
 <mat-card *ngIf="qs.scores.length > 0 || qs.state == 3" class="score-container-card">
   <div class="score-container">
-    <mat-list-item *ngFor="let score of qs.scores">
+    <mat-list-item *ngFor="let score of qs.scores" class="score-list">
       <svg *ngIf="qs.settings.feedback" class="score-entry-rect">
         <rect width="1em" height="1em" rx="1" [ngClass]="{'score-entry-correct-rect': score.tf, 'score-entry-false-rect': !score.tf}">
           <title>{{score.tf ? 'Correct' : 'Incorrect'}}</title>
         </rect>
       </svg>
-      <span *ngIf="!qs.settings.kanji" [ngClass]="{'score-entry-correct': score.tf, 'score-entry-false': !score.tf}" class="score-entry">{{ score.areaName }}</span>
-      <span *ngIf="qs.settings.kanji" [ngClass]="{'score-entry-correct': score.tf, 'score-entry-false': !score.tf}" class="score-entry">{{ score.areaName + ' - ' + score.kanjiAreaName}}</span>
+      <span *ngIf="!qs.settings.kanji && !qs.settings.kanjionly" [ngClass]="{'score-entry-correct': score.tf, 'score-entry-false': !score.tf}" class="score-entry">{{ score.areaName }}</span>
+      <span *ngIf="qs.settings.kanjionly" [ngClass]="{'score-entry-correct': score.tf, 'score-entry-false': !score.tf}" class="score-entry">{{ score.kanjiAreaName }}</span>
+      <span *ngIf="qs.settings.kanji && !qs.settings.kanjionly" [ngClass]="{'score-entry-correct': score.tf, 'score-entry-false': !score.tf}" class="score-entry">{{ score.areaName + ' - ' + score.kanjiAreaName}}</span>
+      <span *ngIf="!score.tf && (!qs.settings.kanji && !qs.settings.kanjionly) && qs.state == 3" class="score-entry-answer">{{"you picked: " + score.pickedAreaName}}</span>
+      <span *ngIf="!score.tf && qs.settings.kanjionly && qs.state == 3" class="score-entry-answer">{{"you picked: " + score.pickedKanjiName}}</span>
+      <span *ngIf="!score.tf && (qs.settings.kanji && !qs.settings.kanjionly) && qs.state == 3" class="score-entry-answer">{{"you picked: " + score.pickedAreaName + ' - ' + score.pickedKanjiName}}</span>
       <mat-divider></mat-divider>
     </mat-list-item>
   </div>

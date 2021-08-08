@@ -24,12 +24,16 @@ export class Answer {
 export class Score {
   areaName: string;
   kanjiAreaName: string;
+  pickedAreaName: string;
+  pickedKanjiName: string;
   tf: boolean;
   id: number;
 
-  constructor(areaName: string, kanjiAreaName: string, tf: boolean, id: number) {
+  constructor(areaName: string, kanjiAreaName: string, pickedAreaName: string, pickedKanjiName: string, tf: boolean, id: number) {
     this.areaName = areaName;
     this.kanjiAreaName = kanjiAreaName;
+    this.pickedAreaName = pickedAreaName;
+    this.pickedKanjiName = pickedKanjiName;
     this.tf = tf;
     this.id = id;
   }
@@ -38,14 +42,20 @@ export class Score {
 export class Settings {
   feedback: boolean;
   kanji: boolean;
+  flag: boolean;
+  kanjionly: boolean;
   
   constructor() {
     this.feedback = true;
     this.kanji = false;
+    this.flag = false;
+    this.kanjionly = false
   }
   public reset() {
     this.feedback = true;
     this.kanji = false;
+    this.flag = false;
+    this.kanjionly = false
   }
 }
 
@@ -61,5 +71,12 @@ export enum Mode {
   CIT = 3,
 }
 
-export type Prefecture = {name: string, kanjiName: string}
-export type Region = {name: string, kanjiName: string}
+export enum CType {
+  DESIG = 1, //20
+  CORE = 2, //62
+  SPEC = 3, //23
+  CITY = 4, //687
+  WARD = 5, //23
+}
+
+export type Name = {name: string, kanjiName: string}

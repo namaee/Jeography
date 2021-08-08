@@ -41,6 +41,14 @@ $font-color: rgb(249, 231, 231);
   // border: 3px solid rgb(96, 255, 189);
 }
 
+.question-display-name-kanji-only {
+  color: $font-color;
+  font-size: 4.5em;
+  text-align: center;
+  margin: 0.3em 0em 0.4em 0rem;
+  // border: 3px solid rgb(96, 255, 189);
+}
+
 .question-display-name-kanji {
   color: $font-color;
   font-size: 3em;
@@ -73,28 +81,6 @@ $font-color: rgb(249, 231, 231);
   color: $secondary-color;
 }
 
-mat-expansion-panel {
-  background-color: $primary-color-dark;
-  color: $font-color;
-  -ms-user-select: none;
-  user-select: none;
-}
-mat-panel-title {
-  color: $font-color;
-}
-
-mat-expansion-panel-content {
-  background-color: $primary-color-dark !important;
-}
-
-.settings-container {
-  display: flex;
-  justify-content: center;
-}
-
-.settings-container > *{
-  margin: auto;
-}
 
 .question-end-screen {
   display: flex;
@@ -125,8 +111,11 @@ mat-expansion-panel-content {
 .question-end-screen-replay:hover {
   color: $secondary-color;
 }
-::ng-deep .tooltip-reset {
-  background: $primary-color-dark;
-  color: $font-color !important;
-  font-size: 12px;
+
+.area-flag { //ratio 3:2
+  position: absolute;
+  height: 5.2em;
+  top: 1em;
+  left: 1em;
+  width: auto;
 }

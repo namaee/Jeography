@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { prefectures, prefecturesData } from '../data';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { citiesSvg, prefectures, prefecturesData, regionSvg } from '../data';
 import { MapService } from '../map/map.service';
-import { Mode } from '../quiz/quiz';
+import { CType, Mode } from '../quiz/quiz';
 
 @Component({
   selector: 'app-legend',
@@ -11,15 +11,55 @@ import { Mode } from '../quiz/quiz';
 export class LegendComponent implements OnInit {
   public prefectures = prefectures;
   public prefecturesData = prefecturesData;
+  public citiesSvg = citiesSvg;
+  public regionSvg = regionSvg;
 
-  constructor(public mapService: MapService) {
+  public view: number = 0;
+  public regionViewGroup: Map<string, {region: string, name: string, capital: boolean, type: CType}[]> = new Map();
+  public regionView: {region: string, name: string, capital: boolean, type: CType}[] = []
+  public cityTypeView: {cityType: string, name: string, capital: boolean, type: CType}[]
+
+  constructor(public ms: MapService, public cdr: ChangeDetectorRef) {
   
   }
 
   ngOnInit(): void {
+    this.citiesSvg.sort((a, b) => new Intl.Collator('jp').compare(a.title, b.title))
+    this.prefectures.sort((a, b) => new Intl.Collator('jp').compare(a.name, b.name))
+    this.regionSvg.sort((a, b) => new Intl.Collator('jp').compare(a.title, b.title))
 
+    this.regionSvg.forEach((region) => {
+      this.regionViewGroup.set(region.title, [])
+    })
+    this.citiesSvg.forEach((city) => {
+      this.regionViewGroup.get(this.prefToRegion(city.prefecture)).push({region: this.prefToRegion(city.prefecture), name: city.title, capital: city.capital, type: city.type})
+    })
   }
 
+  public swapLegendView(number) {
+    this.view = number;
+    this.cdr.detectChanges();
+  }
+  public setActive(name: string) {
+    this.ms.setActive(name, Mode.CIT)
+  }
+
+  public prefToRegion(name: string) {
+    let pref = this.prefecturesData.find((prefecture) => {
+      return prefecture.name == name;      
+    })
+    return pref.region
+  }
+
+  public rectType(type: CType) {
+    switch (type) {
+      case CType.DESIG: return "Designated City";
+      case CType.CORE: return "Core City";
+      case CType.SPEC: return "Special City";
+      case CType.CITY: return "City";
+      case CType.WARD: return "Special Wards";
+    }
+  }
   public getPopRank(pref: string) {
     const sorted = this.prefecturesData.slice().sort((a, b) => a.population < b.population ? 1 : -1)
     return sorted.findIndex((prefecture) => prefecture.name == pref) + 1

@@ -53,21 +53,148 @@ $font-color: rgb(249, 231, 231);
 //   transform-origin: center;
 // }
 
-.circle {
+.desig-circle {
   fill: rgb(165, 1, 4);
   stroke: rgb(46, 47, 47);
 }
 
-.circle:hover {
+.desig-circle:hover {
+  fill: rgb(221, 0, 4);
   cursor: pointer;
 }
+
+.core-circle {
+  fill: rgb(10, 129, 255);
+  stroke: rgb(46, 47, 47);
+}
+
+.core-circle:hover {
+  fill: rgb(88, 169, 255);
+  cursor: pointer;
+}
+
+.special-circle {
+  fill: rgb(13, 134, 60);
+  stroke: rgb(46, 47, 47);
+}
+
+.special-circle:hover {
+  fill: rgb(37, 194, 97);
+  cursor: pointer;
+}
+
+.city-circle {
+  fill: rgb(204, 98, 27);
+  stroke: rgb(46, 47, 47);
+}
+
+.city-circle:hover {
+  fill: rgb(236, 135, 67);
+  cursor: pointer;
+}
+
+.sward-circle {
+  fill: rgb(125, 17, 197);
+  stroke: rgb(46, 47, 47);
+}
+
+.sward-circle:hover {
+  fill: rgb(162, 59, 231);
+  cursor: pointer;
+}
+
 
 ::ng-deep .path-tooltip {
   background-color: $font-color !important;
   color: rgb(226, 121, 130) !important;
 }
 
-::ng-deep .circle-tooltip {
+::ng-deep .desig-circle-tooltip {
   background-color: rgb(46, 47, 47) !important;
   color: rgb(226, 121, 130) !important;
+}
+
+::ng-deep .core-circle-tooltip {
+  background-color: rgb(46, 47, 47) !important;
+  color: rgb(134, 193, 255) !important;
+}
+
+::ng-deep .special-circle-tooltip {
+  background-color: rgb(46, 47, 47) !important;
+  color: rgb(49, 177, 98) !important;
+}
+
+::ng-deep .city-circle-tooltip {
+  background-color: rgb(46, 47, 47) !important;
+  color: rgb(236, 135, 67) !important;
+}
+
+::ng-deep .sward-circle-tooltip {
+  background-color: rgb(46, 47, 47) !important;
+  color: rgb(200, 118, 255) !important;
+}
+
+.info-info {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  color:gray;
+  -ms-user-select: none;
+  user-select: none;
+  z-index: 99;
+}
+
+#info-info {
+  // border: 1px solid orange;
+  background-color: rgb(27, 27, 27);
+  // background-color: $primary-color-dark;
+  display: flex;
+  padding-bottom: 0.4em;
+  padding-top: 0.4em;
+  flex-direction: column;
+}
+
+.info-rect {
+  position: absolute;
+  margin-left: 0.15em;
+  margin-top: 0.2em;
+  // width: 100%;
+  // height: 100%;
+  fill: orangered;
+}
+
+.info-text {
+  margin-left: 1.5em;
+  margin-right: 0.5em;
+  position: relative;
+  color: $font-color;
+}
+
+.desig-rect {
+  fill: rgb(165, 1, 4);
+  stroke: rgb(46, 47, 47);
+}
+
+.core-rect {
+  fill: rgb(10, 129, 255);
+  stroke: rgb(46, 47, 47);
+}
+
+.special-rect {
+  fill: rgb(13, 134, 60);
+  stroke: rgb(46, 47, 47);
+}
+
+.city-rect {
+  fill: rgb(204, 98, 27);
+  stroke: rgb(46, 47, 47);
+}
+
+.sward-rect {
+  fill: rgb(125, 17, 197);
+  stroke: rgb(46, 47, 47);
+}
+
+[hidden] {
+  display: none !important;
 }

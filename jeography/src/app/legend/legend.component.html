@@ -8,8 +8,8 @@
   >
     <span
       class="{{ 'legend-' + prefecture.name }}"
-      (mouseover)="this.mapService.prefectureHover(prefecture.name)"
-      (mouseout)="this.mapService.prefectureLeave()"
+      (mouseover)="this.ms.prefectureHover(prefecture.name)"
+      (mouseout)="this.ms.prefectureLeave()"
     >
       {{ prefecture.name }}
     </span>
@@ -17,24 +17,24 @@
   </mat-list-item>
 </div> -->
 
-<mat-card *ngIf="mapService.mode == modeEnum.PREF" class="info-card">
+<mat-card *ngIf="ms.mode.value == modeEnum.PREF" class="info-card">
   <div class="info-container"> 
     <mat-card class="info-header-card">
-      <div *ngIf="mapService.activePrefecture" class="info-header-container">
-        <img class="area-flag" src="{{'../../assets/Flag_of_' + toStandardLatin(mapService.activePrefecture.name) + '_Prefecture.svg'}}"/>
+      <div *ngIf="ms.activePrefecture" class="info-header-container">
+        <img class="area-flag" src="{{'../../assets/Flag_of_' + toStandardLatin(ms.activePrefecture.name) + '_Prefecture.svg'}}"/>
         <div class="area-names">
-          <span class="area-name">{{mapService.activePrefecture?.name}}</span>
-          <span class="area-name-kanji">{{mapService.activePrefecture?.kanjiName}}</span>
+          <span class="area-name">{{ms.activePrefecture?.name}}</span>
+          <span class="area-name-kanji">{{ms.activePrefecture?.kanjiName}}</span>
         </div>
       </div>
-      <div *ngIf="!mapService.activePrefecture" class="info-header-container">
+      <div *ngIf="!ms.activePrefecture" class="info-header-container">
         <div class="info-header-no-selection">
           no prefecture selected
         </div>
       </div>
     </mat-card>
     
-    <div *ngIf="mapService.activePrefectureData" class="general-information-container">
+    <div *ngIf="ms.activePrefectureData" class="general-information-container">
       <div class="general-information-left">
         <mat-list>
           <mat-list-item>capital</mat-list-item>
@@ -53,14 +53,100 @@
       </div>
       <div class="general-information-right">
         <mat-list>
-          <mat-list-item>{{mapService.activePrefectureData?.capital}}</mat-list-item>
-          <mat-list-item>{{mapService.activePrefectureData?.region}}</mat-list-item>
-          <mat-list-item>{{mapService.activePrefectureData?.island}}</mat-list-item>
-          <mat-list-item [matTooltip]="formatMI(mapService.activePrefectureData?.area) + ' mi&#178;'" matTooltipPosition="left">{{formatKM(mapService.activePrefectureData?.area) + ' km&#178;'  + ' (' + getAreaRank(mapService.activePrefecture?.name) + numberRankSuffix(getAreaRank(mapService.activePrefecture?.name)) + ')'}}</mat-list-item>
-          <mat-list-item>{{formatPop(mapService.activePrefectureData?.population) + ' (' + getPopRank(mapService.activePrefecture?.name) + numberRankSuffix(getPopRank(mapService.activePrefecture?.name)) + ')'}}</mat-list-item>
-          <mat-list-item>{{mapService.activePrefectureData?.flower}}</mat-list-item>
+          <mat-list-item>{{ms.activePrefectureData?.capital}}</mat-list-item>
+          <mat-list-item>{{ms.activePrefectureData?.region}}</mat-list-item>
+          <mat-list-item>{{ms.activePrefectureData?.island}}</mat-list-item>
+          <mat-list-item [matTooltip]="formatMI(ms.activePrefectureData?.area) + ' mi&#178;'" matTooltipPosition="left">{{formatKM(ms.activePrefectureData?.area) + ' km&#178;'  + ' (' + getAreaRank(ms.activePrefecture?.name) + numberRankSuffix(getAreaRank(ms.activePrefecture?.name)) + ')'}}</mat-list-item>
+          <mat-list-item>{{formatPop(ms.activePrefectureData?.population) + ' (' + getPopRank(ms.activePrefecture?.name) + numberRankSuffix(getPopRank(ms.activePrefecture?.name)) + ')'}}</mat-list-item>
+          <mat-list-item>{{ms.activePrefectureData?.flower}}</mat-list-item>
         </mat-list>
       </div>
     </div>
   </div>
 </mat-card>
+
+<div *ngIf="ms.mode.value == modeEnum.CIT" class="cit-card-container">
+  <mat-card class="display-card">
+    <div class="area-names-city">
+      <span class="area-name-city">{{ms.activeCity?.title}}</span>
+      <span class="area-name-city">{{ms.activeCity ? ' -  ' : null}}</span>
+      <span class="area-name-kanji-city">{{ms.activeCity?.kanjiName}}</span>
+    </div>
+  </mat-card>
+
+  <mat-card class="info-card">
+    <mat-card class="info-sub-card">
+      <div *ngIf="view == 1" class="top-list">
+        <button class="swap-button" mat-flat-button color="accent" (click)="swapLegendView(0)">region</button>
+        <mat-list-item class="city-type-item">special wards</mat-list-item>
+        <mat-list-item *ngFor="let city of citiesSvg" class="" (click)="setActive(city.title)">
+          <div *ngIf="city.type == 5">
+            <mat-icon *ngIf="ms.activeCity?.title == city.title" class="city-active-icon">keyboard_arrow_right</mat-icon>
+            <span class="cities">{{city.title}}</span>
+          </div>
+        </mat-list-item>
+        <mat-list-item class="city-type-item-filler">filler</mat-list-item>
+        <mat-list-item class="city-type-item">designated cities</mat-list-item>
+        <mat-list-item *ngFor="let city of citiesSvg" class="" (click)="setActive(city.title)">
+          <div *ngIf="city.type == 1">
+            <mat-icon *ngIf="ms.activeCity?.title == city.title" class="city-active-icon">keyboard_arrow_right</mat-icon>
+            <span class="cities">{{city.title}}</span>
+          </div>
+        </mat-list-item>
+        <mat-list-item class="city-type-item-filler">filler</mat-list-item>
+        <mat-list-item class="city-type-item">core cities</mat-list-item>
+        <mat-list-item *ngFor="let city of citiesSvg" class="" (click)="setActive(city.title)">
+          <div *ngIf="city.type == 2">
+            <mat-icon *ngIf="ms.activeCity?.title == city.title" class="city-active-icon">keyboard_arrow_right</mat-icon>
+            <span class="cities">{{city.title}}</span>
+          </div>
+        </mat-list-item>
+        <mat-list-item class="city-type-item-filler">filler</mat-list-item>
+        <mat-list-item class="city-type-item">special cities</mat-list-item>
+        <mat-list-item *ngFor="let city of citiesSvg" class="" (click)="setActive(city.title)">
+          <div *ngIf="city.type == 3">
+            <mat-icon *ngIf="ms.activeCity?.title == city.title" class="city-active-icon">keyboard_arrow_right</mat-icon>
+            <span class="cities">{{city.title}}</span>
+          </div>
+        </mat-list-item>
+        <mat-list-item class="city-type-item-filler">filler</mat-list-item>
+        <mat-list-item class="city-type-item">cities</mat-list-item>
+        <mat-list-item *ngFor="let city of citiesSvg" class="" (click)="setActive(city.title)">
+          <div *ngIf="city.type == 4">
+            <mat-icon *ngIf="ms.activeCity?.title == city.title" class="city-active-icon">keyboard_arrow_right</mat-icon>
+            <span class="cities">{{city.title}}</span>
+          </div>
+        </mat-list-item>
+      </div>
+  
+      <div *ngIf="view == 0" class="top-list-pref">
+        <button class="swap-button" mat-flat-button color="accent" (click)="swapLegendView(1)">type</button>
+          <ng-container class="prefecture-group" *ngFor="let cityPrefecture of regionViewGroup | keyvalue">
+            <mat-list-item class="region-item">
+              {{cityPrefecture.key.toLowerCase()}}
+            </mat-list-item>
+            <ng-container *ngFor="let city of cityPrefecture.value">
+              <div class="city-region-item-container" [ngStyle]="{'position': 'relative'}">
+                <mat-icon *ngIf="ms.activeCity?.title == city.name" class="city-active-icon">keyboard_arrow_right</mat-icon>
+                <mat-list-item class="cities" (click)="setActive(city.name)">
+                  {{city.name}}
+                  <svg class="rect-container">
+                    <rect width="0.8em" height="0.8em" rx="1" 
+                    [ngClass]="{'desig-rect': city.type == 1, 
+                    'core-rect': city.type == 2, 
+                    'special-rect': city.type == 3, 
+                    'city-rect': city.type == 4, 
+                    'sward-rect': city.type == 5}" 
+                    class="rect">
+                    <title>{{rectType(city.type)}}</title>
+                  </rect>
+                  </svg>
+                </mat-list-item>
+              </div>
+            </ng-container>
+          <div class="city-type-item-filler">i am a filler</div>
+        </ng-container>
+      </div>
+    </mat-card>
+  </mat-card>
+</div>

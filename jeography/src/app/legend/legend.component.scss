@@ -11,8 +11,9 @@ $font-color: rgb(249, 231, 231);
   display: flex;
   flex-flow: column;
   // height: 700px;
-  max-height: 800px;
+  max-height: 43.65em;
   padding: 2em;
+  // border: 1px solid orange;
 }
 
 .info-header-card{
@@ -61,7 +62,19 @@ $font-color: rgb(249, 231, 231);
     margin: auto;
   }
 }
-
+.area-names-city{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: row;
+  justify-content: center;
+  right: 0;
+  color: $font-color;
+  font-size: 4em;
+  > * {
+    margin: 0.25em 0.2em 0em 0.2em;
+  }
+}
 .area-flag { //ratio 3:2
   height: 12.3em;
   width: auto;
@@ -74,6 +87,13 @@ $font-color: rgb(249, 231, 231);
 
 .area-name-kanji {
   width: 100%;
+  font-size: 0.8em;
+  // border: 2px solid red;
+}
+
+
+.area-name-kanji-city {
+  margin-top: 0.35em !important;
   font-size: 0.8em;
   // border: 2px solid red;
 }
@@ -99,14 +119,142 @@ $font-color: rgb(249, 231, 231);
   width: 40%;
   // border: 2px solid cornflowerblue;
 }
+///////////////////////   CITY   ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+.top-list {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  // border: 2px solid green;
+  height: 41em;
+  max-height: inherit;
+  > * {
+    margin: 0em 0.5em 0em 0.5em;
+    color: $font-color;
+    max-width: 11em;
+  }
+}
 
+.top-list-pref {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  // border: 2px solid green;
+  height: 41em;
+  max-height: inherit;
+  > * {
+    margin: 0em 1em 0em 0.5em;
+    color: $font-color;
+    max-width: 11em;
+  }
+}
+.info-sub-card {
+  background-color: $primary-color-dark;
+  height: 51em;
+  max-height: inherit;
+}
 
+.swap-button {
+  margin: 1em !important;
+  width: 6em !important;
+  color: $primary-color !important;
+  margin-top: 0.35em !important;
+}
+.city-type-item {
+  color: $secondary-color !important;
+  cursor: default;
+  font-weight: 500;
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+.cities {
+  cursor: pointer;
+  margin-left: 1em !important;
+  // border: 1px solid paleturquoise;
+  display: block;
+}
+.city-type-item-filler {
+  position: relative;
+  z-index: -999;
+}
+.city-active-icon {
+  position: absolute;
+  top: -.1em;
+  left: -0.4em;
+  color: $secondary-color;
+  // border: 1px solid orange;
+}
 
+.region-item {
+  color: $secondary-color !important;
+  cursor: default;
+  font-weight: 500;
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
 
+.cities-pref {
+  cursor: pointer;
+  margin-left: 1em !important;
+  // border: 1px solid paleturquoise;
+  display: block;
+}
 
+// .prefecture-group {
+//   border: 1px solid purple;
+// }
 
+.desig-rect {
+  fill: rgb(165, 1, 4);
+  stroke: rgb(46, 47, 47);
+}
 
+.core-rect {
+  fill: rgb(10, 129, 255);
+  stroke: rgb(46, 47, 47);
+}
+
+.special-rect {
+  fill: rgb(13, 134, 60);
+  stroke: rgb(46, 47, 47);
+}
+
+.city-rect {
+  fill: rgb(204, 98, 27);
+  stroke: rgb(46, 47, 47);
+}
+
+.sward-rect {
+  fill: rgb(125, 17, 197);
+  stroke: rgb(46, 47, 47);
+}
+
+.rect-container {
+  // border: 1px solid orange;
+  position: absolute;
+  margin-left: 0.15em;
+  margin-top: 0.35em;
+  width: 100%;
+  height: 100%;
+}
+
+.cit-card-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.display-card {
+  background-color: $primary-color-dark;
+  height: 3.5em;
+  width: 100%;
+  width: 50em;
+  margin-left: -10em;
+  padding: 2em;
+  margin-bottom: 2em;
+}
 
 
 

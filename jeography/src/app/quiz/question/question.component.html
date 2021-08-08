@@ -1,12 +1,14 @@
 <mat-card class="question-display-card">
   <div class="question-display">
     <span *ngIf="qs.state == 1" (click)="startQuiz()" class="start-button">Start</span>
-    <span *ngIf="qs.state == 2" class="question-display-name">{{qs.questions[qs.questionIndex].name}}</span>
-    <span *ngIf="qs.state == 2 && qs.settings.kanji" class="question-display-name-kanji">{{qs.questions[qs.questionIndex].kanjiName}}</span>
+    <img  *ngIf="qs.state == 2 && qs.settings.flag && ms.mode.value == modeEnum.PREF" class="area-flag" src="{{'../../assets/Flag_of_' + toStandardLatin(qs.questions[qs.questionIndex].name) + '_Prefecture.svg'}}"/>
+    <span *ngIf="qs.state == 2 && !qs.settings.kanjionly" class="question-display-name">{{qs.questions[qs.questionIndex].name}}</span>
+    <span *ngIf="qs.state == 2 && qs.settings.kanjionly" class="question-display-name-kanji-only">{{qs.questions[qs.questionIndex].kanjiName}}</span>
+    <span *ngIf="qs.state == 2 && qs.settings.kanji && !qs.settings.kanjionly" class="question-display-name-kanji">{{qs.questions[qs.questionIndex].kanjiName}}</span>
     <span *ngIf="qs.state == 2" class="question-index">{{qs.questionIndex + 1 + '/' + qs.questions.length}}</span>
     <div *ngIf="qs.state == 2" class="question-reset">
       <button disableRipple mat-icon-button>
-        <mat-icon class="question-reset-button" (click)="startQuiz()" matTooltip="Reset" matTooltipPosition="above" matTooltipClass="tooltip-reset">refresh</mat-icon>
+        <mat-icon class="question-reset-button" (click)="endQuiz()" matTooltip="Stop" matTooltipPosition="above" matTooltipClass="tooltip-reset">close</mat-icon>
       </button>
     </div>
     <div class="question-end-screen" *ngIf="qs.state == 3">
@@ -19,21 +21,5 @@
       </div>
     </div>
   </div>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-      Settings
-      </mat-panel-title>
-      <mat-panel-description>
-      
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <div class="settings-container">
-      <mat-checkbox class="settings-checkbox" [checked]="qs.settings.feedback" (change)="onSettingChange($event)" value="feedback">Feedback</mat-checkbox>
-      <mat-checkbox class="settings-checkbox" [checked]="qs.settings.kanji" (change)="onSettingChange($event)" value="kanji">Kanji</mat-checkbox>
-      <mat-checkbox class="settings-checkbox" matTooltip="wip" disabled (change)="onSettingChange($event)" value="">Flag</mat-checkbox>
-      <mat-checkbox class="settings-checkbox" [checked]="true" matTooltip="wip" disabled (change)="onSettingChange($event)" value="">Borders</mat-checkbox>
-      <mat-checkbox class="settings-checkbox" matTooltip="wip" disabled (change)="onSettingChange($event)" value="">Kanji only</mat-checkbox>
-    </div>
-  </mat-expansion-panel>
+  <app-quiz-settings></app-quiz-settings>
 </mat-card>

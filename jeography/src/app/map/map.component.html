@@ -16,7 +16,48 @@
       <mat-icon>remove</mat-icon>
     </button>
   </div>
+  <mat-icon [hidden]="mapService.mode.value != modeEnum.CIT" class="info-info">info</mat-icon>
+  <mat-card id="info-info" [class.mat-elevation-z5]="true">
+    <div class="info-with-rect">
+      <svg class="info-rect">
+        <rect width="1em" height="1em" rx="1" class="sward-rect">
+        </rect>
+      </svg>
+      <span class="info-text">special wards</span>
+    </div>
 
+    <div class="info-with-rect">
+      <svg class="info-rect">
+        <rect width="1em" height="1em" rx="1" class="desig-rect">
+        </rect>
+      </svg>
+      <span class="info-text">designated cities</span>
+    </div>
+    
+    <div class="info-with-rect">
+      <svg class="info-rect">
+        <rect width="1em" height="1em" rx="1" class="core-rect">
+        </rect>
+      </svg>
+      <span class="info-text">core cities</span>
+    </div>
+
+    <div class="info-with-rect">
+      <svg class="info-rect">
+        <rect width="1em" height="1em" rx="1" class="special-rect">
+        </rect>
+      </svg>
+      <span class="info-text">special cities</span>
+    </div>
+
+    <div class="info-with-rect">
+      <svg class="info-rect">
+        <rect width="1em" height="1em" rx="1" class="city-rect">
+        </rect>
+      </svg>
+      <span class="info-text">cities</span>
+    </div>
+  </mat-card>
     <!-- </svg:g> -->
 <div class="map-drag" mapDrag (wheel)="onwheel($event)">
   <svg
@@ -32,49 +73,79 @@
   preserveAspectRatio="xMidYMid meet"
   class="map"
   [ngStyle]="mapStyle"
-  [ngClass]="{'map-pref': mapService.mode == modeEnum.PREF, 'map-cit': mapService.mode == modeEnum.CIT}"
-  
+  [ngClass]="{'map-pref': mapService.mode.value == modeEnum.PREF, 'map-cit': mapService.mode.value == modeEnum.CIT}"
+  (click)="debugger($event)"
   >
 
   <!-- prefectures -->
-  <g *ngIf="mapService.mode == modeEnum.PREF">
+  <g *ngIf="mapService.mode.value == modeEnum.PREF">
     <path *ngFor="let prefSvg of prefecturesSvg" [attr.d]="prefSvg.d" [attr.title]="prefSvg.title" 
-    [ngClass]="{'active-prefecture': active == prefSvg.title && state == stateEnum.VIEW}"
+    [ngClass]="{'active-prefecture': activePref == prefSvg.title && state == stateEnum.VIEW}"
     [ngStyle]="mapPaths"
-    [matTooltip]="prefSvg.title" matTooltipPosition="right" matTooltipClass="path-tooltip" 
+    [matTooltip]="prefSvg.title" matTooltipPosition="before" matTooltipClass="path-tooltip" 
     [matTooltipDisabled]="(mapDrag ? mapDrag.dirty : false) || state == stateEnum.QUIZ"
     (click)="onClick($event)"
     ></path>
   </g>
 
   <!-- regions -->
-  <g *ngIf="mapService.mode == modeEnum.REG" 
+  <g *ngIf="mapService.mode.value == modeEnum.REG" 
   transform="translate(87.402329,-95.007708)">
     <g transform="matrix(0.65068506,0,0,0.65068506,-49.459746,-158.34468)">
       <path *ngFor="let prefSvg of regionsSvg" [attr.d]="prefSvg.d" [attr.title]="prefSvg.title" 
-      [ngClass]="{'active-prefecture': active == prefSvg.title && state == stateEnum.VIEW}"
+      [ngClass]="{'active-prefecture': activeReg == prefSvg.title && state == stateEnum.VIEW}"
       [ngStyle]="mapPaths"
-      [matTooltip]="prefSvg.title" matTooltipPosition="right" matTooltipClass="path-tooltip" [matTooltipDisabled]="(mapDrag ? mapDrag.dirty : false) || state == stateEnum.QUIZ"
+      [matTooltip]="prefSvg.title" matTooltipPosition="before" matTooltipClass="path-tooltip" [matTooltipDisabled]="(mapDrag ? mapDrag.dirty : false) || state == stateEnum.QUIZ"
       (click)="onClick($event)"
       ></path>
     </g>
   </g>
 
   <!-- cities -->
-  <g *ngIf="mapService.mode == modeEnum.CIT">
+  <g *ngIf="mapService.mode.value == modeEnum.CIT">
     <path *ngFor="let prefSvg of prefecturesSvg" [attr.d]="prefSvg.d" [attr.title]="prefSvg.title" 
     [ngStyle]="mapPaths"
     ></path>
 
-    <circle *ngFor="let citySvg of citiesSvg" class="circle" 
+    <g *ngFor="let citySvg of citiesSvg">
+      <circle *ngIf="(state == stateEnum.VIEW || (state == stateEnum.QUIZ && qs.questionSelection.includes(citySvg.title))) && !mapService.activeCity"  
+      [ngClass]="{'desig-circle': citySvg.type == 1, 
+      'core-circle': citySvg.type == 2, 
+      'special-circle': citySvg.type == 3, 
+      'city-circle': citySvg.type == 4, 
+      'sward-circle': citySvg.type == 5}" 
+      [ngStyle]="cityCircles" 
+      [attr.title]="citySvg.title" [attr.cx]= "citySvg.cx" [attr.cy]="citySvg.cy" 
+      [attr.r]="0.5 + 1 / (zoomLevel / 2)" 
+      [matTooltip]="citySvg.title" matTooltipPosition="before" 
+      [matTooltipClass]="{'desig-circle-tooltip': citySvg.type == 1, 
+      'core-circle-tooltip': citySvg.type == 2, 
+      'special-circle-tooltip': citySvg.type == 3, 
+      'city-circle-tooltip': citySvg.type == 4, 
+      'sward-circle-tooltip': citySvg.type == 5}"
+      [matTooltipDisabled]="(mapDrag ? mapDrag.dirty : false) || (state == stateEnum.QUIZ && qs.state == gameStateEnum.OCC)"
+      (click)="onClick($event)"
+      ></circle>
+    </g>
+
+    <circle *ngIf="mapService.activeCity" 
+    [ngClass]="{'desig-circle': mapService.activeCity.type == 1, 
+    'core-circle': mapService.activeCity.type == 2, 
+    'special-circle': mapService.activeCity.type == 3, 
+    'city-circle': mapService.activeCity.type == 4, 
+    'sward-circle': mapService.activeCity.type == 5}" 
     [ngStyle]="cityCircles" 
-    [attr.title]="citySvg.title" [attr.cx]= "citySvg.cx" [attr.cy]="citySvg.cy" 
-    [attr.r]="0.5 + 1 / (zoomLevel / 2)" [attr.stroke-width]="0.2 + 0.5 / (zoomLevel / 2)" 
-    [matTooltip]="citySvg.title" matTooltipPosition="above" matTooltipClass="circle-tooltip"
+    [attr.title]="mapService.activeCity.title" [attr.cx]= "mapService.activeCity.cx" [attr.cy]="mapService.activeCity.cy" 
+    [attr.r]="0.5 + 1 / (zoomLevel / 2)"
+    [matTooltip]="mapService.activeCity.title" matTooltipPosition="before" 
+    [matTooltipClass]="{'desig-circle-tooltip': mapService.activeCity.type == 1, 
+    'core-circle-tooltip': mapService.activeCity.type == 2, 
+    'special-circle-tooltip': mapService.activeCity.type == 3, 
+    'city-circle-tooltip': mapService.activeCity.type == 4, 
+    'sward-circle-tooltip': mapService.activeCity.type == 5}"
+    [matTooltipDisabled]="(mapDrag ? mapDrag.dirty : false) || state == stateEnum.QUIZ"
     (click)="onClick($event)"
     ></circle>
-    <!-- <circle class="circle" cx="316.8" cy="255.8" [attr.r]="0.5 + 1 / (zoomLevel / 2)" stroke="black" [attr.stroke-width]="0.2 + 0.5 / (zoomLevel / 2)" fill="red" ></circle> -->
-    <!-- <circle class="circle" cx="200px" cy="200px" r="50" stroke="black" stroke-width="3" fill="red" ></circle> -->
 
   </g>
 

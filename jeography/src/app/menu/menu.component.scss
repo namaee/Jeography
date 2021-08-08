@@ -26,10 +26,18 @@ $correct-color: rgb(136, 255, 130);
   font-family: Roboto, "Helvetica Neue", sans-serif; 
   // border: 3px solid rgb(85, 158, 255);
   cursor: pointer;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .wip {
   color:$error-color;
   white-space: nowrap;
   cursor: default;
+}
+
+.mode-icon {
+  color: $secondary-color;
+  transform: scale(1.2);
+  margin-top: 0.1em;
 }

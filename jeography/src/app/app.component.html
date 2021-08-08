@@ -23,7 +23,7 @@
 <div class="app-container">
   <app-menu class="menu"></app-menu>
   <app-map [state]="state"></app-map>
-  <app-legend *ngIf="state == 1"></app-legend>
-  <app-quiz *ngIf="state == 2"></app-quiz>
+  <app-legend [hidden]="state != 1"></app-legend>
+  <app-quiz [hidden]="state != 2"></app-quiz>
 
 </div>
