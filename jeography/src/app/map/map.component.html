@@ -82,7 +82,7 @@
       'special-circle-tooltip': citySvg.type == 3, 
       'city-circle-tooltip': citySvg.type == 4, 
       'sward-circle-tooltip': citySvg.type == 5}"
-      [matTooltipDisabled]="(mapDrag ? mapDrag.dirty : false) || state == stateEnum.QUIZ"
+      [matTooltipDisabled]="(mapDrag ? mapDrag.dirty : false) || (state == stateEnum.QUIZ && qs.state == gameStateEnum.OCC)"
       (click)="onClick($event)"
       ></circle>
     </g>

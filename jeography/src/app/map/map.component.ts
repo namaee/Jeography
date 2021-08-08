@@ -141,7 +141,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   public get stateEnum(): typeof State {
     return State; 
   }
-
+  public get gameStateEnum(): typeof GameState {
+    return GameState; 
+  }
   public get modeEnum(): typeof Mode {
     return Mode; 
   }
