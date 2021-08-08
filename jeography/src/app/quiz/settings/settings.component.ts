@@ -280,6 +280,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
       case "feedback": this.qs.settings.feedback = event.checked; break;
       case "kanji": this.qs.settings.kanji = event.checked; break;
       case "flag": this.qs.settings.flag = event.checked; break;
+      case "kanjionly": this.qs.settings.kanjionly = event.checked; break;
       default: 
     }
   }

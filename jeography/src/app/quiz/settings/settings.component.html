@@ -11,11 +11,10 @@
   </mat-expansion-panel-header>
   <div class="settings-container">
     <mat-checkbox class="settings-checkbox" [checked]="qs.settings.feedback" (change)="onSettingChange($event)" value="feedback">feedback</mat-checkbox>
-    <mat-checkbox class="settings-checkbox" [checked]="qs.settings.kanji" (change)="onSettingChange($event)" value="kanji">kanji</mat-checkbox>
+    <mat-checkbox class="settings-checkbox" [checked]="qs.settings.kanji || qs.settings.kanjionly" [disabled]="qs.settings.kanjionly" (change)="onSettingChange($event)" value="kanji">kanji</mat-checkbox>
     <mat-checkbox class="settings-checkbox" *ngIf="ms.mode.value == modeEnum.PREF" [checked]="qs.settings.flag" (change)="onSettingChange($event)" value="flag">flag</mat-checkbox>
-    <mat-checkbox class="settings-checkbox" *ngIf="ms.mode.value == modeEnum.CIT" [checked]="true" matTooltip="wip" disabled (change)="onSettingChange($event)" value="">capitals</mat-checkbox>
     <mat-checkbox class="settings-checkbox" *ngIf="ms.mode.value == modeEnum.CIT" [checked]="true" matTooltip="wip" disabled (change)="onSettingChange($event)" value="">city types</mat-checkbox>
-    <mat-checkbox class="settings-checkbox" matTooltip="wip" disabled (change)="onSettingChange($event)" value="">kanji only</mat-checkbox>
+    <mat-checkbox class="settings-checkbox" [checked]="qs.settings.kanjionly" (change)="onSettingChange($event)" value="kanjionly">kanji only</mat-checkbox>
     <button (click)="togglePickPanel()" mat-flat-button color="accent">select</button>
   </div>
   <mat-expansion-panel disabled [class.mat-elevation-z0]="true" hideToggle [expanded]="pickPanelExpanded" class="panel">
@@ -46,7 +45,7 @@
               </mat-checkbox>
               <mat-divider class="divider" [inset]="true"></mat-divider>
               <ng-container *ngFor="let city of cityRegion.value; let i = index">
-                <mat-checkbox #citSel [checked]="ss.citSelection.includes(city.name)"  [disabled]="qs.state == gameStateEnum.OCC" (change)="updateSelection()" [value]="city.name" class="pick-checkbox">{{city.capital ? city.name + ' (c)' : city.name}}</mat-checkbox>
+                <mat-checkbox #citSel [checked]="ss.citSelection.includes(city.name)"  [disabled]="qs.state == gameStateEnum.OCC" (change)="updateSelection()" [value]="city.name" class="pick-checkbox">{{city.name}}</mat-checkbox>
               </ng-container>
               <div class="pick-checkbox-filler">i am a filler</div>
             </ng-container>

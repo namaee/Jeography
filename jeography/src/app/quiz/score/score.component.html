@@ -6,10 +6,12 @@
           <title>{{score.tf ? 'Correct' : 'Incorrect'}}</title>
         </rect>
       </svg>
-      <span *ngIf="!qs.settings.kanji" [ngClass]="{'score-entry-correct': score.tf, 'score-entry-false': !score.tf}" class="score-entry">{{ score.areaName }}</span>
-      <span *ngIf="qs.settings.kanji" [ngClass]="{'score-entry-correct': score.tf, 'score-entry-false': !score.tf}" class="score-entry">{{ score.areaName + ' - ' + score.kanjiAreaName}}</span>
-      <span *ngIf="!score.tf && !qs.settings.kanji && qs.state == 3" class="score-entry-answer">{{"you picked: " + score.pickedAreaName}}</span>
-      <span *ngIf="!score.tf && qs.settings.kanji && qs.state == 3" class="score-entry-answer">{{"you picked: " + score.pickedAreaName + ' - ' + score.pickedKanjiName}}</span>
+      <span *ngIf="!qs.settings.kanji && !qs.settings.kanjionly" [ngClass]="{'score-entry-correct': score.tf, 'score-entry-false': !score.tf}" class="score-entry">{{ score.areaName }}</span>
+      <span *ngIf="qs.settings.kanjionly" [ngClass]="{'score-entry-correct': score.tf, 'score-entry-false': !score.tf}" class="score-entry">{{ score.kanjiAreaName }}</span>
+      <span *ngIf="qs.settings.kanji && !qs.settings.kanjionly" [ngClass]="{'score-entry-correct': score.tf, 'score-entry-false': !score.tf}" class="score-entry">{{ score.areaName + ' - ' + score.kanjiAreaName}}</span>
+      <span *ngIf="!score.tf && (!qs.settings.kanji && !qs.settings.kanjionly) && qs.state == 3" class="score-entry-answer">{{"you picked: " + score.pickedAreaName}}</span>
+      <span *ngIf="!score.tf && qs.settings.kanjionly && qs.state == 3" class="score-entry-answer">{{"you picked: " + score.pickedKanjiName}}</span>
+      <span *ngIf="!score.tf && (qs.settings.kanji && !qs.settings.kanjionly) && qs.state == 3" class="score-entry-answer">{{"you picked: " + score.pickedAreaName + ' - ' + score.pickedKanjiName}}</span>
       <mat-divider></mat-divider>
     </mat-list-item>
   </div>

@@ -41,6 +41,14 @@ $font-color: rgb(249, 231, 231);
   // border: 3px solid rgb(96, 255, 189);
 }
 
+.question-display-name-kanji-only {
+  color: $font-color;
+  font-size: 4.5em;
+  text-align: center;
+  margin: 0.3em 0em 0.4em 0rem;
+  // border: 3px solid rgb(96, 255, 189);
+}
+
 .question-display-name-kanji {
   color: $font-color;
   font-size: 3em;

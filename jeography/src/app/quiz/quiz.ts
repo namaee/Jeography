@@ -43,16 +43,19 @@ export class Settings {
   feedback: boolean;
   kanji: boolean;
   flag: boolean;
+  kanjionly: boolean;
   
   constructor() {
     this.feedback = true;
     this.kanji = false;
     this.flag = false;
+    this.kanjionly = false
   }
   public reset() {
     this.feedback = true;
     this.kanji = false;
     this.flag = false;
+    this.kanjionly = false
   }
 }
 

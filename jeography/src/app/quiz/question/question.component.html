@@ -1,9 +1,10 @@
 <mat-card class="question-display-card">
   <div class="question-display">
     <span *ngIf="qs.state == 1" (click)="startQuiz()" class="start-button">Start</span>
-    <img  *ngIf="qs.state == 2 && qs.settings.flag" class="area-flag" src="{{'../../assets/Flag_of_' + toStandardLatin(qs.questions[qs.questionIndex].name) + '_Prefecture.svg'}}"/>
-    <span *ngIf="qs.state == 2" class="question-display-name">{{qs.questions[qs.questionIndex].name}}</span>
-    <span *ngIf="qs.state == 2 && qs.settings.kanji" class="question-display-name-kanji">{{qs.questions[qs.questionIndex].kanjiName}}</span>
+    <img  *ngIf="qs.state == 2 && qs.settings.flag && ms.mode.value == modeEnum.PREF" class="area-flag" src="{{'../../assets/Flag_of_' + toStandardLatin(qs.questions[qs.questionIndex].name) + '_Prefecture.svg'}}"/>
+    <span *ngIf="qs.state == 2 && !qs.settings.kanjionly" class="question-display-name">{{qs.questions[qs.questionIndex].name}}</span>
+    <span *ngIf="qs.state == 2 && qs.settings.kanjionly" class="question-display-name-kanji-only">{{qs.questions[qs.questionIndex].kanjiName}}</span>
+    <span *ngIf="qs.state == 2 && qs.settings.kanji && !qs.settings.kanjionly" class="question-display-name-kanji">{{qs.questions[qs.questionIndex].kanjiName}}</span>
     <span *ngIf="qs.state == 2" class="question-index">{{qs.questionIndex + 1 + '/' + qs.questions.length}}</span>
     <div *ngIf="qs.state == 2" class="question-reset">
       <button disableRipple mat-icon-button>
