@@ -109,12 +109,19 @@ $font-color: rgb(249, 231, 231);
   flex-wrap: wrap;
   align-content: flex-start;
   // border: 2px solid green;
+  height: 50em;
   max-height: inherit;
   > * {
     margin: 0em 0.5em 0em 0.5em;
     color: $font-color;
     max-width: 11em;
   }
+}
+
+.info-sub-card {
+  background-color: $primary-color-dark;
+  height: inherit;
+  max-height: inherit;
 }
 
 .swap-button {
@@ -155,27 +162,16 @@ $font-color: rgb(249, 231, 231);
   font-family: Roboto, "Helvetica Neue", sans-serif; 
 }
 
-.top-list-pref {
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  // border: 2px solid green;
-  max-height: inherit;
-  > * {
-    margin: 0em 0.8em 0em 0.5em;
-    color: $font-color;
-    max-width: 11em;
-
-  }
-}
 .cities-pref {
   cursor: pointer;
   margin-left: 1em !important;
   // border: 1px solid paleturquoise;
   display: block;
 }
+
+// .prefecture-group {
+//   border: 1px solid purple;
+// }
 
 .desig-rect {
   fill: rgb(165, 1, 4);
@@ -201,8 +197,6 @@ $font-color: rgb(249, 231, 231);
   fill: rgb(125, 17, 197);
   stroke: rgb(46, 47, 47);
 }
-
-
 
 .rect-container {
   // border: 1px solid orange;

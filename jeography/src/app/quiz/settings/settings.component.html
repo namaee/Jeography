@@ -31,7 +31,7 @@
           <button class="pick-top-button" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="primary" (click)="deselectAll()">Deselect All</button>
           <button class="pick-top-button" *ngIf="ms.mode.value == modeEnum.CIT" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="primary" (click)="selectAllC()">Select All Capitals</button>
           <button class="pick-top-button" *ngIf="ms.mode.value == modeEnum.CIT" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="primary" (click)="deselectAllC()">Deselect All Capitals</button>
-          <button class="pick-top-button" *ngIf="ms.mode.value == modeEnum.CIT" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="accent" (click)="swapView()">Swap</button>
+          <button class="pick-top-button swap-button" *ngIf="ms.mode.value == modeEnum.CIT" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="accent" (click)="swapView()">{{view == 0 ? 'Regions' : 'Types'}}</button>
         </div>
 
         <div class="pick-container">
