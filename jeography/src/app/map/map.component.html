@@ -23,7 +23,7 @@
         <rect width="1em" height="1em" rx="1" class="sward-rect">
         </rect>
       </svg>
-      <span class="info-text">Special Wards</span>
+      <span class="info-text">special wards</span>
     </div>
 
     <div class="info-with-rect">
@@ -31,7 +31,7 @@
         <rect width="1em" height="1em" rx="1" class="desig-rect">
         </rect>
       </svg>
-      <span class="info-text">Designated cities</span>
+      <span class="info-text">designated cities</span>
     </div>
     
     <div class="info-with-rect">
@@ -39,7 +39,7 @@
         <rect width="1em" height="1em" rx="1" class="core-rect">
         </rect>
       </svg>
-      <span class="info-text">Core Cities</span>
+      <span class="info-text">core cities</span>
     </div>
 
     <div class="info-with-rect">
@@ -47,7 +47,7 @@
         <rect width="1em" height="1em" rx="1" class="special-rect">
         </rect>
       </svg>
-      <span class="info-text">Special Cities</span>
+      <span class="info-text">special cities</span>
     </div>
 
     <div class="info-with-rect">
@@ -55,7 +55,7 @@
         <rect width="1em" height="1em" rx="1" class="city-rect">
         </rect>
       </svg>
-      <span class="info-text">Cities</span>
+      <span class="info-text">cities</span>
     </div>
   </mat-card>
     <!-- </svg:g> -->
@@ -74,7 +74,7 @@
   class="map"
   [ngStyle]="mapStyle"
   [ngClass]="{'map-pref': mapService.mode.value == modeEnum.PREF, 'map-cit': mapService.mode.value == modeEnum.CIT}"
-  
+  (click)="debugger($event)"
   >
 
   <!-- prefectures -->

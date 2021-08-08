@@ -38,6 +38,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private elementRef: ElementRef, public mapService: MapService, public qs: QuizService) {
   }
 
+  debugger(event: MouseEvent) {
+    console.log('cx: "' + Math.round((((event.offsetX - 51) / 1.456) ) * 10) / 10 + '", cy: "' + Math.round(((event.offsetY - 14) / 1.456) * 10) / 10 + '"');
+
+  }
   ngOnInit(): void {
     const template = document.getElementById('info-info');
     tippy('.info-info', {
@@ -67,7 +71,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   //map interaction to legend
   public onClick(event: MouseEvent) {
-    console.log(((event.offsetX - 51) / 1.456) + 0.6 + ', ' + (event.offsetY - 14) / 1.456);
+    // console.log(((event.offsetX - 51) / 1.456) + 0.6 + ', ' + (event.offsetY - 14) / 1.456);
     let ele = event.target as SVGPathElement;
     if (ele.hasAttribute('title')) {
       if (this.state == State.QUIZ && this.qs.state == GameState.OCC && !this.mapDrag.dirty) {
