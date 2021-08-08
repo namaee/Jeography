@@ -110,14 +110,14 @@
       </mat-list-item>
     </div>
 
-    <div *ngIf="view == 0" class="top-list">
+    <div *ngIf="view == 0" class="top-list-type">
       <button class="swap-button" mat-flat-button color="accent" (click)="swapLegendView(1)">type</button>
-        <div class="prefecture-group" *ngFor="let cityPrefecture of regionViewGroup | keyvalue">
+        <ng-container class="prefecture-group" *ngFor="let cityPrefecture of regionViewGroup | keyvalue">
           <mat-list-item class="region-item">
             {{cityPrefecture.key.toLowerCase()}}
           </mat-list-item>
           <ng-container *ngFor="let city of cityPrefecture.value">
-            <div class="city-region-item-container" [ngStyle]="{'position': 'relative'}">
+            <!-- <div class="city-region-item-container" [ngStyle]="{'position': 'relative'}"> -->
               <mat-icon *ngIf="ms.activeCity?.title == city.name" class="city-active-icon">keyboard_arrow_right</mat-icon>
               <mat-list-item class="cities" (click)="setActive(city.name)">
                 {{city.name}}
@@ -133,10 +133,10 @@
                 </rect>
                 </svg>
               </mat-list-item>
-            </div>
+            <!-- </div> -->
           </ng-container>
         <div class="city-type-item-filler">i am a filler</div>
-      </div>
+      </ng-container>
     </div>
   </mat-card>
 </mat-card>

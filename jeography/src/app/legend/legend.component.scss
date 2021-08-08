@@ -118,6 +118,21 @@ $font-color: rgb(249, 231, 231);
   }
 }
 
+.top-list-type {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  // border: 2px solid green;
+  height: 51em;
+  max-height: inherit;
+  > * {
+    margin: 0em 1em 0em 0.5em;
+    color: $font-color;
+    max-width: 11em;
+  }
+}
 .info-sub-card {
   background-color: $primary-color-dark;
   height: 51em;
