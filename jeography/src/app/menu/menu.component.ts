@@ -18,7 +18,7 @@ export class MenuComponent implements OnInit {
   switchMode(mode: Mode) {
     if (this.qs.state == GameState.OCC) return
     // this.ms.mode = mode;
-    if (mode == Mode.REG) return;
+    // if (mode == Mode.REG) return;
     this.ms.mode.next(mode)
   }
 

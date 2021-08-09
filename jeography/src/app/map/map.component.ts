@@ -23,7 +23,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   public regionsSvg = regionSvg;
   public citiesSvg = citiesSvg;
   private subscriptions: Subscription = new Subscription();
-  public activePref: string = '';
   public activeCit: typeof citiesSvg[0] = null;
   public activeReg: string = '';
   public zoomLevel: number = 1;
@@ -35,7 +34,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.mouseWheel.next(event);
   }
   
-  constructor(private elementRef: ElementRef, public mapService: MapService, public qs: QuizService) {
+  constructor(private elementRef: ElementRef, public ms: MapService, public qs: QuizService) {
   }
 
   debugger(event: MouseEvent) {
@@ -83,16 +82,11 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public setActive(ele: SVGPathElement) {
-    if (this.mapService.mode.value == Mode.PREF) {
-      if (this.activePref == ele.getAttribute('title')) {
-        this.activePref = ''
-        this.mapService.setActive('', this.mapService.mode.value);
-      } else {
-        this.activePref = ele.getAttribute('title')
-        this.mapService.setActive(this.activePref, this.mapService.mode.value);
-      }
-    } else if (this.mapService.mode.value == Mode.CIT) {
-      this.mapService.setActive(ele.getAttribute('title'), this.mapService.mode.value);
+    if (this.ms.mode.value == Mode.PREF) {
+      this.ms.setActive(ele.getAttribute('title'));
+    } 
+    else if (this.ms.mode.value == Mode.CIT) {
+      this.ms.setActive(ele.getAttribute('title'));
     }
   }
 
@@ -122,9 +116,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
         style['transform-origin'] = (50 - (this.mapDrag.currentX / 8)) + "% " + (50 - (this.mapDrag.currentY / 8)) + "%";
     }
     style['stroke'] = 'rgb(242, 242, 242)';
-    if (this.mapService.mode.value == Mode.PREF || this.mapService.mode.value == Mode.CIT) {
+    if (this.ms.mode.value == Mode.PREF || this.ms.mode.value == Mode.CIT) {
       style['stroke-width'] =  0.65 - 0.7 * ((Math.log(this.zoomLevel) / Math.log(1.5)) / 12) + 'px';
-    } else if (this.mapService.mode.value == Mode.REG) {
+    } else if (this.ms.mode.value == Mode.REG) {
       style['stroke-width'] =  1 - ((Math.log(this.zoomLevel) / Math.log(1.5)) / 12) + 'px';
     }
     if (this.mapDrag?.dirty) {

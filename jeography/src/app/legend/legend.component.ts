@@ -14,7 +14,9 @@ export class LegendComponent implements OnInit {
   public citiesSvg = citiesSvg;
   public regionSvg = regionSvg;
 
+  public prefView: number = 0;
   public view: number = 0;
+  public prefectureViewGroup: Map<string, {region: string, name: string}[]> = new Map();
   public regionViewGroup: Map<string, {region: string, name: string, capital: boolean, type: CType}[]> = new Map();
   public regionView: {region: string, name: string, capital: boolean, type: CType}[] = []
   public cityTypeView: {cityType: string, name: string, capital: boolean, type: CType}[]
@@ -29,7 +31,11 @@ export class LegendComponent implements OnInit {
     this.regionSvg.sort((a, b) => new Intl.Collator('jp').compare(a.title, b.title))
 
     this.regionSvg.forEach((region) => {
+      this.prefectureViewGroup.set(region.title, [])
       this.regionViewGroup.set(region.title, [])
+    })
+    this.prefecturesData.forEach((pref) => {
+      this.prefectureViewGroup.get(pref.region).push({region: pref.region, name: pref.name})
     })
     this.citiesSvg.forEach((city) => {
       this.regionViewGroup.get(this.prefToRegion(city.prefecture)).push({region: this.prefToRegion(city.prefecture), name: city.title, capital: city.capital, type: city.type})
@@ -41,7 +47,8 @@ export class LegendComponent implements OnInit {
     this.cdr.detectChanges();
   }
   public setActive(name: string) {
-    this.ms.setActive(name, Mode.CIT)
+    this.ms.setActive(name)
+
   }
 
   public prefToRegion(name: string) {

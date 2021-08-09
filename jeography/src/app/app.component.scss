@@ -9,7 +9,7 @@ $font-color: rgb(249, 231, 231);
   position: relative;
   left: -1.1em;
   font-size: 1.8em;
-  cursor: pointer;
+  cursor: default;
   -ms-user-select: none;
   user-select: none;
 }
@@ -54,4 +54,12 @@ mat-icon {
 ::ng-deep .toolbar-tooltip {
   background-color: $secondary-color !important;
   color: $primary-color !important;
+}
+
+.view-buttons {
+  // margin-left: 10em;
+  > * {
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    margin-right: 5em;
+  }
 }

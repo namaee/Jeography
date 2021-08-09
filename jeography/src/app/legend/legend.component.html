@@ -18,25 +18,43 @@
 </div> -->
 
 <mat-card *ngIf="ms.mode.value == modeEnum.PREF" class="info-card">
-  <div class="info-container"> 
+  <mat-card  *ngIf="!ms.activePrefecture" class="info-sub-card-pref">
+    <div class="top-list-pref-reg">
+        <ng-container class="prefecture-group" *ngFor="let region of prefectureViewGroup | keyvalue">
+          <mat-list-item class="region-item">
+            {{region.key.toLowerCase()}}
+          </mat-list-item>
+          <ng-container *ngFor="let pref of region.value">
+            <div class="city-region-item-container" [ngStyle]="{'position': 'relative'}">
+              <mat-list-item class="cities" (click)="setActive(pref.name)">
+                {{pref.name}}
+              </mat-list-item>
+            </div>
+          </ng-container>
+        <div class="city-type-item-filler">i am a filler</div>
+      </ng-container>
+    </div>
+  </mat-card>
+
+
+
+  <div *ngIf="ms.activePrefecture" class="info-container"> 
     <mat-card class="info-header-card">
-      <div *ngIf="ms.activePrefecture" class="info-header-container">
+      <div class="info-header-container">
+        <mat-icon class="go-back-icon" (click)="setActive('')">close</mat-icon>
         <img class="area-flag" src="{{'../../assets/Flag_of_' + toStandardLatin(ms.activePrefecture.name) + '_Prefecture.svg'}}"/>
         <div class="area-names">
           <span class="area-name">{{ms.activePrefecture?.name}}</span>
           <span class="area-name-kanji">{{ms.activePrefecture?.kanjiName}}</span>
         </div>
       </div>
-      <div *ngIf="!ms.activePrefecture" class="info-header-container">
-        <div class="info-header-no-selection">
-          no prefecture selected
-        </div>
-      </div>
     </mat-card>
     
-    <div *ngIf="ms.activePrefectureData" class="general-information-container">
+    <div class="general-information-container">
       <div class="general-information-left">
         <mat-list>
+          <mat-divider></mat-divider>
+
           <mat-list-item>capital</mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item>region</mat-list-item>
@@ -49,6 +67,7 @@
           <mat-divider></mat-divider>
           <mat-list-item>prefecture flower</mat-list-item>
           <mat-divider></mat-divider>
+
         </mat-list>
       </div>
       <div class="general-information-right">

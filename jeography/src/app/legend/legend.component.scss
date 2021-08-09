@@ -15,11 +15,29 @@ $font-color: rgb(249, 231, 231);
   padding: 2em;
   // border: 1px solid orange;
 }
-
+.info-sub-card-pref {
+  background-color: $primary-color-dark;
+  height: 35.44em;
+  max-height: inherit;
+}
 .info-header-card{
   background-color: $primary-color-dark;
 }
-
+.top-list-pref-reg {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  // border: 2px solid green;
+  height: inherit;
+  max-height: inherit;
+  > * {
+    margin: 0em 1em 0em 0.5em;
+    color: $font-color;
+    max-width: 11em;
+  }
+}
 .info-container {
   width: 100%;
   height: 100%;
@@ -37,6 +55,14 @@ $font-color: rgb(249, 231, 231);
   margin: auto;
 }
 
+.go-back-icon {
+  position: absolute;
+  right: 0.5em;
+  top: 0.5em;
+  cursor: pointer;
+  -ms-user-select: none;
+  user-select: none;
+}
 .info-header-container {
   width: 100%;
   display: flex;

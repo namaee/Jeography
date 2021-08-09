@@ -19,15 +19,20 @@ export class MapService {
   constructor() {
   }
 
-  public setActive(name: string, mode: Mode) {
-    if (mode == Mode.PREF) {
-      this.activePrefecture = this.prefectures.find((prefecture) => {
-        return prefecture.name == name;      
-      })
-      this.activePrefectureData = this.prefecturesData.find((prefecture) => {
-        return prefecture.name == name;      
-      })
-    } else if (mode == Mode.CIT) {
+  public setActive(name: string) {
+    if (this.mode.value == Mode.PREF) {
+      if (name != this.activePrefecture?.name) {
+        this.activePrefecture = this.prefectures.find((prefecture) => {
+          return prefecture.name == name;      
+        })
+        this.activePrefectureData = this.prefecturesData.find((prefecture) => {
+          return prefecture.name == name;      
+        })
+      } else {
+        this.activePrefecture = null;
+        this.activePrefectureData = null;
+      }
+    } else if (this.mode.value  == Mode.CIT) {
       if (name != this.activeCity?.title) {
         this.activeCity = this.citiesSvg.find((city) => {
           return city.title == name;      
