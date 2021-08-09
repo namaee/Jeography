@@ -9,6 +9,9 @@ $font-color: rgb(249, 231, 231);
   position: relative;
   left: -1.1em;
   font-size: 1.8em;
+  cursor: pointer;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .app-container {
