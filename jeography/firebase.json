@@ -6,6 +6,43 @@
       "**/.*",
       "**/node_modules/**"
     ],
+    "headers": [ {
+      "source": "https://jeography.net/assets/*.@(jpg|jpeg|gif|png|svg)",
+      "headers": [ {
+        "key": "Keep-Alive",
+        "value": "timeout=120, max=100"
+      }]
+    }, {
+      "source": "**/*.@(jpg|jpeg|gif|png|svg)",
+      "headers": [ {
+        "key": "Cache-Control",
+        "value": "max-age=2592000"
+      } ]
+    }, {
+      "source": "/",
+      "headers": [ {
+        "key": "Cache-Control",
+        "value": "max-age=2592000"
+      } ]
+    }, {
+      "source": "/*.js",
+      "headers": [ {
+        "key": "Cache-Control",
+        "value": "max-age=2592000"
+      } ]
+    }, {
+      "source": "**/*.css",
+      "headers": [ {
+        "key": "Cache-Control",
+        "value": "max-age=2592000"
+      } ]
+    },{
+      "source": "**/*.ico",
+      "headers": [ {
+        "key": "Cache-Control",
+        "value": "max-age=31536000"
+      } ]
+    }], 
     "rewrites": [
       {
         "source": "**",
