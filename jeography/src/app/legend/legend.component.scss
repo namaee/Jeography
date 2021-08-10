@@ -158,7 +158,7 @@ $font-color: rgb(249, 231, 231);
   max-height: inherit;
   > * {
     margin: 0em 0.5em 0em 0.5em;
-    color: $font-color;
+    // color: $font-color;
     max-width: 11em;
   }
 }
@@ -174,7 +174,7 @@ $font-color: rgb(249, 231, 231);
   max-height: inherit;
   > * {
     margin: 0em 1em 0em 0.5em;
-    color: $font-color;
+    // color: $font-color;
     max-width: 11em;
   }
 }
@@ -186,7 +186,7 @@ $font-color: rgb(249, 231, 231);
 
 .swap-button {
   margin: 1em !important;
-  width: 6em !important;
+  width: 8em !important;
   color: $primary-color !important;
   margin-top: 0.35em !important;
 }
@@ -281,19 +281,6 @@ $font-color: rgb(249, 231, 231);
   padding: 2em;
   margin-bottom: 2em;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // .legend-container {

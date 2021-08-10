@@ -16,6 +16,10 @@ import { ScoreComponent } from './quiz/score/score.component';
 import { QuizService } from './quiz/quiz.service';
 import { SettingsComponent } from './quiz/settings/settings.component';
 import { SettingsService } from './quiz/settings/settings.service';
+import { SearchService } from './search/search.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SearchComponent } from './search/search.component';
+
 
 @NgModule({
   declarations: [
@@ -28,6 +32,7 @@ import { SettingsService } from './quiz/settings/settings.service';
     QuestionComponent,
     ScoreComponent,
     SettingsComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,8 +40,10 @@ import { SettingsService } from './quiz/settings/settings.service';
     InlineSVGModule.forRoot(),
     MaterialModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
-  providers: [MapService, QuizService, SettingsService],
+  providers: [MapService, QuizService, SettingsService, SearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

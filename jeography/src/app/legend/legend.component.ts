@@ -1,7 +1,9 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { citiesSvg, prefectures, prefecturesData, regionSvg } from '../data';
 import { MapService } from '../map/map.service';
 import { CType, Mode } from '../quiz/quiz';
+import { SearchService } from '../search/search.service';
 
 @Component({
   selector: 'app-legend',
@@ -21,7 +23,7 @@ export class LegendComponent implements OnInit {
   public regionView: {region: string, name: string, capital: boolean, type: CType}[] = []
   public cityTypeView: {cityType: string, name: string, capital: boolean, type: CType}[]
 
-  constructor(public ms: MapService, public cdr: ChangeDetectorRef) {
+  constructor(public ms: MapService, public cdr: ChangeDetectorRef, public searchService: SearchService) {
   
   }
 
@@ -106,7 +108,13 @@ export class LegendComponent implements OnInit {
   }
 
   public toStandardLatin(name) {
-    return (name.replace(/ō/g,'o')).replace(/Ō/g, 'O');
+    return (name.replace(/ō/g,'o')).replace(/Ō/g, 'O').replace(/ū/g,'u').replace(/Ū/g, 'U');
+  }
+
+  public citiesStyle(name: string): { [key: string]: string } {
+    const style: { [key: string]: string } = {};
+    style['color'] = this.searchService.searchSubstring(name) ? 'rgb(249, 231, 231)' : 'rgb(71, 71, 71)' 
+    return style;
   }
 
   public get modeEnum(): typeof Mode {
