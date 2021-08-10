@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ColorService } from './color.service';
 import { MapService } from './map/map.service';
 import { GameState } from './quiz/quiz';
 import { QuizService } from './quiz/quiz.service';
@@ -14,10 +15,10 @@ export enum State{
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  public state: State = State.VIEW;
+  public state: State = State.QUIZ;
   public location = location;
   public console = console
-  constructor(private qs: QuizService, private ms: MapService) {
+  constructor(private qs: QuizService, private ms: MapService, public cs: ColorService) {
 
   }
   public stateSwitch(state: State) {
@@ -34,6 +35,11 @@ export class AppComponent {
       this.qs.resetQuiz();
     }
   }
+
+  public changeMapTheme() {
+    this.cs.currentThemeIndex = (this.cs.currentThemeIndex + 1) % 2;    
+  }
+
   public get stateEnum(): typeof State {
     return State; 
   }

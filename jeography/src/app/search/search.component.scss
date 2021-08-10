@@ -7,3 +7,14 @@
     transform: translateY(-1.1em) scale(.75);
     width: 133.33333%;
 }
+
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: rgb(255, 198, 99) !important;
+ }
+
+
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: rgb(255, 198, 99);
+}

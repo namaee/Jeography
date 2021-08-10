@@ -4,9 +4,9 @@ $primary-color-dark: rgb(29, 15, 46);
 $active-fill: rgb(226, 121, 130);
 $font-color: rgb(249, 231, 231);
 
-.map {
-  fill: $default-fill;
-}
+// .map {
+//   fill: $default-fill;
+// }
 
 .map-pref path:hover {
   fill: $active-fill;

@@ -19,6 +19,7 @@ import { SettingsService } from './quiz/settings/settings.service';
 import { SearchService } from './search/search.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchComponent } from './search/search.component';
+import { ColorService } from './color.service';
 
 
 @NgModule({
@@ -43,7 +44,7 @@ import { SearchComponent } from './search/search.component';
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [MapService, QuizService, SettingsService, SearchService],
+  providers: [MapService, QuizService, SettingsService, SearchService, ColorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,6 +3,7 @@ import { Subject, Subscription } from 'rxjs';
 import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css'; 
 import { State } from '../app.component';
+import { ColorService } from '../color.service';
 import { prefectures, prefecturesSvg, regionSvg, citiesSvg} from '../data';
 import { GameState, Mode } from '../quiz/quiz';
 import { QuizService } from '../quiz/quiz.service';
@@ -34,7 +35,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.mouseWheel.next(event);
   }
   
-  constructor(private elementRef: ElementRef, public ms: MapService, public qs: QuizService) {
+  constructor(private elementRef: ElementRef, public ms: MapService, public qs: QuizService, public cs: ColorService) {
   }
 
   debugger(event: MouseEvent) {
@@ -70,7 +71,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   //map interaction to legend
   public onClick(event: MouseEvent) {
-    // console.log(((event.offsetX - 51) / 1.456) + 0.6 + ', ' + (event.offsetY - 14) / 1.456);
     let ele = event.target as SVGPathElement;
     if (ele.hasAttribute('title')) {
       if (this.state == State.QUIZ && this.qs.state == GameState.OCC && !this.mapDrag.dirty) {
@@ -115,7 +115,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.mapDrag != undefined) {
         style['transform-origin'] = (50 - (this.mapDrag.currentX / 8)) + "% " + (50 - (this.mapDrag.currentY / 8)) + "%";
     }
-    style['stroke'] = 'rgb(242, 242, 242)';
+    style['fill'] = this.cs.mapTheme[this.cs.currentThemeIndex].fill
+    style['stroke'] = this.cs.mapTheme[this.cs.currentThemeIndex].stroke
     if (this.ms.mode.value == Mode.PREF || this.ms.mode.value == Mode.CIT) {
       style['stroke-width'] =  0.65 - 0.7 * ((Math.log(this.zoomLevel) / Math.log(1.5)) / 12) + 'px';
     } else if (this.ms.mode.value == Mode.REG) {
