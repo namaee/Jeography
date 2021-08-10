@@ -54,6 +54,11 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.cdr.detectChanges()
       })
     )
+    this.subscriptions.add(
+      this.ss.wrongAnswers.subscribe((event) => {
+        if (event) this.fillWrongAnswers(event)
+      })
+    )
     this.prefectures.sort((a, b) => new Intl.Collator('jp').compare(a.name, b.name))
     this.prefectures.forEach((prefecture) => {
       this.ss.prefSelection.push(prefecture.name)
@@ -283,6 +288,26 @@ export class SettingsComponent implements OnInit, OnDestroy {
       case "kanjionly": this.qs.settings.kanjionly = event.checked; break;
       default: 
     }
+  }
+
+  public fillWrongAnswers(names: string[]) {
+    this.deselectAll();
+    if (this.ms.mode.value == Mode.PREF) {
+      this.prefSel._results.forEach((selObj) => {
+        if (names.includes(selObj.value)) {
+          selObj._checked = true};
+      })
+    } else if (this.ms.mode.value == Mode.CIT) {
+      this.citSel._results.forEach((selObj) => {
+        if (names.includes(selObj.value)) selObj._checked = true;
+      })
+      this.citSelTypes.forEach((citSelType) => {
+        citSelType?._results.forEach((selObj) => {
+          if (names.includes(selObj.value)) selObj._checked = true;
+        })
+      })
+    }
+    this.updateSelection();
   }
 
   public setDescription() {

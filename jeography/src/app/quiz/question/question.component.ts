@@ -1,12 +1,7 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { QuizService } from '../quiz.service';
-import { Subscription } from 'rxjs';
-import { MatCheckboxChange } from '@angular/material/checkbox';
 import { GameState, Mode } from '../quiz';
 import { MapService } from 'src/app/map/map.service';
-import { prefectures, citiesSvg } from '../../data';
-import { SelectionModel } from '@angular/cdk/collections';
-import { MatListOption } from '@angular/material/list';
 import { SettingsService } from '../settings/settings.service';
 
 @Component({
@@ -21,7 +16,6 @@ export class QuestionComponent implements OnInit {
   }
 
   public startQuiz() {
-    
     switch (this.ms.mode.value) {
       case Mode.PREF: {
         this.qs.questionSelection = this.ss.prefSelection 
@@ -33,10 +27,24 @@ export class QuestionComponent implements OnInit {
         if (this.ss.citSelection.length > 0) this.qs.startQuiz(Mode.CIT); 
         break;
       }
-
     }
   }
     
+  public startQuizWrongAnswers() {
+    switch (this.ms.mode.value) {
+      case Mode.PREF: {
+        this.qs.questionSelection = this.ss.prefSelection 
+        if (this.ss.prefSelection.length > 0) this.qs.startQuizWrongAnswers(Mode.PREF);
+        break;
+       }
+      case Mode.CIT: {
+        this.qs.questionSelection = this.ss.citSelection 
+        if (this.ss.citSelection.length > 0) this.qs.startQuizWrongAnswers(Mode.CIT); 
+        break;
+      }
+    }
+  }
+
   public endQuiz() {
     this.qs.state = GameState.END
     this.ss.openSettings(this.qs.state)

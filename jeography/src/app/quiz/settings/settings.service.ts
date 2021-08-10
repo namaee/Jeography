@@ -8,6 +8,7 @@ export class SettingsService {
   public prefSelection: string[] = [];
   public citSelection: string[] = [];
   public gameState: BehaviorSubject<GameState> = new BehaviorSubject<GameState>(null)
+  public wrongAnswers: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(null)
 
   constructor() {
   }

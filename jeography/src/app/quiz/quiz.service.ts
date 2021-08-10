@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { prefectures, citiesSvg } from '../data';
 import { MapService } from '../map/map.service';
-import { Question, Answer,  Settings, Score, GameState, Mode } from './quiz';
+import { Question,  Settings, Score, GameState, Mode } from './quiz';
 import { SettingsService } from './settings/settings.service';
 
 
@@ -15,14 +15,13 @@ export class QuizService implements OnInit {
   public settings: Settings = new Settings();
   public questionSelection: string[] = [];
   public questions: Question[] = [];
-  public answers: Answer[] = [];
   public scores: Score[] = [];
   public scoreID: number = 0;
   public correctAmount: number = 0;
   public questionIndex: number = 0;
-  
+  public scoresWrong: string[] = [];
   constructor(private ss: SettingsService, private ms: MapService) {
-
+    
   }
   ngOnInit(): void {
   }
@@ -58,6 +57,9 @@ export class QuizService implements OnInit {
       ans, this.returnKanjiName(ans), 
       ans == this.questions[this.questionIndex].name, 
       this.scoreID++))
+    if (ans != this.questions[this.questionIndex].name) {
+      this.scoresWrong.push(this.questions[this.questionIndex].name)
+    }
     // this.answers.push(answer)
     // this.updateScore();
     if (this.questionIndex >= this.questions.length - 1) {
@@ -67,6 +69,7 @@ export class QuizService implements OnInit {
           this.correctAmount++;
         }
       })    
+      this.questionIndex++
       this.state = 3
       this.ss.openSettings(3);
       return;
@@ -76,24 +79,26 @@ export class QuizService implements OnInit {
 
   public resetQuiz() {
     this.state = 1;
-    // this.settings.reset();
     this.questions = [];
     this.questionIndex = 0;
-    this.answers = []
     this.scores = [];
+    this.scoresWrong = [];
     this.scoreID = 0;
     this.correctAmount = 0;
     this.ss.openSettings(1);
-    // this.quizControl.next('reset');
   }
 
-  
-  // public updateScore() {
-  //   // this.qs.questions.slice(0, this.qs.questionIndex).forEach((question: Question) => {
-  //   //   this.scores.
-  //   // })
-  //   this.scores.unshift(new Score(this.questions[this.questionIndex].name, this.questions[this.questionIndex].kanjiName, this.answers[this.questionIndex].tf, this.answers[this.questionIndex], this.scoreID++))
-  // }
+  public startQuizWrongAnswers(mode: Mode) {
+    let wrongAnsers = this.scoresWrong
+    for (let i = this.questionIndex; i < this.questions.length; i++) {
+      wrongAnsers.push(this.questions[i].name)
+    }
+    this.resetQuiz();
+    this.ss.wrongAnswers.next(wrongAnsers)
+    this.createQuestions(mode) 
+    this.state = 2
+    this.ss.lockSettings()
+  }
 
   public returnKanjiName(name: string) {
     if (this.ms.mode.value == Mode.PREF) {
@@ -107,8 +112,8 @@ export class QuizService implements OnInit {
       })
       return city.kanjiName;
     }
-
   }
+
   public shuffle(ar) {
     var ci = ar.length, ri;
     while (0 !== ci) {
