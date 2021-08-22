@@ -106,15 +106,20 @@ export class SettingsComponent implements OnInit, OnDestroy {
   public updateSelectionOnSwitch() {
     if (this.ms.mode.value == Mode.PREF) {
       this.prefSel?._results.forEach((selObj) => {
-        if (selObj._checked) this.ss.prefSelection.push(selObj.value)
-        
+        if (selObj._checked) {
+          let i = this.ss.prefSelection.indexOf(selObj.value)
+          if (i == -1) this.ss.prefSelection.push(selObj.value)
+        }
       })
       this.qs.questionSelection = this.ss.prefSelection
     } else if (this.ms.mode.value == Mode.CIT) {
       if (this.view == 0) {
         this.citSelTypes.forEach((citSelType) => {
           citSelType?._results.forEach((selObj) => {
-            if (selObj._checked) this.ss.citSelection.push(selObj.value)
+            if (selObj._checked) {
+              let i = this.ss.citSelection.indexOf(selObj.value)
+              if (i == -1) this.ss.citSelection.push(selObj.value)
+            }
           })
         })
       }
