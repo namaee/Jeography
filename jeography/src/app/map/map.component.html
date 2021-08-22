@@ -82,7 +82,7 @@
     [ngClass]="{'active-prefecture': ms.activePrefecture?.name == prefSvg.title && state == stateEnum.VIEW}"
     [ngStyle]="mapPaths"
     [matTooltip]="prefSvg.title" matTooltipPosition="before" matTooltipClass="path-tooltip" 
-    [matTooltipDisabled]="(mapDrag ? mapDrag.dirty : false) || state == stateEnum.QUIZ"
+    [matTooltipDisabled]="(mapDrag ? mapDrag.dirty : false) || (state == stateEnum.QUIZ && qs.state == gameStateEnum.OCC)"
     (click)="onClick($event)"
     ></path>
   </g>
