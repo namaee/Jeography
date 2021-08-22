@@ -46,6 +46,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscriptions.add(
       this.ms.mode.subscribe(() => {
+        this.updateSelectionOnSwitch()
         this.cdr.detectChanges()
       })
     )  
@@ -102,7 +103,30 @@ export class SettingsComponent implements OnInit, OnDestroy {
       this.cdr.detectChanges()
     }
   }
-
+  public updateSelectionOnSwitch() {
+    if (this.ms.mode.value == Mode.PREF) {
+      this.prefSel?._results.forEach((selObj) => {
+        if (selObj._checked) this.ss.prefSelection.push(selObj.value)
+        
+      })
+      this.qs.questionSelection = this.ss.prefSelection
+    } else if (this.ms.mode.value == Mode.CIT) {
+      if (this.view == 0) {
+        this.citSelTypes.forEach((citSelType) => {
+          citSelType?._results.forEach((selObj) => {
+            if (selObj._checked) this.ss.citSelection.push(selObj.value)
+          })
+        })
+      }
+      else if (this.view == 1) {
+        this.citSel?._results.forEach((selObj) => {
+          if (selObj._checked) this.ss.citSelection.push(selObj.value)
+        })
+      }
+      this.qs.questionSelection = this.ss.citSelection
+      this.cdr.detectChanges()
+    }
+  }
   public selectAll() {
     if (this.ms.mode.value == Mode.PREF) {
       this.prefSel._results.forEach((selObj) => {
@@ -286,6 +310,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
       case "kanji": this.qs.settings.kanji = event.checked; break;
       case "flag": this.qs.settings.flag = event.checked; break;
       case "kanjionly": this.qs.settings.kanjionly = event.checked; break;
+      case "cityTypes": this.qs.settings.cityTypes = event.checked; break;
       default: 
     }
   }

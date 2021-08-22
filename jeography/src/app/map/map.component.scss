@@ -103,6 +103,15 @@ $font-color: rgb(249, 231, 231);
   cursor: pointer;
 }
 
+.city-typeless-circle {
+  fill: rgb(204, 98, 27) !important;
+  stroke: rgb(46, 47, 47) !important;
+}
+
+.city-typeless-circle:hover {
+  fill: rgb(236, 135, 67) !important;
+  cursor: pointer;
+}
 
 ::ng-deep .path-tooltip {
   background-color: $font-color !important;
@@ -132,6 +141,12 @@ $font-color: rgb(249, 231, 231);
 ::ng-deep .sward-circle-tooltip {
   background-color: rgb(46, 47, 47) !important;
   color: rgb(200, 118, 255) !important;
+}
+
+
+::ng-deep .city-typeless-circle-tooltip {
+  background-color: rgb(46, 47, 47) !important;
+  color: rgb(236, 135, 67) !important;
 }
 
 .info-info {

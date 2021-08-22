@@ -7,6 +7,7 @@ import { ColorService } from '../color.service';
 import { prefectures, prefecturesSvg, regionSvg, citiesSvg} from '../data';
 import { GameState, Mode } from '../quiz/quiz';
 import { QuizService } from '../quiz/quiz.service';
+import { SettingsService } from '../quiz/settings/settings.service';
 import { MapService } from './map.service';
 import { MapDragDirective } from './mapDrag.directive';
 

@@ -95,7 +95,8 @@
 
     <g *ngFor="let citySvg of citiesSvg">
       <circle *ngIf="(state == stateEnum.VIEW || (state == stateEnum.QUIZ && qs.questionSelection.includes(citySvg.title))) && !ms.activeCity"  
-      [ngClass]="{'desig-circle': citySvg.type == 1, 
+      [ngClass]="{'city-typeless-circle': !qs.settings.cityTypes,
+      'desig-circle': citySvg.type == 1, 
       'core-circle': citySvg.type == 2, 
       'special-circle': citySvg.type == 3, 
       'city-circle': citySvg.type == 4, 
@@ -104,7 +105,8 @@
       [attr.title]="citySvg.title" [attr.cx]= "citySvg.cx" [attr.cy]="citySvg.cy" 
       [attr.r]="0.5 + 1 / (zoomLevel / 2)" 
       [matTooltip]="citySvg.title" matTooltipPosition="before" 
-      [matTooltipClass]="{'desig-circle-tooltip': citySvg.type == 1, 
+      [matTooltipClass]="{'city-typeless-circle-tooltip': !qs.settings.cityTypes,
+      'desig-circle-tooltip': citySvg.type == 1, 
       'core-circle-tooltip': citySvg.type == 2, 
       'special-circle-tooltip': citySvg.type == 3, 
       'city-circle-tooltip': citySvg.type == 4, 

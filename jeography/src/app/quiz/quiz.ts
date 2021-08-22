@@ -44,18 +44,21 @@ export class Settings {
   kanji: boolean;
   flag: boolean;
   kanjionly: boolean;
+  cityTypes: boolean;
   
   constructor() {
     this.feedback = true;
     this.kanji = false;
     this.flag = false;
     this.kanjionly = false
+    this.cityTypes = true;
   }
   public reset() {
     this.feedback = true;
     this.kanji = false;
     this.flag = false;
     this.kanjionly = false
+    this.cityTypes = true;
   }
 }
 
