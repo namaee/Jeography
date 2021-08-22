@@ -98,7 +98,10 @@
   <mat-card class="info-card">
     <mat-card class="info-sub-card">
       <div *ngIf="view == 1" class="top-list">
-        <button class="swap-button" mat-flat-button color="accent" (click)="swapLegendView(0)">region</button>
+        <button class="swap-button" mat-flat-button color="accent" (click)="swapLegendView(0)">
+          <mat-icon class="loop-icon">loop</mat-icon>
+          region
+        </button>
         <app-search></app-search>
         <mat-list-item class="city-type-item">special wards</mat-list-item>
         <mat-list-item [ngStyle]="citiesStyle(city.title)" *ngFor="let city of citiesSvg" class="" (click)="setActive(city.title)">
@@ -142,7 +145,10 @@
       </div>
   
       <div *ngIf="view == 0" class="top-list-pref">
-        <button class="swap-button" mat-flat-button color="accent" (click)="swapLegendView(1)">type</button>
+        <button class="swap-button" mat-flat-button color="accent" (click)="swapLegendView(1)">
+          <mat-icon class="loop-icon">loop</mat-icon>
+          type
+        </button>
         <app-search></app-search>  
           <ng-container class="prefecture-group" *ngFor="let cityPrefecture of regionViewGroup | keyvalue">
             <mat-list-item class="region-item">

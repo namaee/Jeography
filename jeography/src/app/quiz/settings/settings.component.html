@@ -15,7 +15,11 @@
     <mat-checkbox class="settings-checkbox" *ngIf="ms.mode.value == modeEnum.PREF" [checked]="qs.settings.flag" (change)="onSettingChange($event)" value="flag">flag</mat-checkbox>
     <mat-checkbox class="settings-checkbox" *ngIf="ms.mode.value == modeEnum.CIT" [checked]="qs.settings.cityTypes" (change)="onSettingChange($event)" value="cityTypes">city types</mat-checkbox>
     <mat-checkbox class="settings-checkbox" [checked]="qs.settings.kanjionly" (change)="onSettingChange($event)" value="kanjionly">kanji only</mat-checkbox>
-    <button (click)="togglePickPanel()" mat-flat-button color="accent">select</button>
+    <button (click)="togglePickPanel()" mat-flat-button color="accent">
+      <mat-icon *ngIf="pickPanelExpanded" class="select-arrow-icon">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="!pickPanelExpanded" class="select-arrow-icon">arrow_drop_up</mat-icon>
+      select
+    </button>
   </div>
   <mat-expansion-panel disabled [class.mat-elevation-z0]="true" hideToggle [expanded]="pickPanelExpanded" class="panel">
     <mat-expansion-panel-header class="pick-panel-header" disableRipple #panelH (click)="panelH._toggle()">
@@ -30,7 +34,10 @@
           <button class="pick-top-button" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="primary" (click)="deselectAll()">deselect all</button>
           <button class="pick-top-button" *ngIf="ms.mode.value == modeEnum.CIT" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="primary" (click)="selectAllC()">select all capitals</button>
           <button class="pick-top-button" *ngIf="ms.mode.value == modeEnum.CIT" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="primary" (click)="deselectAllC()">deselect all capitals</button>
-          <button class="pick-top-button swap-button" *ngIf="ms.mode.value == modeEnum.CIT" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="accent" (click)="swapView()">{{view == 0 ? 'region' : 'type'}}</button>
+          <button class="pick-top-button swap-button" *ngIf="ms.mode.value == modeEnum.CIT" [disabled]="qs.state == gameStateEnum.OCC" mat-flat-button color="accent" (click)="swapView()">
+            <mat-icon class="loop-icon">loop</mat-icon>
+            {{view == 0 ? 'region' : 'type'}}
+          </button>
         </div>
 
         <div class="pick-container">
