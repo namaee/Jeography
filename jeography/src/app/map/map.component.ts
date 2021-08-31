@@ -40,7 +40,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   debugger(event: MouseEvent) {
-    // console.log('cx: "' + Math.round((((event.offsetX - 51) / 1.456) ) * 10) / 10 + '", cy: "' + Math.round(((event.offsetY - 14) / 1.456) * 10) / 10 + '"');
+    console.log('cx: "' + Math.round((((event.offsetX - 51) / 1.456) ) * 10) / 10 + '", cy: "' + Math.round(((event.offsetY - 14) / 1.456) * 10) / 10 + '"');
 
   }
   ngOnInit(): void {

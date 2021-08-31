@@ -15,7 +15,7 @@ export enum State{
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  public state: State = State.QUIZ;
+  public state: State = State.VIEW;
   public location = location;
   public console = console
   constructor(private qs: QuizService, private ms: MapService, public cs: ColorService) {
